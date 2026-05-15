@@ -2099,7 +2099,40 @@
         <button onclick="cancelIngredient()" style="padding:10px 14px;background:#1a1a1a;border:1px solid rgba(255,255,255,0.08);border-radius:10px;font-size:13px;color:#666;cursor:pointer;font-family:-apple-system,sans-serif;">✕</button>
       </div>
     </div>
-    <div id="ing-added-list" style="margin-bottom:12px;"></div>
+    <div id="ing-added-list" style="margin-bottom:8px;"></div>
+
+    <!-- Manual entry -->
+    <div onclick="toggleManualEntry()" style="display:flex;align-items:center;gap:6px;cursor:pointer;margin-bottom:8px;">
+      <div style="font-size:10px;color:#444;text-transform:uppercase;letter-spacing:1px;">Ingrédient non trouvé ?</div>
+      <div style="font-size:11px;color:var(--accent);font-weight:600;">+ Saisie manuelle</div>
+    </div>
+    <div id="manual-entry-row" style="display:none;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:14px;margin-bottom:10px;">
+      <input id="manual-name" type="text" placeholder="Nom (ex: Kebab, Pizza…)"
+        style="width:100%;background:#1c1c1e;border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:10px 12px;font-size:14px;color:#fff;outline:none;font-family:-apple-system,sans-serif;margin-bottom:10px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
+        <div>
+          <div style="font-size:10px;color:var(--accent);margin-bottom:4px;">Calories</div>
+          <input id="manual-kcal" type="number" inputmode="numeric" placeholder="0"
+            style="width:100%;background:#1c1c1e;border:1px solid rgba(10,132,255,0.2);border-radius:8px;padding:9px;font-size:15px;font-weight:600;color:var(--accent);outline:none;font-family:-apple-system,sans-serif;text-align:center;">
+        </div>
+        <div>
+          <div style="font-size:10px;color:#30d158;margin-bottom:4px;">Protéines (g)</div>
+          <input id="manual-prot" type="number" inputmode="numeric" placeholder="0"
+            style="width:100%;background:#1c1c1e;border:1px solid rgba(48,209,88,0.2);border-radius:8px;padding:9px;font-size:15px;font-weight:600;color:#30d158;outline:none;font-family:-apple-system,sans-serif;text-align:center;">
+        </div>
+        <div>
+          <div style="font-size:10px;color:#ff9f0a;margin-bottom:4px;">Glucides (g)</div>
+          <input id="manual-carb" type="number" inputmode="numeric" placeholder="0"
+            style="width:100%;background:#1c1c1e;border:1px solid rgba(255,159,10,0.2);border-radius:8px;padding:9px;font-size:15px;font-weight:600;color:#ff9f0a;outline:none;font-family:-apple-system,sans-serif;text-align:center;">
+        </div>
+        <div>
+          <div style="font-size:10px;color:#bf5af2;margin-bottom:4px;">Lipides (g)</div>
+          <input id="manual-fat" type="number" inputmode="numeric" placeholder="0"
+            style="width:100%;background:#1c1c1e;border:1px solid rgba(191,90,242,0.2);border-radius:8px;padding:9px;font-size:15px;font-weight:600;color:#bf5af2;outline:none;font-family:-apple-system,sans-serif;text-align:center;">
+        </div>
+      </div>
+      <button onclick="addManualIngredient()" style="width:100%;padding:10px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:10px;font-size:13px;font-weight:600;color:#fff;cursor:pointer;font-family:-apple-system,sans-serif;">Ajouter cet ingrédient</button>
+    </div>
 
     <!-- Live macro preview -->
     <div id="ing-macro-preview" style="display:none;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:12px;margin-bottom:16px;">
@@ -4384,6 +4417,30 @@ function cancelIngredient() {
   document.getElementById('ing-qty').value = '';
 }
 
+function toggleManualEntry() {
+  const row = document.getElementById('manual-entry-row');
+  row.style.display = row.style.display === 'none' ? 'block' : 'none';
+}
+
+function addManualIngredient() {
+  const name = document.getElementById('manual-name').value.trim() || 'Autre';
+  const kcal = parseFloat(document.getElementById('manual-kcal').value) || 0;
+  const prot = parseFloat(document.getElementById('manual-prot').value) || 0;
+  const carb = parseFloat(document.getElementById('manual-carb').value) || 0;
+  const fat  = parseFloat(document.getElementById('manual-fat').value)  || 0;
+  if (kcal === 0 && prot === 0 && carb === 0 && fat === 0) return;
+  addedIngredients.push({ label: name, kcal, prot, carb, fat });
+  // Reset fields
+  document.getElementById('manual-name').value = '';
+  document.getElementById('manual-kcal').value = '';
+  document.getElementById('manual-prot').value = '';
+  document.getElementById('manual-carb').value = '';
+  document.getElementById('manual-fat').value = '';
+  document.getElementById('manual-entry-row').style.display = 'none';
+  renderAddedIngredients();
+  updateMacroPreview();
+}
+
 function removeIngredient(idx) {
   addedIngredients.splice(idx, 1);
   renderAddedIngredients();
@@ -4427,6 +4484,8 @@ function openAddMeal() {
   document.getElementById('ing-suggestions').innerHTML = '';
   document.getElementById('ing-added-list').innerHTML = '';
   document.getElementById('ing-macro-preview').style.display = 'none';
+  document.getElementById('manual-entry-row').style.display = 'none';
+  ['manual-name','manual-kcal','manual-prot','manual-carb','manual-fat'].forEach(id => { document.getElementById(id).value = ''; });
   document.querySelectorAll('.meal-type-btn').forEach(b => {
     b.style.background = '#1a1a1a';
     b.style.borderColor = 'rgba(255,255,255,0.08)';
