@@ -1679,6 +1679,13 @@
       <div style="font-size:9px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.5px;font-weight:500;">Poids</div>
     </div>
 
+    <div style="width:1px;height:28px;background:rgba(255,255,255,0.1);"></div>
+
+    <div onclick="showScreen('nutrition');renderNutrition()" style="display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;" ontouchstart="this.style.opacity=0.5" ontouchend="this.style.opacity=1">
+      <div style="font-size:20px;">🥗</div>
+      <div style="font-size:9px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.5px;font-weight:500;">Nutrition</div>
+    </div>
+
   </div>
 </div>
 
@@ -1901,6 +1908,209 @@
   </div>
 </div>
 
+<!-- NUTRITION SCREEN -->
+<div class="screen" id="nutrition">
+  <div class="progress-header">
+    <div class="back-btn" onclick="showScreen('home')">‹</div>
+    <div class="progress-title">Nutrition</div>
+  </div>
+  <div class="progress-content" id="nutrition-content" style="padding-bottom:100px;">
+
+    <!-- Date selector -->
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+      <div onclick="nutriPrevDay()" style="width:36px;height:36px;background:#1a1a1a;border:1px solid rgba(255,255,255,0.07);border-radius:10px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:20px;color:#666;">‹</div>
+      <div id="nutri-date-label" style="font-size:13px;font-weight:600;color:#fff;letter-spacing:-0.2px;"></div>
+      <div onclick="nutriNextDay()" style="width:36px;height:36px;background:#1a1a1a;border:1px solid rgba(255,255,255,0.07);border-radius:10px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:20px;color:#666;">›</div>
+    </div>
+
+    <!-- Macro targets summary -->
+    <div id="nutri-summary" style="background:#111;border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:16px;margin-bottom:12px;">
+      <div style="font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#555;margin-bottom:12px;">Objectifs du jour</div>
+      <div style="display:flex;gap:8px;margin-bottom:14px;">
+        <div style="flex:1;text-align:center;">
+          <div id="nutri-kcal-consumed" style="font-size:22px;font-weight:700;color:var(--accent);letter-spacing:-0.5px;">0</div>
+          <div style="font-size:9px;color:#444;text-transform:uppercase;letter-spacing:1px;margin-top:2px;">/ 2700 kcal</div>
+        </div>
+        <div style="width:1px;background:rgba(255,255,255,0.06);"></div>
+        <div style="flex:1;text-align:center;">
+          <div id="nutri-prot-consumed" style="font-size:22px;font-weight:700;color:#30d158;letter-spacing:-0.5px;">0</div>
+          <div style="font-size:9px;color:#444;text-transform:uppercase;letter-spacing:1px;margin-top:2px;">/ 134g prot</div>
+        </div>
+        <div style="width:1px;background:rgba(255,255,255,0.06);"></div>
+        <div style="flex:1;text-align:center;">
+          <div id="nutri-carb-consumed" style="font-size:22px;font-weight:700;color:#ff9f0a;letter-spacing:-0.5px;">0</div>
+          <div style="font-size:9px;color:#444;text-transform:uppercase;letter-spacing:1px;margin-top:2px;">/ 320g gluc</div>
+        </div>
+        <div style="width:1px;background:rgba(255,255,255,0.06);"></div>
+        <div style="flex:1;text-align:center;">
+          <div id="nutri-fat-consumed" style="font-size:22px;font-weight:700;color:#bf5af2;letter-spacing:-0.5px;">0</div>
+          <div style="font-size:9px;color:#444;text-transform:uppercase;letter-spacing:1px;margin-top:2px;">/ 75g lip</div>
+        </div>
+      </div>
+      <!-- Progress bars -->
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+            <span style="font-size:10px;color:#555;">Calories</span>
+            <span id="nutri-kcal-pct" style="font-size:10px;color:var(--accent);">0%</span>
+          </div>
+          <div style="height:4px;background:rgba(255,255,255,0.06);border-radius:2px;overflow:hidden;">
+            <div id="bar-kcal" style="height:100%;background:var(--accent);border-radius:2px;width:0%;transition:width 0.4s;"></div>
+          </div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+            <span style="font-size:10px;color:#555;">Protéines</span>
+            <span id="nutri-prot-pct" style="font-size:10px;color:#30d158;">0%</span>
+          </div>
+          <div style="height:4px;background:rgba(255,255,255,0.06);border-radius:2px;overflow:hidden;">
+            <div id="bar-prot" style="height:100%;background:#30d158;border-radius:2px;width:0%;transition:width 0.4s;"></div>
+          </div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+            <span style="font-size:10px;color:#555;">Glucides</span>
+            <span id="nutri-carb-pct" style="font-size:10px;color:#ff9f0a;">0%</span>
+          </div>
+          <div style="height:4px;background:rgba(255,255,255,0.06);border-radius:2px;overflow:hidden;">
+            <div id="bar-carb" style="height:100%;background:#ff9f0a;border-radius:2px;width:0%;transition:width 0.4s;"></div>
+          </div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+            <span style="font-size:10px;color:#555;">Lipides</span>
+            <span id="nutri-fat-pct" style="font-size:10px;color:#bf5af2;">0%</span>
+          </div>
+          <div style="height:4px;background:rgba(255,255,255,0.06);border-radius:2px;overflow:hidden;">
+            <div id="bar-fat" style="height:100%;background:#bf5af2;border-radius:2px;width:0%;transition:width 0.4s;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Meals log -->
+    <div id="nutri-meals-list"></div>
+
+    <!-- Add meal button -->
+    <div onclick="openAddMeal()" style="margin-top:10px;padding:14px;background:rgba(10,132,255,0.08);border:1px dashed rgba(10,132,255,0.3);border-radius:14px;text-align:center;cursor:pointer;transition:all 0.15s;" ontouchstart="this.style.opacity=0.6" ontouchend="this.style.opacity=1">
+      <div style="font-size:20px;margin-bottom:4px;">+</div>
+      <div style="font-size:13px;font-weight:600;color:var(--accent);">Ajouter un repas</div>
+    </div>
+
+    <!-- Conseils section -->
+    <div style="margin-top:16px;background:#111;border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:16px;">
+      <div style="font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#555;margin-bottom:12px;">Conseils · Prise de masse</div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div style="display:flex;gap:10px;align-items:flex-start;">
+          <div style="font-size:16px;flex-shrink:0;">🥩</div>
+          <div>
+            <div style="font-size:12px;font-weight:600;color:#f0ebe3;margin-bottom:2px;">2g de protéines / kg</div>
+            <div style="font-size:11px;color:#555;font-weight:300;line-height:1.5;">Priorité absolue. Répartis sur 3-4 repas. Sources : poulet, œufs, fromage blanc, thon, whey.</div>
+          </div>
+        </div>
+        <div style="height:1px;background:rgba(255,255,255,0.04);"></div>
+        <div style="display:flex;gap:10px;align-items:flex-start;">
+          <div style="font-size:16px;flex-shrink:0;">⚡</div>
+          <div>
+            <div style="font-size:12px;font-weight:600;color:#f0ebe3;margin-bottom:2px;">Surplus calorique modéré</div>
+            <div style="font-size:11px;color:#555;font-weight:300;line-height:1.5;">+200-250 kcal au-dessus de la maintenance. Trop de surplus = prise de gras inutile.</div>
+          </div>
+        </div>
+        <div style="height:1px;background:rgba(255,255,255,0.04);"></div>
+        <div style="display:flex;gap:10px;align-items:flex-start;">
+          <div style="font-size:16px;flex-shrink:0;">🕐</div>
+          <div>
+            <div style="font-size:12px;font-weight:600;color:#f0ebe3;margin-bottom:2px;">Repas post-entraînement</div>
+            <div style="font-size:11px;color:#555;font-weight:300;line-height:1.5;">Dans les 2h après la séance : protéines + glucides. C'est la fenêtre anabolique principale.</div>
+          </div>
+        </div>
+        <div style="height:1px;background:rgba(255,255,255,0.04);"></div>
+        <div style="display:flex;gap:10px;align-items:flex-start;">
+          <div style="font-size:16px;flex-shrink:0;">💧</div>
+          <div>
+            <div style="font-size:12px;font-weight:600;color:#f0ebe3;margin-bottom:2px;">Hydratation</div>
+            <div style="font-size:11px;color:#555;font-weight:300;line-height:1.5;">2-3L d'eau par jour minimum. Plus les jours de séance.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MACRO REFERENCE -->
+    <div style="margin-top:16px;background:#111;border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:16px;">
+      <div style="font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#555;margin-bottom:12px;">Référence macros · par portion</div>
+      <div style="display:flex;gap:6px;margin-bottom:14px;">
+        <div onclick="switchMacroTab('prot',this)" id="tab-prot" style="flex:1;padding:7px 4px;background:rgba(48,209,88,0.12);border:1px solid rgba(48,209,88,0.3);border-radius:8px;text-align:center;font-size:11px;font-weight:600;color:#30d158;cursor:pointer;">🥩 Protéines</div>
+        <div onclick="switchMacroTab('carb',this)" id="tab-carb" style="flex:1;padding:7px 4px;background:#1a1a1a;border:1px solid rgba(255,255,255,0.06);border-radius:8px;text-align:center;font-size:11px;font-weight:600;color:#555;cursor:pointer;">🍚 Glucides</div>
+        <div onclick="switchMacroTab('fat',this)" id="tab-fat" style="flex:1;padding:7px 4px;background:#1a1a1a;border:1px solid rgba(255,255,255,0.06);border-radius:8px;text-align:center;font-size:11px;font-weight:600;color:#555;cursor:pointer;">🥑 Lipides</div>
+      </div>
+      <div id="macro-tab-content"></div>
+    </div>
+
+    <!-- RECETTES -->
+    <div style="margin-top:16px;background:#111;border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:16px;margin-bottom:16px;">
+      <div style="font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#555;margin-bottom:12px;">Recettes · Prise de masse</div>
+      <div id="recipes-list"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ADD MEAL MODAL -->
+<div id="add-meal-modal" style="display:none;position:fixed;inset:0;z-index:300;background:rgba(0,0,0,0.85);align-items:flex-end;" onclick="closeAddMeal()">
+  <div onclick="event.stopPropagation()" style="background:#0f0f0f;border-radius:20px 20px 0 0;border-top:1px solid rgba(255,255,255,0.08);width:100%;max-width:430px;margin:0 auto;padding:20px 20px 44px;max-height:90vh;overflow-y:auto;">
+    <div onclick="closeAddMeal()" style="width:36px;height:4px;background:rgba(255,255,255,0.15);border-radius:2px;margin:0 auto 20px;cursor:pointer;"></div>
+    <div style="font-size:18px;font-weight:700;color:#fff;margin-bottom:16px;letter-spacing:-0.3px;">Ajouter un repas</div>
+
+    <!-- Meal type -->
+    <div style="font-size:10px;color:#555;text-transform:uppercase;letter-spacing:2px;margin-bottom:8px;">Type de repas</div>
+    <div style="display:flex;gap:8px;margin-bottom:16px;">
+      <div onclick="selectMealType('petit-déjeuner',this)" class="meal-type-btn" style="flex:1;padding:10px 6px;background:#1a1a1a;border:1px solid rgba(255,255,255,0.08);border-radius:10px;text-align:center;cursor:pointer;">
+        <div style="font-size:18px;">🌅</div>
+        <div style="font-size:10px;color:#888;margin-top:3px;">Petit-déj</div>
+      </div>
+      <div onclick="selectMealType('déjeuner',this)" class="meal-type-btn" style="flex:1;padding:10px 6px;background:#1a1a1a;border:1px solid rgba(255,255,255,0.08);border-radius:10px;text-align:center;cursor:pointer;">
+        <div style="font-size:18px;">☀️</div>
+        <div style="font-size:10px;color:#888;margin-top:3px;">Déjeuner</div>
+      </div>
+      <div onclick="selectMealType('dîner',this)" class="meal-type-btn" style="flex:1;padding:10px 6px;background:#1a1a1a;border:1px solid rgba(255,255,255,0.08);border-radius:10px;text-align:center;cursor:pointer;">
+        <div style="font-size:18px;">🌙</div>
+        <div style="font-size:10px;color:#888;margin-top:3px;">Dîner</div>
+      </div>
+      <div onclick="selectMealType('collation',this)" class="meal-type-btn" style="flex:1;padding:10px 6px;background:#1a1a1a;border:1px solid rgba(255,255,255,0.08);border-radius:10px;text-align:center;cursor:pointer;">
+        <div style="font-size:18px;">🍎</div>
+        <div style="font-size:10px;color:#888;margin-top:3px;">Collation</div>
+      </div>
+    </div>
+
+    <!-- Description -->
+    <div style="font-size:10px;color:#555;text-transform:uppercase;letter-spacing:2px;margin-bottom:8px;">Description (optionnel)</div>
+    <input id="meal-desc-input" type="text" placeholder="ex: Poulet riz brocolis" style="width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:12px 14px;font-size:14px;color:#fff;outline:none;margin-bottom:16px;font-family:-apple-system,sans-serif;">
+
+    <!-- Macros -->
+    <div style="font-size:10px;color:#555;text-transform:uppercase;letter-spacing:2px;margin-bottom:8px;">Macros</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:20px;">
+      <div>
+        <div style="font-size:11px;color:var(--accent);margin-bottom:4px;">Calories (kcal)</div>
+        <input id="meal-kcal" type="number" inputmode="numeric" placeholder="600" style="width:100%;background:rgba(10,132,255,0.06);border:1px solid rgba(10,132,255,0.2);border-radius:10px;padding:11px 12px;font-size:16px;color:var(--accent);outline:none;font-family:-apple-system,sans-serif;text-align:center;">
+      </div>
+      <div>
+        <div style="font-size:11px;color:#30d158;margin-bottom:4px;">Protéines (g)</div>
+        <input id="meal-prot" type="number" inputmode="numeric" placeholder="40" style="width:100%;background:rgba(48,209,88,0.06);border:1px solid rgba(48,209,88,0.2);border-radius:10px;padding:11px 12px;font-size:16px;color:#30d158;outline:none;font-family:-apple-system,sans-serif;text-align:center;">
+      </div>
+      <div>
+        <div style="font-size:11px;color:#ff9f0a;margin-bottom:4px;">Glucides (g)</div>
+        <input id="meal-carb" type="number" inputmode="numeric" placeholder="80" style="width:100%;background:rgba(255,159,10,0.06);border:1px solid rgba(255,159,10,0.2);border-radius:10px;padding:11px 12px;font-size:16px;color:#ff9f0a;outline:none;font-family:-apple-system,sans-serif;text-align:center;">
+      </div>
+      <div>
+        <div style="font-size:11px;color:#bf5af2;margin-bottom:4px;">Lipides (g)</div>
+        <input id="meal-fat" type="number" inputmode="numeric" placeholder="20" style="width:100%;background:rgba(191,90,242,0.06);border:1px solid rgba(191,90,242,0.2);border-radius:10px;padding:11px 12px;font-size:16px;color:#bf5af2;outline:none;font-family:-apple-system,sans-serif;text-align:center;">
+      </div>
+    </div>
+
+    <button onclick="saveMeal()" style="width:100%;padding:14px;background:var(--accent);border:none;border-radius:12px;font-size:14px;font-weight:600;color:#fff;cursor:pointer;letter-spacing:0.5px;">Enregistrer</button>
+  </div>
+</div>
+
 <!-- PHASE DETAIL MODAL -->
 <div id="phase-modal" style="display:none;position:fixed;inset:0;z-index:300;background:rgba(0,0,0,0.85);align-items:flex-end;" onclick="closePhaseModal()">
   <div onclick="event.stopPropagation()" style="background:#0f0f0f;border-radius:20px 20px 0 0;border-top:1px solid rgba(255,255,255,0.08);width:100%;max-width:430px;margin:0 auto;padding:20px 20px 44px;max-height:85vh;overflow-y:auto;">
@@ -1991,8 +2201,8 @@ const WORKOUTS = {
     tag: 'Upper A',
     name: 'Poitrine + Dos',
     exercises: [
-      { id: 'bench', name: 'Développé Couché Machine', sets: 4, reps: 10, weight: '25 kg/côté', rpe: '7-8', note: 'Si indispo → utilise Chest Press Technogym', restTimer: 120 },
-      { id: 'chest_press', name: 'Chest Press Technogym', sets: 4, reps: 10, weight: '60 kg', rpe: '7-8', note: 'Backup si développé couché indispo', hidden: true, restTimer: 120 },
+      { id: 'bench', name: 'Développé Couché Machine', sets: 4, reps: 10, weight: '25 kg/côté', rpe: '7-8', note: 'Si indispo → utilise Chest Press Technogym', restTimer: 120, swapWith: 'chest_press' },
+      { id: 'chest_press', name: 'Chest Press Technogym', sets: 4, reps: 10, weight: '60 kg', rpe: '7-8', note: 'Backup si développé couché indispo', hidden: true, restTimer: 120, swapWith: 'bench' },
       { id: 'pullup', name: 'Tractions Lestées', sets: 4, reps: 10, weight: '5 kg', rpe: '7-8', note: 'Lest ceinture · Coudes vers hanches · Forme propre', restTimer: 150 },
       { id: 'rowH', name: 'Tirage Horizontal', sets: 4, reps: 10, weight: '55 kg', rpe: '7-8', restTimer: 120 },
       { id: 'csr', name: 'Chest Supported Row', sets: 3, reps: 12, weight: '40 kg/côté', rpe: '7-8', note: 'Hammer Strength Iso-Lateral', restTimer: 120 },
@@ -2701,16 +2911,37 @@ function renderExercises(w) {
           </div>
         </div>`;
 
+      // Find substitute via swapWith property
+      const subEx = ex.swapWith ? w.exercises.find(e => e.id === ex.swapWith) : null;
+      const hasSub = !!subEx;
+      const swapBtn = hasSub ? `
+        <div onclick="swapExercise('${ex.id}','${subEx.id}')" style="
+          display:flex;align-items:center;gap:5px;
+          padding:5px 10px;
+          background:rgba(255,165,0,0.1);
+          border:1px solid rgba(255,165,0,0.25);
+          border-radius:10px;
+          cursor:pointer;
+          flex-shrink:0;
+          transition:all 0.15s;
+        " id="swap-btn-${ex.id}">
+          <span style="font-size:13px;">⇄</span>
+          <span style="font-size:11px;font-weight:600;color:rgba(255,165,0,0.9);letter-spacing:0.2px;">Switch</span>
+        </div>` : '';
+
       block.innerHTML = `
         <div class="ex-header">
           <div class="ex-info">
             ${supersetBadge}
-            <div class="ex-name">${ex.name}</div>
+            <div class="ex-name" id="ex-name-${ex.id}">${ex.name}</div>
             <div class="ex-meta">${ex.sets} séries · RPE ${ex.rpe}${ex.note ? ' · ' + ex.note : ''}</div>
           </div>
-          <div class="ex-weight-pill">
-            <span class="ex-weight-val">${weightVal}</span>
-            ${weightUnit ? `<span class="ex-weight-unit">${weightUnit}</span>` : ''}
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
+            ${swapBtn}
+            <div class="ex-weight-pill">
+              <span class="ex-weight-val">${weightVal}</span>
+              ${weightUnit ? `<span class="ex-weight-unit">${weightUnit}</span>` : ''}
+            </div>
           </div>
         </div>
         <div class="sets-table">${setsHTML}</div>
@@ -2735,6 +2966,46 @@ function renderExercises(w) {
 function parseWeight(w) {
   const match = w.match(/[\d.]+/);
   return match ? match[0] : '0';
+}
+
+function swapExercise(exAId, exBId) {
+  const w = WORKOUTS[currentWorkout];
+  const exA = w.exercises.find(e => e.id === exAId);
+  const exB = w.exercises.find(e => e.id === exBId);
+  if (!exA || !exB) return;
+
+  // Toggle visibility between the two
+  const aWasHidden = exA.hidden;
+  exA.hidden = !aWasHidden;
+  exB.hidden = aWasHidden;
+
+  // Show name of the one now visible
+  const visibleName = exA.hidden ? exB.name : exA.name;
+  renderExercises(w);
+  showSwapToast(visibleName);
+}
+
+function showSwapToast(name) {
+  let toast = document.getElementById('swap-toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'swap-toast';
+    toast.style.cssText = `
+      position:fixed;bottom:100px;left:50%;transform:translateX(-50%);
+      background:rgba(255,165,0,0.15);
+      border:1px solid rgba(255,165,0,0.3);
+      backdrop-filter:blur(20px);
+      padding:10px 18px;border-radius:14px;
+      font-size:13px;font-weight:600;color:rgba(255,165,0,0.95);
+      z-index:999;white-space:nowrap;
+      transition:opacity 0.3s;
+    `;
+    document.body.appendChild(toast);
+  }
+  toast.textContent = '⇄ ' + name;
+  toast.style.opacity = '1';
+  clearTimeout(toast._t);
+  toast._t = setTimeout(() => { toast.style.opacity = '0'; }, 2000);
 }
 
 function updateSet(exId, setIdx, field, val) {
@@ -3859,6 +4130,387 @@ function seedHistoricalData() {
 // Init
 seedHistoricalData();
 updateHomeStats();
+
+// ===== NUTRITION =====
+const NUTRI_TARGETS = { kcal: 2700, prot: 134, carb: 320, fat: 75 };
+let nutriCurrentDate = new Date();
+let selectedMealType = 'déjeuner';
+
+function nutriDateKey(date) {
+  return `${String(date.getDate()).padStart(2,'0')}/${String(date.getMonth()+1).padStart(2,'0')}/${date.getFullYear()}`;
+}
+
+function loadNutriLog() {
+  try { return JSON.parse(localStorage.getItem('hugo_nutri') || '{}'); } catch(e) { return {}; }
+}
+
+function saveNutriLog(log) {
+  try { localStorage.setItem('hugo_nutri', JSON.stringify(log)); } catch(e) {}
+}
+
+function nutriPrevDay() {
+  nutriCurrentDate.setDate(nutriCurrentDate.getDate() - 1);
+  renderNutrition();
+}
+
+function nutriNextDay() {
+  const tomorrow = new Date(); tomorrow.setDate(tomorrow.getDate() + 1);
+  if (nutriCurrentDate < tomorrow) {
+    nutriCurrentDate.setDate(nutriCurrentDate.getDate() + 1);
+    renderNutrition();
+  }
+}
+
+function renderNutrition() {
+  const key = nutriDateKey(nutriCurrentDate);
+  const today = nutriDateKey(new Date());
+  const label = key === today ? 'Aujourd\'hui' : key;
+  document.getElementById('nutri-date-label').textContent = label;
+
+  const log = loadNutriLog();
+  const meals = log[key] || [];
+
+  // Totals
+  const totals = meals.reduce((acc, m) => ({
+    kcal: acc.kcal + (m.kcal||0),
+    prot: acc.prot + (m.prot||0),
+    carb: acc.carb + (m.carb||0),
+    fat:  acc.fat  + (m.fat||0),
+  }), { kcal:0, prot:0, carb:0, fat:0 });
+
+  document.getElementById('nutri-kcal-consumed').textContent = totals.kcal;
+  document.getElementById('nutri-prot-consumed').textContent = totals.prot;
+  document.getElementById('nutri-carb-consumed').textContent = totals.carb;
+  document.getElementById('nutri-fat-consumed').textContent  = totals.fat;
+
+  ['kcal','prot','carb','fat'].forEach(k => {
+    const pct = Math.min(Math.round((totals[k] / NUTRI_TARGETS[k]) * 100), 100);
+    document.getElementById(`bar-${k}`).style.width = pct + '%';
+    document.getElementById(`nutri-${k}-pct`).textContent = pct + '%';
+  });
+
+  // Render macro reference and recipes if first load
+  renderMacroTab();
+  renderRecipes();
+
+  // Meals list
+  const mealIcons = { 'petit-déjeuner':'🌅', 'déjeuner':'☀️', 'dîner':'🌙', 'collation':'🍎' };
+  const listEl = document.getElementById('nutri-meals-list');
+  if (meals.length === 0) {
+    listEl.innerHTML = '<div style="text-align:center;padding:20px 0;color:#333;font-size:13px;">Aucun repas enregistré</div>';
+    return;
+  }
+  listEl.innerHTML = meals.map((m, i) => `
+    <div style="background:#111;border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:14px 16px;margin-bottom:8px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div style="font-size:18px;">${mealIcons[m.type]||'🍽️'}</div>
+          <div>
+            <div style="font-size:13px;font-weight:600;color:#fff;text-transform:capitalize;">${m.type}</div>
+            ${m.desc ? `<div style="font-size:11px;color:#555;font-weight:300;">${m.desc}</div>` : ''}
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div style="font-size:16px;font-weight:700;color:var(--accent);">${m.kcal} <span style="font-size:10px;color:#444;font-weight:400;">kcal</span></div>
+          <div onclick="deleteMeal('${key}',${i})" style="font-size:16px;color:#333;cursor:pointer;padding:4px;">✕</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:6px;">
+        <div style="flex:1;background:rgba(48,209,88,0.06);border-radius:8px;padding:6px;text-align:center;">
+          <div style="font-size:13px;font-weight:600;color:#30d158;">${m.prot}g</div>
+          <div style="font-size:9px;color:#444;text-transform:uppercase;letter-spacing:0.5px;">prot</div>
+        </div>
+        <div style="flex:1;background:rgba(255,159,10,0.06);border-radius:8px;padding:6px;text-align:center;">
+          <div style="font-size:13px;font-weight:600;color:#ff9f0a;">${m.carb}g</div>
+          <div style="font-size:9px;color:#444;text-transform:uppercase;letter-spacing:0.5px;">gluc</div>
+        </div>
+        <div style="flex:1;background:rgba(191,90,242,0.06);border-radius:8px;padding:6px;text-align:center;">
+          <div style="font-size:13px;font-weight:600;color:#bf5af2;">${m.fat}g</div>
+          <div style="font-size:9px;color:#444;text-transform:uppercase;letter-spacing:0.5px;">lip</div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function deleteMeal(dateKey, idx) {
+  const log = loadNutriLog();
+  if (log[dateKey]) {
+    log[dateKey].splice(idx, 1);
+    saveNutriLog(log);
+    renderNutrition();
+  }
+}
+
+function openAddMeal() {
+  document.getElementById('meal-desc-input').value = '';
+  document.getElementById('meal-kcal').value = '';
+  document.getElementById('meal-prot').value = '';
+  document.getElementById('meal-carb').value = '';
+  document.getElementById('meal-fat').value = '';
+  // Reset meal type buttons
+  document.querySelectorAll('.meal-type-btn').forEach(b => {
+    b.style.background = '#1a1a1a';
+    b.style.borderColor = 'rgba(255,255,255,0.08)';
+    b.querySelector('div:last-child').style.color = '#888';
+  });
+  selectedMealType = 'déjeuner';
+  document.getElementById('add-meal-modal').style.display = 'flex';
+}
+
+function closeAddMeal() {
+  document.getElementById('add-meal-modal').style.display = 'none';
+}
+
+function selectMealType(type, el) {
+  selectedMealType = type;
+  document.querySelectorAll('.meal-type-btn').forEach(b => {
+    b.style.background = '#1a1a1a';
+    b.style.borderColor = 'rgba(255,255,255,0.08)';
+    b.querySelector('div:last-child').style.color = '#888';
+  });
+  el.style.background = 'rgba(10,132,255,0.1)';
+  el.style.borderColor = 'rgba(10,132,255,0.3)';
+  el.querySelector('div:last-child').style.color = 'var(--accent)';
+}
+
+function saveMeal() {
+  const kcal = parseInt(document.getElementById('meal-kcal').value) || 0;
+  const prot = parseInt(document.getElementById('meal-prot').value) || 0;
+  const carb = parseInt(document.getElementById('meal-carb').value) || 0;
+  const fat  = parseInt(document.getElementById('meal-fat').value)  || 0;
+  const desc = document.getElementById('meal-desc-input').value.trim();
+
+  if (kcal === 0 && prot === 0 && carb === 0 && fat === 0) return;
+
+  const key = nutriDateKey(nutriCurrentDate);
+  const log = loadNutriLog();
+  if (!log[key]) log[key] = [];
+  log[key].push({ type: selectedMealType, desc, kcal, prot, carb, fat });
+  saveNutriLog(log);
+  closeAddMeal();
+  renderNutrition();
+}
+
+// ===== MACRO REFERENCE =====
+const MACRO_DATA = {
+  prot: [
+    { name: 'Blanc de poulet', portion: '150g', kcal: 165, prot: 35, carb: 0, fat: 2 },
+    { name: 'Œuf entier', portion: '1 œuf (60g)', kcal: 78, prot: 6, carb: 0, fat: 5 },
+    { name: 'Blanc d\'œuf', portion: '1 blanc (35g)', kcal: 17, prot: 4, carb: 0, fat: 0 },
+    { name: 'Thon en boîte', portion: '100g égoutté', kcal: 116, prot: 26, carb: 0, fat: 1 },
+    { name: 'Fromage blanc 0%', portion: '200g', kcal: 80, prot: 16, carb: 6, fat: 0 },
+    { name: 'Skyr nature', portion: '150g', kcal: 90, prot: 15, carb: 5, fat: 0 },
+    { name: 'Steak haché 5%', portion: '150g', kcal: 195, prot: 30, carb: 0, fat: 8 },
+    { name: 'Saumon', portion: '150g', kcal: 280, prot: 30, carb: 0, fat: 17 },
+    { name: 'Whey protéine', portion: '1 dose (30g)', kcal: 120, prot: 24, carb: 3, fat: 2 },
+    { name: 'Jambon blanc', portion: '2 tranches (60g)', kcal: 66, prot: 12, carb: 1, fat: 2 },
+  ],
+  carb: [
+    { name: 'Riz blanc cuit', portion: '150g cuit', kcal: 195, prot: 4, carb: 43, fat: 0 },
+    { name: 'Flocons d\'avoine', portion: '80g sec', kcal: 300, prot: 10, carb: 54, fat: 6 },
+    { name: 'Pain complet', portion: '2 tranches (70g)', kcal: 168, prot: 7, carb: 32, fat: 2 },
+    { name: 'Pâtes cuites', portion: '200g cuites', kcal: 280, prot: 10, carb: 56, fat: 2 },
+    { name: 'Patate douce cuite', portion: '200g', kcal: 180, prot: 3, carb: 42, fat: 0 },
+    { name: 'Banane', portion: '1 banane (120g)', kcal: 107, prot: 1, carb: 27, fat: 0 },
+    { name: 'Pomme de terre cuite', portion: '200g', kcal: 156, prot: 4, carb: 34, fat: 0 },
+    { name: 'Quinoa cuit', portion: '150g cuit', kcal: 183, prot: 7, carb: 32, fat: 3 },
+  ],
+  fat: [
+    { name: 'Huile d\'olive', portion: '1 c.s. (15ml)', kcal: 135, prot: 0, carb: 0, fat: 15 },
+    { name: 'Avocat', portion: '½ avocat (80g)', kcal: 128, prot: 1, carb: 2, fat: 12 },
+    { name: 'Amandes', portion: '30g', kcal: 174, prot: 6, carb: 5, fat: 15 },
+    { name: 'Beurre de cacahuète', portion: '2 c.s. (32g)', kcal: 192, prot: 8, carb: 6, fat: 16 },
+    { name: 'Noix', portion: '30g', kcal: 196, prot: 5, carb: 4, fat: 20 },
+    { name: 'Fromage (emmental)', portion: '30g', kcal: 117, prot: 8, carb: 0, fat: 9 },
+  ]
+};
+
+let currentMacroTab = 'prot';
+
+function switchMacroTab(tab, el) {
+  currentMacroTab = tab;
+  ['prot','carb','fat'].forEach(t => {
+    const tabEl = document.getElementById('tab-' + t);
+    if (t === tab) {
+      const colors = { prot: ['rgba(48,209,88,0.12)','rgba(48,209,88,0.3)','#30d158'], carb: ['rgba(255,159,10,0.12)','rgba(255,159,10,0.3)','#ff9f0a'], fat: ['rgba(191,90,242,0.12)','rgba(191,90,242,0.3)','#bf5af2'] };
+      tabEl.style.background = colors[t][0];
+      tabEl.style.borderColor = colors[t][1];
+      tabEl.style.color = colors[t][2];
+    } else {
+      tabEl.style.background = '#1a1a1a';
+      tabEl.style.borderColor = 'rgba(255,255,255,0.06)';
+      tabEl.style.color = '#555';
+    }
+  });
+  renderMacroTab();
+}
+
+function renderMacroTab() {
+  const items = MACRO_DATA[currentMacroTab] || [];
+  const colors = { prot: '#30d158', carb: '#ff9f0a', fat: '#bf5af2' };
+  const col = colors[currentMacroTab];
+  const el = document.getElementById('macro-tab-content');
+  el.innerHTML = items.map((item, i) => `
+    <div style="${i < items.length-1 ? 'border-bottom:1px solid rgba(255,255,255,0.04);' : ''}padding:10px 0;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+        <div>
+          <div style="font-size:13px;font-weight:600;color:#f0ebe3;">${item.name}</div>
+          <div style="font-size:11px;color:#444;font-weight:300;">${item.portion}</div>
+        </div>
+        <div style="font-size:15px;font-weight:700;color:var(--accent);">${item.kcal} <span style="font-size:10px;color:#444;font-weight:400;">kcal</span></div>
+      </div>
+      <div style="display:flex;gap:6px;">
+        <div style="flex:1;background:rgba(48,209,88,0.06);border-radius:6px;padding:5px;text-align:center;">
+          <div style="font-size:12px;font-weight:600;color:#30d158;">${item.prot}g</div>
+          <div style="font-size:9px;color:#444;">P</div>
+        </div>
+        <div style="flex:1;background:rgba(255,159,10,0.06);border-radius:6px;padding:5px;text-align:center;">
+          <div style="font-size:12px;font-weight:600;color:#ff9f0a;">${item.carb}g</div>
+          <div style="font-size:9px;color:#444;">G</div>
+        </div>
+        <div style="flex:1;background:rgba(191,90,242,0.06);border-radius:6px;padding:5px;text-align:center;">
+          <div style="font-size:12px;font-weight:600;color:#bf5af2;">${item.fat}g</div>
+          <div style="font-size:9px;color:#444;">L</div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ===== RECIPES =====
+const RECIPES = [
+  {
+    name: 'Bowl Poulet Riz',
+    emoji: '🍗',
+    tags: ['Post-séance', 'Riche en prot'],
+    kcal: 620, prot: 55, carb: 65, fat: 10,
+    desc: 'Le classique de la prise de masse.',
+    ingredients: ['150g blanc de poulet grillé', '150g riz blanc cuit', '100g brocolis vapeur', '1 c.s. sauce soja', 'Épices au choix'],
+    steps: ['Cuire le riz (20 min).', 'Griller le poulet assaisonné 6-7 min de chaque côté.', 'Cuire les brocolis à la vapeur 5 min.', 'Assembler le bowl, arroser de sauce soja.']
+  },
+  {
+    name: 'Omelette Musculation',
+    emoji: '🍳',
+    tags: ['Petit-déj', 'Rapide'],
+    kcal: 380, prot: 38, carb: 4, fat: 22,
+    desc: 'Protéines + graisses saines, prêt en 5 min.',
+    ingredients: ['3 œufs entiers', '2 blancs d\'œuf', '30g emmental râpé', '½ avocat', 'Sel, poivre, herbes'],
+    steps: ['Battre les œufs et blancs ensemble.', 'Cuire dans une poêle huilée à feu moyen.', 'Ajouter l\'emmental avant de plier.', 'Servir avec l\'avocat en tranches.']
+  },
+  {
+    name: 'Overnight Oats Protéiné',
+    emoji: '🥣',
+    tags: ['Petit-déj', 'Préparation J-1'],
+    kcal: 520, prot: 35, carb: 62, fat: 10,
+    desc: 'Prépare le soir, mange le matin.',
+    ingredients: ['80g flocons d\'avoine', '200ml lait écrémé', '150g fromage blanc 0%', '1 dose whey vanille', '1 banane', '1 c.s. beurre de cacahuète'],
+    steps: ['Mélanger flocons, lait, fromage blanc et whey.', 'Couvrir et mettre au frigo toute la nuit.', 'Le matin, ajouter banane tranchée et beurre de cacahuète.']
+  },
+  {
+    name: 'Pasta Thon Sauce Légère',
+    emoji: '🍝',
+    tags: ['Déjeuner', 'Anti-gaspi'],
+    kcal: 580, prot: 42, carb: 72, fat: 8,
+    desc: 'Rapide, économique, efficace.',
+    ingredients: ['200g pâtes cuites', '100g thon en boîte égoutté', '100g fromage blanc 0%', '½ citron pressé', 'Herbes de Provence', 'Sel, poivre'],
+    steps: ['Cuire les pâtes al dente.', 'Mélanger thon, fromage blanc, jus de citron et herbes.', 'Mélanger avec les pâtes chaudes.', 'Rectifier l\'assaisonnement.']
+  },
+  {
+    name: 'Shake Post-Séance',
+    emoji: '🥤',
+    tags: ['Post-séance', '5 min'],
+    kcal: 420, prot: 40, carb: 48, fat: 6,
+    desc: 'Dans les 30 min après la séance.',
+    ingredients: ['1 dose whey (30g)', '200ml lait écrémé', '1 banane', '80g flocons d\'avoine', '1 c.c. miel'],
+    steps: ['Mixer tous les ingrédients ensemble.', 'Boire immédiatement.']
+  },
+  {
+    name: 'Patate Douce Saumon',
+    emoji: '🐟',
+    tags: ['Dîner', 'Oméga-3'],
+    kcal: 550, prot: 38, carb: 44, fat: 18,
+    desc: 'Repas complet riche en bons lipides.',
+    ingredients: ['150g filet de saumon', '200g patate douce', '100g haricots verts', '1 c.s. huile d\'olive', 'Citron, aneth'],
+    steps: ['Cuire la patate douce au four 25 min à 200°C.', 'Cuire le saumon à la poêle 4 min de chaque côté.', 'Cuire les haricots verts 5 min à la vapeur.', 'Dresser et arroser d\'huile d\'olive et de citron.']
+  },
+];
+
+let openRecipeIdx = null;
+
+function renderRecipes() {
+  const el = document.getElementById('recipes-list');
+  if (!el) return;
+  el.innerHTML = RECIPES.map((r, i) => `
+    <div style="border-bottom:${i < RECIPES.length-1 ? '1px solid rgba(255,255,255,0.04)' : 'none'};padding-bottom:${i < RECIPES.length-1 ? '12px' : '0'};margin-bottom:${i < RECIPES.length-1 ? '12px' : '0'};">
+      <div onclick="toggleRecipe(${i})" style="display:flex;justify-content:space-between;align-items:center;cursor:pointer;">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div style="font-size:22px;">${r.emoji}</div>
+          <div>
+            <div style="font-size:13px;font-weight:600;color:#f0ebe3;">${r.name}</div>
+            <div style="display:flex;gap:4px;margin-top:3px;flex-wrap:wrap;">
+              ${r.tags.map(t => `<span style="font-size:9px;font-weight:600;color:var(--accent);background:rgba(10,132,255,0.1);border-radius:4px;padding:2px 6px;letter-spacing:0.3px;">${t}</span>`).join('')}
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div style="text-align:right;">
+            <div style="font-size:13px;font-weight:700;color:var(--accent);">${r.kcal} kcal</div>
+            <div style="font-size:10px;color:#30d158;">${r.prot}g P</div>
+          </div>
+          <div id="recipe-arrow-${i}" style="color:#444;font-size:18px;transition:transform 0.25s;">›</div>
+        </div>
+      </div>
+      <div id="recipe-detail-${i}" style="display:none;margin-top:12px;">
+        <div style="font-size:11px;color:#555;font-style:italic;margin-bottom:10px;">${r.desc}</div>
+        <div style="display:flex;gap:6px;margin-bottom:10px;">
+          <div style="flex:1;background:rgba(48,209,88,0.06);border-radius:8px;padding:7px;text-align:center;">
+            <div style="font-size:13px;font-weight:600;color:#30d158;">${r.prot}g</div>
+            <div style="font-size:9px;color:#444;">Prot</div>
+          </div>
+          <div style="flex:1;background:rgba(255,159,10,0.06);border-radius:8px;padding:7px;text-align:center;">
+            <div style="font-size:13px;font-weight:600;color:#ff9f0a;">${r.carb}g</div>
+            <div style="font-size:9px;color:#444;">Gluc</div>
+          </div>
+          <div style="flex:1;background:rgba(191,90,242,0.06);border-radius:8px;padding:7px;text-align:center;">
+            <div style="font-size:13px;font-weight:600;color:#bf5af2;">${r.fat}g</div>
+            <div style="font-size:9px;color:#444;">Lip</div>
+          </div>
+        </div>
+        <div style="font-size:10px;color:#555;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Ingrédients</div>
+        <div style="margin-bottom:10px;">
+          ${r.ingredients.map(ing => `<div style="font-size:12px;color:#888;padding:3px 0;border-bottom:1px solid rgba(255,255,255,0.03);">· ${ing}</div>`).join('')}
+        </div>
+        <div style="font-size:10px;color:#555;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Préparation</div>
+        ${r.steps.map((s, si) => `<div style="display:flex;gap:8px;margin-bottom:5px;"><div style="font-size:10px;font-weight:700;color:var(--accent);flex-shrink:0;width:16px;margin-top:1px;">${si+1}.</div><div style="font-size:12px;color:#888;line-height:1.5;">${s}</div></div>`).join('')}
+        <button onclick="addRecipeToLog(${i})" style="width:100%;margin-top:12px;padding:10px;background:rgba(10,132,255,0.1);border:1px solid rgba(10,132,255,0.25);border-radius:10px;font-size:12px;font-weight:600;color:var(--accent);cursor:pointer;font-family:-apple-system,sans-serif;">+ Ajouter au log du jour</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function toggleRecipe(i) {
+  const detail = document.getElementById('recipe-detail-' + i);
+  const arrow = document.getElementById('recipe-arrow-' + i);
+  const isOpen = detail.style.display !== 'none';
+  detail.style.display = isOpen ? 'none' : 'block';
+  arrow.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(90deg)';
+}
+
+function addRecipeToLog(i) {
+  const r = RECIPES[i];
+  const key = nutriDateKey(nutriCurrentDate);
+  const log = loadNutriLog();
+  if (!log[key]) log[key] = [];
+  log[key].push({ type: 'repas', desc: r.name, kcal: r.kcal, prot: r.prot, carb: r.carb, fat: r.fat });
+  saveNutriLog(log);
+  renderNutrition();
+  // Scroll to top to see updated totals
+  document.getElementById('nutrition-content').scrollTo({ top: 0, behavior: 'smooth' });
+  // Brief visual feedback
+  const btn = document.querySelector(`#recipe-detail-${i} button`);
+  if (btn) { btn.textContent = '✅ Ajouté !'; setTimeout(() => { btn.textContent = '+ Ajouter au log du jour'; }, 2000); }
+}
 </script>
 </body>
 </html>
