@@ -3540,7 +3540,7 @@ function renderProgress() {
 
   Object.entries(allExIds).forEach(([id, name]) => {
     const history = [];
-    log.slice().reverse().forEach(session => {
+    log.forEach(session => {
       const ex = session.exercises.find(e => e.id === id);
       if (ex) {
         const doneSets = ex.sets.filter(s => s.done);
@@ -3548,10 +3548,14 @@ function renderProgress() {
           const maxWeight = Math.max(...doneSets.map(s => parseFloat(s.weight) || 0));
           const avgReps = Math.round(doneSets.reduce((a,s) => a + (parseInt(s.reps)||0), 0) / doneSets.length);
           const totalSets = doneSets.length;
-          history.push({ date: session.date, weight: maxWeight, reps: avgReps, sets: totalSets });
+          const ts = session.timestamp || (parseDate(session.date) ? parseDate(session.date).getTime() : 0);
+          history.push({ date: session.date, weight: maxWeight, reps: avgReps, sets: totalSets, ts });
         }
       }
     });
+
+    // Sort chronologically oldest → newest
+    history.sort((a, b) => a.ts - b.ts);
 
     if (history.length === 0) return;
     chartData[id] = history;
@@ -4313,6 +4317,7 @@ function renderNutrition() {
 }
 
 function deleteMeal(dateKey, idx) {
+  if (!confirm('Supprimer ce repas ?')) return;
   const log = loadNutriLog();
   if (log[dateKey]) {
     log[dateKey].splice(idx, 1);
@@ -4354,6 +4359,15 @@ const ING_DB = [
   { name: 'Haricots verts', unit: 'g', kcal100: 31, prot100: 2, carb100: 5, fat100: 0.2 },
   { name: 'Banane', unit: 'g', kcal100: 89, prot100: 1.1, carb100: 23, fat100: 0.3 },
   { name: 'Pomme', unit: 'g', kcal100: 52, prot100: 0.3, carb100: 14, fat100: 0.2 },
+  // Plats & spécialités
+  { name: 'Tielle sétoise', unit: 'g', kcal100: 306, prot100: 8, carb100: 31, fat100: 16 },
+  { name: 'Pizza margherita', unit: 'g', kcal100: 249, prot100: 10, carb100: 31, fat100: 9 },
+  { name: 'Kebab (viande)', unit: 'g', kcal100: 220, prot100: 18, carb100: 3, fat100: 15 },
+  { name: 'Pita / pain kebab', unit: 'g', kcal100: 270, prot100: 9, carb100: 53, fat100: 2 },
+  { name: 'Frites', unit: 'g', kcal100: 312, prot100: 4, carb100: 41, fat100: 15 },
+  { name: 'Riz cantonnais', unit: 'g', kcal100: 185, prot100: 5, carb100: 26, fat100: 7 },
+  { name: 'Lasagnes bolognaise', unit: 'g', kcal100: 150, prot100: 8, carb100: 14, fat100: 7 },
+  { name: 'Crêpe nature', unit: 'g', kcal100: 210, prot100: 6, carb100: 29, fat100: 8 },
   // per unit
   { name: 'Oeuf entier', unit: 'unité', kcalUnit: 78, protUnit: 6.3, carbUnit: 0.6, fatUnit: 5.3 },
   { name: 'Blanc d\'oeuf', unit: 'unité', kcalUnit: 17, protUnit: 3.6, carbUnit: 0.2, fatUnit: 0.1 },
