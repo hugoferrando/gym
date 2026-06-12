@@ -2281,9 +2281,10 @@ const WORKOUTS = {
     name: 'Poitrine + Dos',
     exercises: [
       { id: 'bench', name: 'Développé Couché Machine', sets: 4, reps: 10, weight: '25 kg/côté', rpe: '7-8', note: 'Si indispo → utilise Chest Press Technogym', restTimer: 120, swapWith: 'chest_press' },
-      { id: 'chest_press', name: 'Chest Press Technogym', sets: 4, reps: 10, weight: '60 kg', rpe: '7-8', note: 'Backup si développé couché indispo', hidden: true, restTimer: 120, swapWith: 'bench' },
+      { id: 'chest_press', name: 'Chest Press Technogym', sets: 4, reps: 10, weight: '60 kg', rpe: '7-8', note: 'Backup si développé couché indispo', hidden: true, restTimer: 120, swapWith: 'incline_smith' },
+      { id: 'incline_smith', name: 'Développé Incliné Smith', sets: 4, reps: 10, weight: '17.5 kg/côté', rpe: '7-8', note: 'Inclinaison 30-45°', hidden: true, restTimer: 120, swapWith: 'bench' },
       { id: 'pullup', name: 'Tractions Lestées', sets: 4, reps: 10, weight: '5 kg', rpe: '7-8', note: 'Lest ceinture · Coudes vers hanches · Forme propre', restTimer: 150 },
-      { id: 'rowH', name: 'Tirage Horizontal', sets: 4, reps: 10, weight: '60 kg', rpe: '7-8', restTimer: 120 },
+      { id: 'rowH', name: 'Tirage Horizontal', sets: 4, reps: 10, weight: '55 kg', rpe: '7-8', restTimer: 120 },
       { id: 'csr', name: 'Chest Supported Row', sets: 3, reps: 12, weight: '50 kg/côté', rpe: '7-8', note: 'Hammer Strength Iso-Lateral', restTimer: 120 },
       { id: 'pec', name: 'Papillon', sets: 3, reps: 12, weight: '25 kg', rpe: '7-8', restTimer: 90 },
     ]
@@ -2295,7 +2296,7 @@ const WORKOUTS = {
       { id: 'ohp', name: 'Dumbbell OHP', sets: 4, reps: 10, weight: '18 kg', rpe: '7-8', restTimer: 120 },
       { id: 'lat', name: 'Élévations Latérales', sets: 4, reps: 15, weight: '8 kg', rpe: '7', note: 'Assis · Isolation deltoïde', restTimer: 90 },
       { id: 'curl', name: 'Curl Marteau', sets: 3, reps: 12, weight: '12 kg', rpe: '7', restTimer: 90 },
-      { id: 'tri_high', name: 'Triceps Poulie Haute', sets: 3, reps: 12, weight: '12.5 kg', rpe: '7', supersetWith: 'tri_low', restTimer: 0 },
+      { id: 'tri_high', name: 'Triceps Poulie Haute', sets: 3, reps: 12, weight: '15 kg', rpe: '7', supersetWith: 'tri_low', restTimer: 0 },
       { id: 'tri_low', name: 'Triceps Poulie Basse', sets: 3, reps: 12, weight: '15 kg', rpe: '7', supersetStart: true, restTimer: 90 },
       { id: 'curl_cable', name: 'Curl Poulie Basse', sets: 3, reps: 12, weight: '17.5 kg', rpe: '7', restTimer: 90 },
       { id: 'dips', name: 'Dips', sets: 3, reps: 10, weight: '+5 kg', rpe: '—', restTimer: 90 },
@@ -2305,7 +2306,7 @@ const WORKOUTS = {
     tag: 'Upper C',
     name: 'Épaules + Dos + Bras',
     exercises: [
-      { id: 'ohp_c', name: 'Dumbbell OHP', sets: 4, reps: 10, weight: '17.5 kg', rpe: '7-8', restTimer: 120 },
+      { id: 'ohp_c', name: 'Dumbbell OHP', sets: 4, reps: 10, weight: '18 kg', rpe: '7-8', restTimer: 120 },
       { id: 'lat_c', name: 'Élévations Latérales', sets: 4, reps: 15, weight: '8 kg', rpe: '7', note: 'Assis · Focus contraction', restTimer: 90 },
       { id: 'rowV_c', name: 'Tirage Vertical', sets: 4, reps: 10, weight: '55 kg', rpe: '7-8', restTimer: 120 },
       { id: 'curl_c', name: 'Curl Marteau', sets: 3, reps: 12, weight: '14 kg', rpe: '7', restTimer: 90 },
@@ -2992,11 +2993,19 @@ function renderExercises(w) {
           </div>
         </div>`;
 
-      // Find substitute via swapWith property
-      const subEx = ex.swapWith ? w.exercises.find(e => e.id === ex.swapWith) : null;
-      const hasSub = !!subEx;
-      const swapBtn = hasSub ? `
-        <div onclick="swapExercise('${ex.id}','${subEx.id}')" style="
+      // Find all alternatives (swapWith chain)
+      const allAlts = [];
+      const seen = new Set();
+      let cur = ex;
+      while (cur && cur.swapWith && !seen.has(cur.id)) {
+        seen.add(cur.id);
+        const next = w.exercises.find(e => e.id === cur.swapWith);
+        if (next) allAlts.push(next);
+        cur = next;
+      }
+      const hasAlts = allAlts.length > 0;
+      const swapBtn = hasAlts ? `
+        <div onclick="showSwapMenu('${ex.id}')" style="
           display:flex;align-items:center;gap:5px;
           padding:5px 10px;
           background:rgba(255,165,0,0.1);
@@ -3049,18 +3058,88 @@ function parseWeight(w) {
   return match ? match[0] : '0';
 }
 
+function showSwapMenu(currentId) {
+  const w = WORKOUTS[currentWorkout];
+  const current = w.exercises.find(e => e.id === currentId);
+  if (!current) return;
+
+  // Collect all options in chain
+  const options = [current];
+  const seen = new Set([currentId]);
+  let cur = current;
+  while (cur && cur.swapWith && !seen.has(cur.swapWith)) {
+    seen.add(cur.swapWith);
+    const next = w.exercises.find(e => e.id === cur.swapWith);
+    if (next) { options.push(next); cur = next; } else break;
+  }
+
+  // Build overlay
+  let overlay = document.getElementById('swap-menu-overlay');
+  if (overlay) overlay.remove();
+  overlay = document.createElement('div');
+  overlay.id = 'swap-menu-overlay';
+  overlay.style.cssText = `
+    position:fixed;inset:0;z-index:1000;
+    background:rgba(0,0,0,0.6);
+    backdrop-filter:blur(8px);
+    display:flex;align-items:flex-end;justify-content:center;
+    padding-bottom:40px;
+  `;
+  overlay.onclick = (e) => { if (e.target === overlay) overlay.remove(); };
+
+  const menu = document.createElement('div');
+  menu.style.cssText = `
+    background:#1c1c1e;
+    border:1px solid rgba(255,255,255,0.1);
+    border-radius:18px;
+    padding:16px;
+    width:calc(100% - 32px);
+    max-width:400px;
+  `;
+
+  menu.innerHTML = `<div style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.4);text-align:center;margin-bottom:12px;letter-spacing:0.5px;text-transform:uppercase;">Choisir l'exercice</div>`;
+
+  options.forEach((opt, i) => {
+    const btn = document.createElement('div');
+    const isActive = !opt.hidden;
+    btn.style.cssText = `
+      padding:14px 16px;
+      border-radius:12px;
+      margin-bottom:${i < options.length - 1 ? '8px' : '0'};
+      cursor:pointer;
+      display:flex;align-items:center;justify-content:space-between;
+      background:${isActive ? 'rgba(255,165,0,0.12)' : 'rgba(255,255,255,0.05)'};
+      border:1px solid ${isActive ? 'rgba(255,165,0,0.3)' : 'rgba(255,255,255,0.08)'};
+      transition:all 0.15s;
+    `;
+    btn.innerHTML = `
+      <div>
+        <div style="font-size:15px;font-weight:600;color:${isActive ? 'rgba(255,165,0,0.95)' : '#fff'}">${opt.name}</div>
+        <div style="font-size:12px;color:rgba(255,255,255,0.4);margin-top:2px;">${opt.weight} · RPE ${opt.rpe}</div>
+      </div>
+      ${isActive ? '<div style="font-size:18px;">✓</div>' : ''}
+    `;
+    btn.onclick = () => {
+      options.forEach(o => { o.hidden = (o.id !== opt.id); });
+      renderExercises(w);
+      overlay.remove();
+      showSwapToast(opt.name);
+    };
+    menu.appendChild(btn);
+  });
+
+  overlay.appendChild(menu);
+  document.body.appendChild(overlay);
+}
+
 function swapExercise(exAId, exBId) {
   const w = WORKOUTS[currentWorkout];
   const exA = w.exercises.find(e => e.id === exAId);
   const exB = w.exercises.find(e => e.id === exBId);
   if (!exA || !exB) return;
-
-  // Toggle visibility between the two
   const aWasHidden = exA.hidden;
   exA.hidden = !aWasHidden;
   exB.hidden = aWasHidden;
-
-  // Show name of the one now visible
   const visibleName = exA.hidden ? exB.name : exA.name;
   renderExercises(w);
   showSwapToast(visibleName);
