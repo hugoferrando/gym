@@ -3125,10 +3125,10 @@ function renderExercises(w) {
           <div class="set-row" id="set-${ei}-${s}">
             <div class="set-num">${s + 1}</div>
             <div class="stepper">
-              <div class="stepper-btn" onclick="stepSet(${ei},${s},'weight',-2.5,'${ex.id}')">−</div>
+              <div class="stepper-btn" onclick="stepSet(${ei},${s},'weight',-1,'${ex.id}')">−</div>
               <input class="stepper-input" id="inp-w-${ei}-${s}" type="number" inputmode="decimal" value="${preset.weight}" 
                 oninput="updateSet('${ex.id}',${s},'weight',this.value)" placeholder="—">
-              <div class="stepper-btn" onclick="stepSet(${ei},${s},'weight',2.5,'${ex.id}')">+</div>
+              <div class="stepper-btn" onclick="stepSet(${ei},${s},'weight',1,'${ex.id}')">+</div>
             </div>
             <div class="set-divider">×</div>
             <div class="stepper">
@@ -3264,7 +3264,9 @@ function getProgressionHint(ex) {
   const lastMax = Math.max(...hist[0].sets.filter(s => s.done).map(s => parseFloat(s.weight) || 0), 0);
   if (lastMax <= 0) return null;
   const unit = ex.weight.includes('côté') ? ' kg/côté' : ex.weight.includes('main') ? ' kg/main' : ' kg';
-  return { target: Math.round((lastMax + 2.5) * 100) / 100, unit };
+  const isDumbbell = /lat|curl|ohp|elev|bulgarian/i.test(ex.id) || /dumbbell|haltère|élévation|marteau|bulgare/i.test(ex.name);
+  const increment = isDumbbell ? 2 : 2.5;
+  return { target: Math.round((lastMax + increment) * 100) / 100, unit };
 }
 
 function showSwapMenu(currentId) {
