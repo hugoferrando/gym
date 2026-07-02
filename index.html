@@ -1586,6 +1586,37 @@
   }
   #workout .set-divider { width: 12px; }
   #workout .sets-table-header .col-done { width: 42px; }
+
+  /* === Timer réductible (glisser vers le bas) === */
+  .timer-overlay { transition: transform 0.28s cubic-bezier(0.32,0.72,0,1); touch-action: none; }
+  .timer-overlay.dragging { transition: none; }
+  #timer-mini {
+    display: none;
+    position: fixed;
+    right: 16px;
+    bottom: calc(24px + env(safe-area-inset-bottom));
+    z-index: 99;
+    align-items: center;
+    gap: 9px;
+    background: rgba(22,22,28,0.88);
+    backdrop-filter: blur(30px) saturate(180%);
+    -webkit-backdrop-filter: blur(30px) saturate(180%);
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 999px;
+    padding: 7px 15px 7px 8px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.15);
+    cursor: pointer;
+  }
+  #timer-mini.visible { display: flex; }
+  #timer-mini:active { transform: scale(0.96); }
+  #timer-mini-time {
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.3px;
+  }
+  #timer-mini.urgent #timer-mini-time { color: var(--red); }
 </style>
 </head>
 <body>
@@ -2399,6 +2430,18 @@
     <div class="timer-preset" data-secs="180" onclick="setTimer(180, this)">3 min</div>
     <div class="timer-stop" onclick="stopTimer()">✕</div>
   </div>
+</div>
+
+<!-- TIMER RÉDUIT (pastille flottante) -->
+<div id="timer-mini" onclick="expandTimer()">
+  <svg width="30" height="30" style="transform:rotate(-90deg);display:block;">
+    <circle cx="15" cy="15" r="12" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="3"/>
+    <circle id="timer-mini-ring" cx="15" cy="15" r="12" fill="none"
+      stroke="var(--accent)" stroke-width="3" stroke-linecap="round"
+      stroke-dasharray="75.4" stroke-dashoffset="0"
+      style="transition:stroke-dashoffset 1s linear, stroke 0.3s;"/>
+  </svg>
+  <div id="timer-mini-time">2:00</div>
 </div>
 
 <!-- COMPLETE -->
@@ -3731,6 +3774,9 @@ function startTimer(secs) {
   timerEndTime = Date.now() + secs * 1000;
   updateTimerDisplay();
   document.getElementById('timer-overlay').classList.add('visible');
+  const miniEl = document.getElementById('timer-mini');
+  if (miniEl) miniEl.classList.remove('visible');
+  timerMinimized = false;
   requestWakeLock();
   requestNotificationPermission();
   timerInterval = setInterval(() => {
@@ -3770,8 +3816,69 @@ function stopTimer() {
   timerInterval = null;
   timerEndTime = null;
   releaseWakeLock();
-  document.getElementById('timer-overlay').classList.remove('visible');
+  const ov = document.getElementById('timer-overlay');
+  ov.classList.remove('visible');
+  ov.style.transform = '';
+  const mini = document.getElementById('timer-mini');
+  if (mini) mini.classList.remove('visible');
+  timerMinimized = false;
 }
+
+// ===== Timer réductible =====
+let timerMinimized = false;
+
+function minimizeTimer() {
+  const ov = document.getElementById('timer-overlay');
+  timerMinimized = true;
+  // Animation de sortie vers le bas, puis bascule en pastille
+  ov.style.transform = 'translateX(-50%) translateY(110%)';
+  setTimeout(() => {
+    ov.classList.remove('visible');
+    ov.style.transform = '';
+    if (timerInterval) {
+      document.getElementById('timer-mini').classList.add('visible');
+      updateTimerDisplay();
+    }
+  }, 280);
+  if (navigator.vibrate) { try { navigator.vibrate(8); } catch (e) {} }
+}
+
+function expandTimer() {
+  timerMinimized = false;
+  document.getElementById('timer-mini').classList.remove('visible');
+  const ov = document.getElementById('timer-overlay');
+  ov.style.transform = '';
+  ov.classList.add('visible');
+}
+
+// Geste : glisser le sheet vers le bas pour le réduire
+(function initTimerDrag() {
+  const ov = document.getElementById('timer-overlay');
+  if (!ov) return;
+  let startY = null, dy = 0, dragging = false;
+  ov.addEventListener('touchstart', (e) => {
+    startY = e.touches[0].clientY;
+    dy = 0;
+    dragging = true;
+    ov.classList.add('dragging');
+  }, { passive: true });
+  ov.addEventListener('touchmove', (e) => {
+    if (!dragging || startY === null) return;
+    dy = Math.max(0, e.touches[0].clientY - startY);
+    ov.style.transform = `translateX(-50%) translateY(${dy}px)`;
+  }, { passive: true });
+  const endDrag = () => {
+    if (!dragging) return;
+    dragging = false;
+    ov.classList.remove('dragging');
+    if (dy > 80) minimizeTimer();
+    else ov.style.transform = '';
+    startY = null;
+    dy = 0;
+  };
+  ov.addEventListener('touchend', endDrag);
+  ov.addEventListener('touchcancel', endDrag);
+})();
 
 function updateTimerDisplay() {
   const mins = Math.floor(timerLeft / 60);
@@ -3781,6 +3888,18 @@ function updateTimerDisplay() {
   const CIRCUMFERENCE = 502.65;
 
   display.textContent = `${mins}:${secs.toString().padStart(2,'0')}`;
+
+  // Pastille du timer réduit
+  const miniTime = document.getElementById('timer-mini-time');
+  if (miniTime) {
+    miniTime.textContent = `${mins}:${secs.toString().padStart(2,'0')}`;
+    const miniRing = document.getElementById('timer-mini-ring');
+    if (miniRing && timerTotal > 0) {
+      miniRing.style.strokeDashoffset = 75.4 * (1 - timerLeft / timerTotal);
+      miniRing.style.stroke = timerLeft <= 10 ? 'var(--red)' : 'var(--accent)';
+    }
+    document.getElementById('timer-mini').classList.toggle('urgent', timerLeft <= 10);
+  }
 
   if (ring) {
     const pct = timerLeft / timerTotal;
