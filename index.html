@@ -1781,11 +1781,20 @@
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:12px;">
       <div style="font-size:10px;color:var(--text-dim);text-transform:uppercase;letter-spacing:3px;margin-bottom:6px;">Circuit · 3 rounds</div>
       <div style="font-size:22px;font-weight:600;color:var(--text);margin-bottom:4px;">Circuit Abdos</div>
-      <div style="font-size:13px;color:var(--text-dim);font-weight:300;">5 exercices · automatique · repos entre les rounds</div>
+      <div id="abs-routine-desc-1" style="font-size:13px;color:var(--text-dim);font-weight:300;">5 exercices · automatique · repos entre les rounds</div>
+      <div id="abs-routine-desc-2" style="font-size:13px;color:var(--text-dim);font-weight:300;display:none;">5 exercices · volume · haltère · <a href="https://www.instagram.com/reel/DZnbcj5gK1U/?igsh=MWEydHN2ZjdnMzZwcg==" target="_blank" style="color:var(--accent);text-decoration:none;">voir la vidéo ↗</a></div>
+    </div>
+
+    <!-- Sélecteur de routine -->
+    <div style="display:flex;gap:8px;margin-bottom:12px;">
+      <button id="abs-routine-1" onclick="switchAbsRoutine(1)" style="flex:1;padding:10px;background:var(--accent);color:#fff;border:1px solid var(--border);border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;">Routine 1</button>
+      <button id="abs-routine-2" onclick="switchAbsRoutine(2)" style="flex:1;padding:10px;background:var(--surface2);color:var(--text-mid);border:1px solid var(--border);border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;">Routine 2</button>
     </div>
 
     <div style="font-size:10px;color:var(--text-dim);text-transform:uppercase;letter-spacing:2px;margin-bottom:8px;">Personnaliser</div>
-    <div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:16px;">
+
+    <!-- PANEL ROUTINE 1 -->
+    <div id="abs-routine-panel-1" style="background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:16px;">
 
       <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-bottom:1px solid var(--border);">
         <div><div style="font-size:13px;color:var(--text);font-weight:400;">Planche</div><div style="font-size:11px;color:var(--text-dim);margin-top:2px;">Gainage</div></div>
@@ -1829,6 +1838,58 @@
           <button onclick="adjustAbs('abwheel',-1)" style="width:30px;height:30px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;font-size:16px;color:var(--text-mid);cursor:pointer;">−</button>
           <div id="abs-val-abwheel" style="font-size:16px;font-weight:600;color:var(--accent);min-width:58px;text-align:center;">10 reps</div>
           <button onclick="adjustAbs('abwheel',1)" style="width:30px;height:30px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;font-size:16px;color:var(--text-mid);cursor:pointer;">+</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL ROUTINE 2 -->
+    <div id="abs-routine-panel-2" style="background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:16px;display:none;">
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--border);background:var(--surface2);">
+        <div><div style="font-size:12px;color:var(--text-mid);font-weight:500;">Poids haltère (toute la routine)</div></div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <button onclick="adjustAbsDb2(-1)" style="width:30px;height:30px;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:16px;color:var(--text-mid);cursor:pointer;">−</button>
+          <div id="abs-db2-weight-val" style="font-size:16px;font-weight:600;color:var(--accent);min-width:58px;text-align:center;">8 kg</div>
+          <button onclick="adjustAbsDb2(1)" style="width:30px;height:30px;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:16px;color:var(--text-mid);cursor:pointer;">+</button>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-bottom:1px solid var(--border);">
+        <div><div style="font-size:13px;color:var(--text);font-weight:400;">Russian Twist</div><div style="font-size:11px;color:var(--text-dim);margin-top:2px;">Obliques · rotation</div></div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <button onclick="adjustAbs('russian',-5)" style="width:30px;height:30px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;font-size:16px;color:var(--text-mid);cursor:pointer;">−</button>
+          <div id="abs-val-russian" style="font-size:16px;font-weight:600;color:var(--accent);min-width:58px;text-align:center;">50 reps</div>
+          <button onclick="adjustAbs('russian',5)" style="width:30px;height:30px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;font-size:16px;color:var(--text-mid);cursor:pointer;">+</button>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-bottom:1px solid var(--border);">
+        <div><div style="font-size:13px;color:var(--text);font-weight:400;">Montées de Jambes (haltère)</div><div style="font-size:11px;color:var(--text-dim);margin-top:2px;">Bas du ventre · charge</div></div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <button onclick="adjustAbs('legraise_db',-2)" style="width:30px;height:30px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;font-size:16px;color:var(--text-mid);cursor:pointer;">−</button>
+          <div id="abs-val-legraise_db" style="font-size:16px;font-weight:600;color:var(--accent);min-width:58px;text-align:center;">20 reps</div>
+          <button onclick="adjustAbs('legraise_db',2)" style="width:30px;height:30px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;font-size:16px;color:var(--text-mid);cursor:pointer;">+</button>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-bottom:1px solid var(--border);">
+        <div><div style="font-size:13px;color:var(--text);font-weight:400;">Ciseaux Horizontaux</div><div style="font-size:11px;color:var(--text-dim);margin-top:2px;">Abdos · adducteurs</div></div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <button onclick="adjustAbs('scissors_h',-5)" style="width:30px;height:30px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;font-size:16px;color:var(--text-mid);cursor:pointer;">−</button>
+          <div id="abs-val-scissors_h" style="font-size:16px;font-weight:600;color:var(--accent);min-width:58px;text-align:center;">50 reps</div>
+          <button onclick="adjustAbs('scissors_h',5)" style="width:30px;height:30px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;font-size:16px;color:var(--text-mid);cursor:pointer;">+</button>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-bottom:1px solid var(--border);">
+        <div><div style="font-size:13px;color:var(--text);font-weight:400;">Ciseaux Verticaux</div><div style="font-size:11px;color:var(--text-dim);margin-top:2px;">Bas du ventre · contrôle</div></div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <button onclick="adjustAbs('scissors_v',-5)" style="width:30px;height:30px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;font-size:16px;color:var(--text-mid);cursor:pointer;">−</button>
+          <div id="abs-val-scissors_v" style="font-size:16px;font-weight:600;color:var(--accent);min-width:58px;text-align:center;">50 reps</div>
+          <button onclick="adjustAbs('scissors_v',5)" style="width:30px;height:30px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;font-size:16px;color:var(--text-mid);cursor:pointer;">+</button>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 16px;">
+        <div><div style="font-size:13px;color:var(--text);font-weight:400;">Crunchs</div><div style="font-size:11px;color:var(--text-dim);margin-top:2px;">🥇 Activation directe</div></div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <button onclick="adjustAbs('crunch',-5)" style="width:30px;height:30px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;font-size:16px;color:var(--text-mid);cursor:pointer;">−</button>
+          <div id="abs-val-crunch" style="font-size:16px;font-weight:600;color:var(--accent);min-width:58px;text-align:center;">50 reps</div>
+          <button onclick="adjustAbs('crunch',5)" style="width:30px;height:30px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;font-size:16px;color:var(--text-mid);cursor:pointer;">+</button>
         </div>
       </div>
     </div>
@@ -2554,6 +2615,14 @@ const ABS_EXERCISES = [
   { id: 'abwheel', name: 'Ab Wheel Rollout', target: '10 reps', isTime: false, duration: 35, tip: 'Dos plat · Ramène en contractant les abdos' },
 ];
 
+const ABS_EXERCISES_2 = [
+  { id: 'russian', name: 'Russian Twist', target: '50 reps', isTime: false, duration: 60, tip: 'Pieds levés · Rotation complète · Contrôlé' },
+  { id: 'legraise_db', name: 'Montées de Jambes (haltère)', target: '20 reps', isTime: false, duration: 40, tip: 'Haltère entre les pieds · Bas du dos collé au sol' },
+  { id: 'scissors_h', name: 'Ciseaux Horizontaux', target: '50 reps', isTime: false, duration: 55, tip: 'Jambes tendues · Amplitude contrôlée · Abdos gainés' },
+  { id: 'scissors_v', name: 'Ciseaux Verticaux', target: '50 reps', isTime: false, duration: 55, tip: 'Jambes alternées haut/bas · Bas du dos au sol' },
+  { id: 'crunch', name: 'Crunchs', target: '50 reps', isTime: false, duration: 60, tip: 'Expire en montant · Contracte au sommet · Descente contrôlée' },
+];
+
 const absCustom = {
   planche: 60,
   bicycle: 20,
@@ -2562,16 +2631,45 @@ const absCustom = {
   abwheel: 10,
 };
 
-const SECS_PER_REP = { bicycle: 1.5, legraise: 2, vertical: 1.8, abwheel: 3.5 };
+const absCustom2 = {
+  russian: 50,
+  legraise_db: 20,
+  scissors_h: 50,
+  scissors_v: 50,
+  crunch: 50,
+};
+
+let absActiveRoutine = 1;
+let absDb2Weight = 8;
+
+const SECS_PER_REP = { bicycle: 1.5, legraise: 2, vertical: 1.8, abwheel: 3.5, russian: 1.2, legraise_db: 2, scissors_h: 1.1, scissors_v: 1.1, crunch: 1.2 };
 
 
 // Seconds per rep for non-timed exercises
 function adjustAbs(id, delta) {
+  const custom = absActiveRoutine === 2 ? absCustom2 : absCustom;
   const min = id === 'planche' ? 10 : 2;
-  absCustom[id] = Math.max(min, absCustom[id] + delta);
+  custom[id] = Math.max(min, custom[id] + delta);
   const isTime = id === 'planche';
-  const val = absCustom[id];
+  const val = custom[id];
   document.getElementById(`abs-val-${id}`).textContent = isTime ? `${val} sec` : `${val} reps`;
+}
+
+function adjustAbsDb2(delta) {
+  absDb2Weight = Math.max(1, absDb2Weight + delta);
+  document.getElementById('abs-db2-weight-val').textContent = absDb2Weight + ' kg';
+}
+
+function switchAbsRoutine(n) {
+  absActiveRoutine = n;
+  document.getElementById('abs-routine-1').style.background = n === 1 ? 'var(--accent)' : 'var(--surface2)';
+  document.getElementById('abs-routine-1').style.color = n === 1 ? '#fff' : 'var(--text-mid)';
+  document.getElementById('abs-routine-2').style.background = n === 2 ? 'var(--accent)' : 'var(--surface2)';
+  document.getElementById('abs-routine-2').style.color = n === 2 ? '#fff' : 'var(--text-mid)';
+  document.getElementById('abs-routine-panel-1').style.display = n === 1 ? 'block' : 'none';
+  document.getElementById('abs-routine-panel-2').style.display = n === 2 ? 'block' : 'none';
+  document.getElementById('abs-routine-desc-1').style.display = n === 1 ? 'block' : 'none';
+  document.getElementById('abs-routine-desc-2').style.display = n === 2 ? 'block' : 'none';
 }
 const ABS_REST = 45;
 const ABS_ROUNDS = 3;
@@ -2606,8 +2704,11 @@ function absBeep(isRest) {
 
 function startAbsCircuit() {
   // Apply custom values to exercises
-  ABS_EXERCISES.forEach(ex => {
-    const val = absCustom[ex.id];
+  const activeExercises = absActiveRoutine === 2 ? ABS_EXERCISES_2 : ABS_EXERCISES;
+  const activeCustom = absActiveRoutine === 2 ? absCustom2 : absCustom;
+  window._absExercises = activeExercises;
+  activeExercises.forEach(ex => {
+    const val = activeCustom[ex.id];
     if (ex.isTime) {
       ex.duration = val;
       ex.target = `${val} secondes`;
@@ -2654,7 +2755,7 @@ function setAbsBackground(exId) {
 
 function runAbsStep() {
   clearInterval(absInterval);
-  const ex = ABS_EXERCISES[absCurrentEx];
+  const ex = (window._absExercises || ABS_EXERCISES)[absCurrentEx];
   const prepLabel = document.getElementById('abs-prep-label');
 
   if (absIsPrep) {
@@ -2666,12 +2767,12 @@ function runAbsStep() {
     document.getElementById('abs-ex-name').style.color = '#fff';
     document.getElementById('abs-status-label').textContent = absIsRest
       ? `Fin Round ${absCurrentRound + 1} · Repos`
-      : `Round ${absCurrentRound + 1} · Ex ${absCurrentEx + 1}/${ABS_EXERCISES.length}`;
+      : `Round ${absCurrentRound + 1} · Ex ${absCurrentEx + 1}/${(window._absExercises || ABS_EXERCISES).length}`;
     if (prepLabel) prepLabel.style.display = 'block';
     const tipEl = document.getElementById('abs-ex-tip');
     if (tipEl) tipEl.textContent = ex.tip || '';
     // Next label
-    const isLastEx = absCurrentEx === ABS_EXERCISES.length - 1;
+    const isLastEx = absCurrentEx === (window._absExercises || ABS_EXERCISES).length - 1;
     const isLastRound = absCurrentRound === ABS_ROUNDS - 1;
     document.getElementById('abs-next-label').textContent = `${ex.name} · ${ex.target}`;
     setAbsBackground(ex.id);
@@ -2701,7 +2802,7 @@ function runAbsStep() {
     absTotal = ABS_REST;
     document.getElementById('abs-ex-name').textContent = 'Repos';
     document.getElementById('abs-ex-target').textContent = '45 secondes';
-    document.getElementById('abs-next-label').textContent = `Round ${absCurrentRound + 2} · ${ABS_EXERCISES[0].name}`;
+    document.getElementById('abs-next-label').textContent = `Round ${absCurrentRound + 2} · ${(window._absExercises || ABS_EXERCISES)[0].name}`;
     document.getElementById('abs-status-label').textContent = `Fin Round ${absCurrentRound + 1}`;
     document.getElementById('abs-ex-tip').textContent = 'Récupère · Respire';
     const imgEl2 = document.getElementById('abs-ex-img');
@@ -2713,14 +2814,14 @@ function runAbsStep() {
     document.getElementById('abs-ex-target').textContent = ex.target;
     document.getElementById('abs-ex-tip').textContent = ex.tip || '';
     setAbsBackground(ex.id);
-    const isLastEx = absCurrentEx === ABS_EXERCISES.length - 1;
+    const isLastEx = absCurrentEx === (window._absExercises || ABS_EXERCISES).length - 1;
     const isLastRound = absCurrentRound === ABS_ROUNDS - 1;
     let nextLabel = !isLastEx
-      ? `${ABS_EXERCISES[absCurrentEx + 1].name} · ${ABS_EXERCISES[absCurrentEx + 1].target}`
-      : !isLastRound ? `Round ${absCurrentRound + 2} · ${ABS_EXERCISES[0].name}`
+      ? `${(window._absExercises || ABS_EXERCISES)[absCurrentEx + 1].name} · ${(window._absExercises || ABS_EXERCISES)[absCurrentEx + 1].target}`
+      : !isLastRound ? `Round ${absCurrentRound + 2} · ${(window._absExercises || ABS_EXERCISES)[0].name}`
       : 'Dernier exercice ! 💪';
     document.getElementById('abs-next-label').textContent = nextLabel;
-    document.getElementById('abs-status-label').textContent = `Round ${absCurrentRound + 1} · ${absCurrentEx + 1}/${ABS_EXERCISES.length}`;
+    document.getElementById('abs-status-label').textContent = `Round ${absCurrentRound + 1} · ${absCurrentEx + 1}/${(window._absExercises || ABS_EXERCISES).length}`;
   }
 
   for (let r = 0; r < ABS_ROUNDS; r++) {
@@ -2786,7 +2887,7 @@ function advanceAbsCircuit() {
     absIsPrep = true;
   } else {
     absCurrentEx++;
-    if (absCurrentEx >= ABS_EXERCISES.length) {
+    if (absCurrentEx >= (window._absExercises || ABS_EXERCISES).length) {
       if (absCurrentRound >= ABS_ROUNDS - 1) {
         finishAbsCircuit();
         return;
@@ -2865,7 +2966,7 @@ function prevAbsStep() {
   if (pl) pl.textContent = 'Pause';
   if (absIsRest) {
     absIsRest = false;
-    absCurrentEx = ABS_EXERCISES.length - 1;
+    absCurrentEx = (window._absExercises || ABS_EXERCISES).length - 1;
     absIsPrep = true;
   } else if (absIsPrep) {
     absIsPrep = false;
@@ -2874,7 +2975,7 @@ function prevAbsStep() {
       absIsPrep = true;
     } else if (absCurrentRound > 0) {
       absCurrentRound--;
-      absCurrentEx = ABS_EXERCISES.length - 1;
+      absCurrentEx = (window._absExercises || ABS_EXERCISES).length - 1;
       absIsPrep = true;
     }
   } else {
