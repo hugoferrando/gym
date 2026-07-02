@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>Hugo — Salle</title>
 <meta name="theme-color" content="#0a0a0f">
 <meta name="mobile-web-app-capable" content="yes">
@@ -144,7 +144,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 52px 20px 12px;
+    padding: max(52px, calc(env(safe-area-inset-top) + 16px)) 20px 12px;
     position: sticky;
     top: 0;
     background: rgba(0,0,0,0.82);
@@ -293,7 +293,7 @@
   }
 
   .ex-weight-unit {
-    font-size: 9px;
+    font-size: 10px;
     color: rgba(10,132,255,0.7);
     text-transform: uppercase;
     letter-spacing: 0.3px;
@@ -559,7 +559,7 @@
   #history, #progress, #weight { background: var(--bg); }
 
   .history-header, .progress-header {
-    padding: 52px 20px 16px;
+    padding: max(52px, calc(env(safe-area-inset-top) + 16px)) 20px 16px;
     display: flex;
     align-items: center;
     gap: 14px;
@@ -924,7 +924,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 52px 20px 16px;
+    padding: max(52px, calc(env(safe-area-inset-top) + 16px)) 20px 16px;
     position: sticky;
     top: 0;
     background: var(--bg);
@@ -1035,7 +1035,7 @@
   }
 
   .ex-weight-unit {
-    font-size: 9px;
+    font-size: 10px;
     color: var(--text-dim);
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -1225,7 +1225,7 @@
   }
 
   .history-header {
-    padding: 52px 20px 20px;
+    padding: max(52px, calc(env(safe-area-inset-top) + 16px)) 20px 20px;
     border-bottom: 1px solid var(--border);
     display: flex;
     align-items: center;
@@ -1311,7 +1311,7 @@
   }
 
   .progress-header {
-    padding: 52px 20px 20px;
+    padding: max(52px, calc(env(safe-area-inset-top) + 16px)) 20px 20px;
     border-bottom: 1px solid var(--border);
     display: flex;
     align-items: center;
@@ -1380,7 +1380,7 @@
   }
 
   .progress-bar-date {
-    font-size: 9px;
+    font-size: 10px;
     color: var(--text-dim);
     opacity: 0.6;
   }
@@ -1505,7 +1505,7 @@
     line-height: 1.2;
   }
   .ex-rpe-btn .rpe-lbl {
-    font-size: 9px;
+    font-size: 10px;
     color: rgba(255,255,255,0.35);
     text-transform: uppercase;
     letter-spacing: 0.3px;
@@ -1594,7 +1594,7 @@
 <div class="screen active" id="home">
 
   <!-- HEADER -->
-  <div style="padding:56px 20px 8px;">
+  <div style="padding:max(56px, calc(env(safe-area-inset-top) + 20px)) 20px 8px;">
     <div style="font-size:13px;font-weight:500;color:var(--text-dim);margin-bottom:6px;">Bienvenue</div>
     <div style="font-size:34px;font-weight:700;color:var(--text);letter-spacing:-0.8px;">Hugo</div>
   </div>
@@ -1733,33 +1733,33 @@
 </div>
 
 <!-- FIXED BOTTOM NAV -->
-<div id="bottom-nav" style="position:fixed;bottom:20px;left:50%;transform:translateX(-50%);width:calc(100% - 32px);max-width:380px;z-index:50;">
+<div id="bottom-nav" style="position:fixed;bottom:calc(20px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);width:calc(100% - 32px);max-width:380px;z-index:50;">
   <div style="background:rgba(255,255,255,0.09);border:1px solid rgba(255,255,255,0.18);border-radius:999px;padding:14px 28px;backdrop-filter:blur(60px) saturate(200%);-webkit-backdrop-filter:blur(60px) saturate(200%);box-shadow:0 8px 32px rgba(0,0,0,0.3),inset 0 1px 0 rgba(255,255,255,0.25),inset 0 -1px 0 rgba(0,0,0,0.1);display:flex;align-items:center;justify-content:space-between;">
 
     <div onclick="showScreen('history')" style="display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;" ontouchstart="this.style.opacity=0.5" ontouchend="this.style.opacity=1">
       <div style="font-size:17px;font-weight:700;color:var(--accent);" id="total-sessions">0</div>
-      <div style="font-size:9px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.5px;font-weight:500;">Séances</div>
+      <div style="font-size:10px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.5px;font-weight:500;">Séances</div>
     </div>
 
     <div style="width:1px;height:28px;background:rgba(255,255,255,0.1);"></div>
 
     <div onclick="showScreen('progress')" style="display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;" ontouchstart="this.style.opacity=0.5" ontouchend="this.style.opacity=1">
       <div style="font-size:20px;">📈</div>
-      <div style="font-size:9px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.5px;font-weight:500;">Progrès</div>
+      <div style="font-size:10px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.5px;font-weight:500;">Progrès</div>
     </div>
 
     <div style="width:1px;height:28px;background:rgba(255,255,255,0.1);"></div>
 
     <div onclick="showScreen('weight')" style="display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;" ontouchstart="this.style.opacity=0.5" ontouchend="this.style.opacity=1">
       <div style="font-size:17px;font-weight:700;color:var(--accent);" id="current-weight-display">—</div>
-      <div style="font-size:9px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.5px;font-weight:500;">Poids</div>
+      <div style="font-size:10px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.5px;font-weight:500;">Poids</div>
     </div>
 
     <div style="width:1px;height:28px;background:rgba(255,255,255,0.1);"></div>
 
     <div onclick="showScreen('nutrition');renderNutrition()" style="display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;" ontouchstart="this.style.opacity=0.5" ontouchend="this.style.opacity=1">
       <div style="font-size:20px;">🥗</div>
-      <div style="font-size:9px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.5px;font-weight:500;">Nutrition</div>
+      <div style="font-size:10px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.5px;font-weight:500;">Nutrition</div>
     </div>
 
   </div>
@@ -1773,7 +1773,7 @@
       <div class="workout-tag" style="color:var(--accent);">Circuit</div>
       <div class="workout-name">Abdos</div>
     </div>
-    <button class="done-btn" onclick="stopAbsCircuit();showScreen('home')" style="background:#1a1a1a;color:#666;">Stop</button>
+    <button class="done-btn" onclick="stopAbsCircuit();showScreen('home')" style="background:#1a1a1a;color:rgba(255,255,255,0.55);">Stop</button>
   </div>
 
   <!-- PRE-START -->
@@ -1846,7 +1846,7 @@
     <div id="abs-routine-panel-2" style="background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:16px;display:none;">
       <!-- POIDS -->
       <div style="padding:8px 16px 6px;background:var(--surface2);border-bottom:2px solid var(--accent);">
-        <div style="font-size:9px;color:var(--accent);text-transform:uppercase;letter-spacing:2px;font-weight:700;margin-bottom:6px;">⚖️ Poids haltère</div>
+        <div style="font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:2px;font-weight:700;margin-bottom:6px;">⚖️ Poids haltère</div>
         <div style="display:flex;justify-content:space-between;align-items:center;">
           <div style="font-size:12px;color:var(--text-dim);">Utilisé sur toute la routine</div>
           <div style="display:flex;align-items:center;gap:8px;">
@@ -1858,7 +1858,7 @@
       </div>
       <!-- REPS -->
       <div style="padding:8px 16px 4px;border-bottom:1px solid var(--border);">
-        <div style="font-size:9px;color:var(--text-dim);text-transform:uppercase;letter-spacing:2px;font-weight:700;">🔁 Reps par exercice</div>
+        <div style="font-size:10px;color:var(--text-dim);text-transform:uppercase;letter-spacing:2px;font-weight:700;">🔁 Reps par exercice</div>
       </div>
       <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-bottom:1px solid var(--border);">
         <div><div style="font-size:13px;color:var(--text);font-weight:400;">Russian Twist</div><div style="font-size:11px;color:var(--text-dim);margin-top:2px;">Obliques · rotation</div></div>
@@ -2000,19 +2000,19 @@
   </div>
   <!-- Sauvegarde des données -->
   <div style="margin:0 16px 4px;padding:12px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:14px;">
-    <div style="font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#555;margin-bottom:10px;">💾 Sauvegarde (séances · poids · nutrition)</div>
+    <div style="font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:10px;">💾 Sauvegarde (séances · poids · nutrition)</div>
     <div style="display:flex;gap:8px;">
       <button onclick="exportAllData()" style="flex:1;padding:11px;background:rgba(10,132,255,0.12);border:1px solid rgba(10,132,255,0.3);border-radius:10px;font-size:12px;font-weight:600;color:var(--accent);cursor:pointer;">↓ Exporter</button>
       <button onclick="document.getElementById('import-file-input').click()" style="flex:1;padding:11px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);border-radius:10px;font-size:12px;font-weight:600;color:var(--text-mid);cursor:pointer;">↑ Importer</button>
       <input id="import-file-input" type="file" accept=".json,application/json" style="display:none;" onchange="importAllData(event)">
     </div>
-    <div id="backup-status" style="font-size:11px;color:#555;margin-top:8px;display:none;"></div>
+    <div id="backup-status" style="font-size:11px;color:rgba(255,255,255,0.5);margin-top:8px;display:none;"></div>
   </div>
   <div class="history-content" id="history-content"></div>
 </div>
 
 <!-- SAVED LOGS OVERLAY -->
-<div id="saved-logs-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.95);z-index:300;overflow-y:auto;padding:60px 16px 40px;">
+<div id="saved-logs-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.95);z-index:300;overflow-y:auto;padding:max(60px, calc(env(safe-area-inset-top) + 24px)) 16px 40px;">
   <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
     <div style="font-size:20px;font-weight:700;color:#fff;">Logs Claude</div>
     <div onclick="hideSavedLogs()" style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;font-size:18px;color:#fff;cursor:pointer;">✕</div>
@@ -2039,7 +2039,7 @@
   <div class="progress-content" id="weight-content">
     <!-- Add weight form -->
     <div style="background:#111;border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:16px;margin-bottom:12px;">
-      <div style="font-size:11px;color:#555;text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;">Enregistrer mon poids</div>
+      <div style="font-size:11px;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;">Enregistrer mon poids</div>
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
         <input id="weight-input" type="number" inputmode="decimal" step="0.1" placeholder="67.0"
           style="flex:1;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:12px 16px;font-size:20px;font-family:-apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif,sans-serif;color:var(--accent);outline:none;text-align:center;min-width:0;">
@@ -2073,53 +2073,53 @@
 
     <!-- Date selector -->
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
-      <div onclick="nutriPrevDay()" style="width:36px;height:36px;background:#1a1a1a;border:1px solid rgba(255,255,255,0.07);border-radius:10px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:20px;color:#666;">‹</div>
+      <div onclick="nutriPrevDay()" style="width:36px;height:36px;background:#1a1a1a;border:1px solid rgba(255,255,255,0.07);border-radius:10px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:20px;color:rgba(255,255,255,0.55);">‹</div>
       <div id="nutri-date-label" style="font-size:13px;font-weight:600;color:#fff;letter-spacing:-0.2px;"></div>
-      <div onclick="nutriNextDay()" style="width:36px;height:36px;background:#1a1a1a;border:1px solid rgba(255,255,255,0.07);border-radius:10px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:20px;color:#666;">›</div>
+      <div onclick="nutriNextDay()" style="width:36px;height:36px;background:#1a1a1a;border:1px solid rgba(255,255,255,0.07);border-radius:10px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:20px;color:rgba(255,255,255,0.55);">›</div>
     </div>
 
     <!-- Macro targets summary -->
     <div id="nutri-summary" style="background:#111;border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:16px;margin-bottom:12px;">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
-        <div style="font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#555;">Objectifs du jour</div>
-        <div onclick="toggleNutriTargetsEditor()" style="font-size:14px;cursor:pointer;padding:2px 8px;color:#666;">⚙︎</div>
+        <div style="font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.5);">Objectifs du jour</div>
+        <div onclick="toggleNutriTargetsEditor()" style="font-size:14px;cursor:pointer;padding:2px 8px;color:rgba(255,255,255,0.55);">⚙︎</div>
       </div>
       <!-- Éditeur d'objectifs -->
       <div id="nutri-targets-editor" style="display:none;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:12px;margin-bottom:14px;">
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
-          <div><div style="font-size:9px;color:#555;text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;">kcal</div><input id="target-inp-kcal" type="number" inputmode="numeric" style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:8px 10px;font-size:14px;color:#fff;outline:none;"></div>
-          <div><div style="font-size:9px;color:#555;text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;">Protéines (g)</div><input id="target-inp-prot" type="number" inputmode="numeric" style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:8px 10px;font-size:14px;color:#fff;outline:none;"></div>
-          <div><div style="font-size:9px;color:#555;text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;">Glucides (g)</div><input id="target-inp-carb" type="number" inputmode="numeric" style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:8px 10px;font-size:14px;color:#fff;outline:none;"></div>
-          <div><div style="font-size:9px;color:#555;text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;">Lipides (g)</div><input id="target-inp-fat" type="number" inputmode="numeric" style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:8px 10px;font-size:14px;color:#fff;outline:none;"></div>
+          <div><div style="font-size:10px;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;">kcal</div><input id="target-inp-kcal" type="number" inputmode="numeric" style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:8px 10px;font-size:14px;color:#fff;outline:none;"></div>
+          <div><div style="font-size:10px;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;">Protéines (g)</div><input id="target-inp-prot" type="number" inputmode="numeric" style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:8px 10px;font-size:14px;color:#fff;outline:none;"></div>
+          <div><div style="font-size:10px;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;">Glucides (g)</div><input id="target-inp-carb" type="number" inputmode="numeric" style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:8px 10px;font-size:14px;color:#fff;outline:none;"></div>
+          <div><div style="font-size:10px;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;">Lipides (g)</div><input id="target-inp-fat" type="number" inputmode="numeric" style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:8px 10px;font-size:14px;color:#fff;outline:none;"></div>
         </div>
         <button onclick="saveNutriTargets()" style="width:100%;padding:10px;background:var(--accent);border:none;border-radius:8px;font-size:12px;font-weight:600;color:#fff;cursor:pointer;">Enregistrer</button>
       </div>
       <div style="display:flex;gap:8px;margin-bottom:14px;">
         <div style="flex:1;text-align:center;">
           <div id="nutri-kcal-consumed" style="font-size:22px;font-weight:700;color:var(--accent);letter-spacing:-0.5px;">0</div>
-          <div id="nutri-kcal-target" style="font-size:9px;color:#444;text-transform:uppercase;letter-spacing:1px;margin-top:2px;">/ 2700 kcal</div>
+          <div id="nutri-kcal-target" style="font-size:10px;color:rgba(255,255,255,0.45);text-transform:uppercase;letter-spacing:1px;margin-top:2px;">/ 2700 kcal</div>
         </div>
         <div style="width:1px;background:rgba(255,255,255,0.06);"></div>
         <div style="flex:1;text-align:center;">
           <div id="nutri-prot-consumed" style="font-size:22px;font-weight:700;color:#30d158;letter-spacing:-0.5px;">0</div>
-          <div id="nutri-prot-target" style="font-size:9px;color:#444;text-transform:uppercase;letter-spacing:1px;margin-top:2px;">/ 134g prot</div>
+          <div id="nutri-prot-target" style="font-size:10px;color:rgba(255,255,255,0.45);text-transform:uppercase;letter-spacing:1px;margin-top:2px;">/ 134g prot</div>
         </div>
         <div style="width:1px;background:rgba(255,255,255,0.06);"></div>
         <div style="flex:1;text-align:center;">
           <div id="nutri-carb-consumed" style="font-size:22px;font-weight:700;color:#ff9f0a;letter-spacing:-0.5px;">0</div>
-          <div id="nutri-carb-target" style="font-size:9px;color:#444;text-transform:uppercase;letter-spacing:1px;margin-top:2px;">/ 320g gluc</div>
+          <div id="nutri-carb-target" style="font-size:10px;color:rgba(255,255,255,0.45);text-transform:uppercase;letter-spacing:1px;margin-top:2px;">/ 320g gluc</div>
         </div>
         <div style="width:1px;background:rgba(255,255,255,0.06);"></div>
         <div style="flex:1;text-align:center;">
           <div id="nutri-fat-consumed" style="font-size:22px;font-weight:700;color:#bf5af2;letter-spacing:-0.5px;">0</div>
-          <div id="nutri-fat-target" style="font-size:9px;color:#444;text-transform:uppercase;letter-spacing:1px;margin-top:2px;">/ 75g lip</div>
+          <div id="nutri-fat-target" style="font-size:10px;color:rgba(255,255,255,0.45);text-transform:uppercase;letter-spacing:1px;margin-top:2px;">/ 75g lip</div>
         </div>
       </div>
       <!-- Progress bars -->
       <div style="display:flex;flex-direction:column;gap:6px;">
         <div>
           <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
-            <span style="font-size:10px;color:#555;">Calories</span>
+            <span style="font-size:10px;color:rgba(255,255,255,0.5);">Calories</span>
             <span id="nutri-kcal-pct" style="font-size:10px;color:var(--accent);">0%</span>
           </div>
           <div style="height:4px;background:rgba(255,255,255,0.06);border-radius:2px;overflow:hidden;">
@@ -2128,7 +2128,7 @@
         </div>
         <div>
           <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
-            <span style="font-size:10px;color:#555;">Protéines</span>
+            <span style="font-size:10px;color:rgba(255,255,255,0.5);">Protéines</span>
             <span id="nutri-prot-pct" style="font-size:10px;color:#30d158;">0%</span>
           </div>
           <div style="height:4px;background:rgba(255,255,255,0.06);border-radius:2px;overflow:hidden;">
@@ -2137,7 +2137,7 @@
         </div>
         <div>
           <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
-            <span style="font-size:10px;color:#555;">Glucides</span>
+            <span style="font-size:10px;color:rgba(255,255,255,0.5);">Glucides</span>
             <span id="nutri-carb-pct" style="font-size:10px;color:#ff9f0a;">0%</span>
           </div>
           <div style="height:4px;background:rgba(255,255,255,0.06);border-radius:2px;overflow:hidden;">
@@ -2146,7 +2146,7 @@
         </div>
         <div>
           <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
-            <span style="font-size:10px;color:#555;">Lipides</span>
+            <span style="font-size:10px;color:rgba(255,255,255,0.5);">Lipides</span>
             <span id="nutri-fat-pct" style="font-size:10px;color:#bf5af2;">0%</span>
           </div>
           <div style="height:4px;background:rgba(255,255,255,0.06);border-radius:2px;overflow:hidden;">
@@ -2167,13 +2167,13 @@
 
     <!-- Conseils section -->
     <div style="margin-top:16px;background:#111;border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:16px;">
-      <div style="font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#555;margin-bottom:12px;">Conseils · Prise de masse</div>
+      <div style="font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:12px;">Conseils · Prise de masse</div>
       <div style="display:flex;flex-direction:column;gap:10px;">
         <div style="display:flex;gap:10px;align-items:flex-start;">
           <div style="font-size:16px;flex-shrink:0;">🥩</div>
           <div>
             <div style="font-size:12px;font-weight:600;color:#f0ebe3;margin-bottom:2px;">2g de protéines / kg</div>
-            <div style="font-size:11px;color:#555;font-weight:300;line-height:1.5;">Priorité absolue. Répartis sur 3-4 repas. Sources : poulet, œufs, fromage blanc, thon, whey.</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.5);font-weight:300;line-height:1.5;">Priorité absolue. Répartis sur 3-4 repas. Sources : poulet, œufs, fromage blanc, thon, whey.</div>
           </div>
         </div>
         <div style="height:1px;background:rgba(255,255,255,0.04);"></div>
@@ -2181,7 +2181,7 @@
           <div style="font-size:16px;flex-shrink:0;">⚡</div>
           <div>
             <div style="font-size:12px;font-weight:600;color:#f0ebe3;margin-bottom:2px;">Surplus calorique modéré</div>
-            <div style="font-size:11px;color:#555;font-weight:300;line-height:1.5;">+200-250 kcal au-dessus de la maintenance. Trop de surplus = prise de gras inutile.</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.5);font-weight:300;line-height:1.5;">+200-250 kcal au-dessus de la maintenance. Trop de surplus = prise de gras inutile.</div>
           </div>
         </div>
         <div style="height:1px;background:rgba(255,255,255,0.04);"></div>
@@ -2189,7 +2189,7 @@
           <div style="font-size:16px;flex-shrink:0;">🕐</div>
           <div>
             <div style="font-size:12px;font-weight:600;color:#f0ebe3;margin-bottom:2px;">Repas post-entraînement</div>
-            <div style="font-size:11px;color:#555;font-weight:300;line-height:1.5;">Dans les 2h après la séance : protéines + glucides. C'est la fenêtre anabolique principale.</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.5);font-weight:300;line-height:1.5;">Dans les 2h après la séance : protéines + glucides. C'est la fenêtre anabolique principale.</div>
           </div>
         </div>
         <div style="height:1px;background:rgba(255,255,255,0.04);"></div>
@@ -2197,7 +2197,7 @@
           <div style="font-size:16px;flex-shrink:0;">💧</div>
           <div>
             <div style="font-size:12px;font-weight:600;color:#f0ebe3;margin-bottom:2px;">Hydratation</div>
-            <div style="font-size:11px;color:#555;font-weight:300;line-height:1.5;">2-3L d'eau par jour minimum. Plus les jours de séance.</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.5);font-weight:300;line-height:1.5;">2-3L d'eau par jour minimum. Plus les jours de séance.</div>
           </div>
         </div>
       </div>
@@ -2205,42 +2205,42 @@
 
     <!-- MACRO REFERENCE -->
     <div style="margin-top:16px;background:#111;border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:16px;">
-      <div style="font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#555;margin-bottom:12px;">Référence macros · par portion</div>
+      <div style="font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:12px;">Référence macros · par portion</div>
       <div style="display:flex;gap:6px;margin-bottom:14px;">
         <div onclick="switchMacroTab('prot',this)" id="tab-prot" style="flex:1;padding:7px 4px;background:rgba(48,209,88,0.12);border:1px solid rgba(48,209,88,0.3);border-radius:8px;text-align:center;font-size:11px;font-weight:600;color:#30d158;cursor:pointer;">🥩 Protéines</div>
-        <div onclick="switchMacroTab('carb',this)" id="tab-carb" style="flex:1;padding:7px 4px;background:#1a1a1a;border:1px solid rgba(255,255,255,0.06);border-radius:8px;text-align:center;font-size:11px;font-weight:600;color:#555;cursor:pointer;">🍚 Glucides</div>
-        <div onclick="switchMacroTab('fat',this)" id="tab-fat" style="flex:1;padding:7px 4px;background:#1a1a1a;border:1px solid rgba(255,255,255,0.06);border-radius:8px;text-align:center;font-size:11px;font-weight:600;color:#555;cursor:pointer;">🥑 Lipides</div>
+        <div onclick="switchMacroTab('carb',this)" id="tab-carb" style="flex:1;padding:7px 4px;background:#1a1a1a;border:1px solid rgba(255,255,255,0.06);border-radius:8px;text-align:center;font-size:11px;font-weight:600;color:rgba(255,255,255,0.5);cursor:pointer;">🍚 Glucides</div>
+        <div onclick="switchMacroTab('fat',this)" id="tab-fat" style="flex:1;padding:7px 4px;background:#1a1a1a;border:1px solid rgba(255,255,255,0.06);border-radius:8px;text-align:center;font-size:11px;font-weight:600;color:rgba(255,255,255,0.5);cursor:pointer;">🥑 Lipides</div>
       </div>
       <div id="macro-tab-content"></div>
     </div>
 
     <!-- RECETTES -->
     <div style="margin-top:16px;background:#111;border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:16px;margin-bottom:16px;">
-      <div style="font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#555;margin-bottom:12px;">Recettes · Prise de masse</div>
+      <div style="font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:12px;">Recettes · Prise de masse</div>
       <div id="recipes-list"></div>
       <div style="margin-top:14px;border-top:1px solid rgba(255,255,255,0.05);padding-top:14px;">
-        <div style="font-size:10px;color:#555;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">Sites de recettes protéinées</div>
+        <div style="font-size:10px;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">Sites de recettes protéinées</div>
         <div style="display:flex;flex-direction:column;gap:8px;">
           <a href="https://www.myprotein.fr/blog/recettes/" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:space-between;padding:12px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:12px;text-decoration:none;">
             <div>
               <div style="font-size:13px;font-weight:600;color:#fff;">Myprotein Blog</div>
-              <div style="font-size:11px;color:#555;margin-top:1px;">Recettes fitness & prise de masse</div>
+              <div style="font-size:11px;color:rgba(255,255,255,0.5);margin-top:1px;">Recettes fitness & prise de masse</div>
             </div>
-            <div style="font-size:16px;color:#444;">→</div>
+            <div style="font-size:16px;color:rgba(255,255,255,0.45);">→</div>
           </a>
           <a href="https://www.doctissimo.fr/forme/nutrition/recettes-sport" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:space-between;padding:12px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:12px;text-decoration:none;">
             <div>
               <div style="font-size:13px;font-weight:600;color:#fff;">Doctissimo Sport</div>
-              <div style="font-size:11px;color:#555;margin-top:1px;">Recettes adaptées à l'effort</div>
+              <div style="font-size:11px;color:rgba(255,255,255,0.5);margin-top:1px;">Recettes adaptées à l'effort</div>
             </div>
-            <div style="font-size:16px;color:#444;">→</div>
+            <div style="font-size:16px;color:rgba(255,255,255,0.45);">→</div>
           </a>
           <a href="https://www.myfitbyfood.com/recettes-fitness/" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:space-between;padding:12px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:12px;text-decoration:none;">
             <div>
               <div style="font-size:13px;font-weight:600;color:#fff;">My Fit By Food</div>
-              <div style="font-size:11px;color:#555;margin-top:1px;">Recettes avec macros détaillées</div>
+              <div style="font-size:11px;color:rgba(255,255,255,0.5);margin-top:1px;">Recettes avec macros détaillées</div>
             </div>
-            <div style="font-size:16px;color:#444;">→</div>
+            <div style="font-size:16px;color:rgba(255,255,255,0.45);">→</div>
           </a>
         </div>
       </div>
@@ -2259,7 +2259,7 @@
     </div>
 
     <!-- Meal type -->
-    <div style="font-size:10px;color:#555;text-transform:uppercase;letter-spacing:2px;margin-bottom:8px;">Type de repas</div>
+    <div style="font-size:10px;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:2px;margin-bottom:8px;">Type de repas</div>
     <div style="display:flex;gap:8px;margin-bottom:20px;">
       <div onclick="selectMealType('petit-déjeuner',this)" class="meal-type-btn" style="flex:1;padding:10px 6px;background:#1a1a1a;border:1px solid rgba(255,255,255,0.08);border-radius:10px;text-align:center;cursor:pointer;">
         <div style="font-size:18px;">🌅</div>
@@ -2280,7 +2280,7 @@
     </div>
 
     <!-- Ingredient search -->
-    <div style="font-size:10px;color:#555;text-transform:uppercase;letter-spacing:2px;margin-bottom:8px;">Ingrédients</div>
+    <div style="font-size:10px;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:2px;margin-bottom:8px;">Ingrédients</div>
     <input id="ing-search" type="text" placeholder="Ex : oeuf, poulet, riz…" autocomplete="off"
       style="width:100%;background:#1c1c1e;border:1px solid rgba(255,255,255,0.15);border-radius:10px;padding:12px 14px;font-size:15px;color:#fff;outline:none;font-family:-apple-system,sans-serif;margin-bottom:8px;"
       oninput="searchIngredients(this.value)">
@@ -2293,14 +2293,14 @@
           style="width:80px;background:#1c1c1e;border:1px solid rgba(255,255,255,0.15);border-radius:10px;padding:10px 8px;font-size:18px;font-weight:700;color:var(--accent);outline:none;font-family:-apple-system,sans-serif;text-align:center;">
         <div id="ing-qty-unit" style="font-size:14px;color:#888;font-weight:500;min-width:32px;"></div>
         <button onclick="confirmIngredient()" style="flex:1;padding:10px;background:var(--accent);border:none;border-radius:10px;font-size:13px;font-weight:600;color:#fff;cursor:pointer;font-family:-apple-system,sans-serif;">Ajouter</button>
-        <button onclick="cancelIngredient()" style="padding:10px 14px;background:#1a1a1a;border:1px solid rgba(255,255,255,0.08);border-radius:10px;font-size:13px;color:#666;cursor:pointer;font-family:-apple-system,sans-serif;">✕</button>
+        <button onclick="cancelIngredient()" style="padding:10px 14px;background:#1a1a1a;border:1px solid rgba(255,255,255,0.08);border-radius:10px;font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer;font-family:-apple-system,sans-serif;">✕</button>
       </div>
     </div>
     <div id="ing-added-list" style="margin-bottom:8px;"></div>
 
     <!-- Manual entry -->
     <div onclick="toggleManualEntry()" style="display:flex;align-items:center;gap:6px;cursor:pointer;margin-bottom:8px;">
-      <div style="font-size:10px;color:#444;text-transform:uppercase;letter-spacing:1px;">Ingrédient non trouvé ?</div>
+      <div style="font-size:10px;color:rgba(255,255,255,0.45);text-transform:uppercase;letter-spacing:1px;">Ingrédient non trouvé ?</div>
       <div style="font-size:11px;color:var(--accent);font-weight:600;">+ Saisie manuelle</div>
     </div>
     <div id="manual-entry-row" style="display:none;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:14px;margin-bottom:10px;">
@@ -2333,23 +2333,23 @@
 
     <!-- Live macro preview -->
     <div id="ing-macro-preview" style="display:none;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:12px;margin-bottom:16px;">
-      <div style="font-size:10px;color:#555;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Total calculé</div>
+      <div style="font-size:10px;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Total calculé</div>
       <div style="display:flex;gap:6px;">
         <div style="flex:1;text-align:center;">
           <div id="prev-kcal" style="font-size:16px;font-weight:700;color:var(--accent);">0</div>
-          <div style="font-size:9px;color:#444;">kcal</div>
+          <div style="font-size:10px;color:rgba(255,255,255,0.45);">kcal</div>
         </div>
         <div style="flex:1;text-align:center;">
           <div id="prev-prot" style="font-size:16px;font-weight:700;color:#30d158;">0g</div>
-          <div style="font-size:9px;color:#444;">prot</div>
+          <div style="font-size:10px;color:rgba(255,255,255,0.45);">prot</div>
         </div>
         <div style="flex:1;text-align:center;">
           <div id="prev-carb" style="font-size:16px;font-weight:700;color:#ff9f0a;">0g</div>
-          <div style="font-size:9px;color:#444;">gluc</div>
+          <div style="font-size:10px;color:rgba(255,255,255,0.45);">gluc</div>
         </div>
         <div style="flex:1;text-align:center;">
           <div id="prev-fat" style="font-size:16px;font-weight:700;color:#bf5af2;">0g</div>
-          <div style="font-size:9px;color:#444;">lip</div>
+          <div style="font-size:10px;color:rgba(255,255,255,0.45);">lip</div>
         </div>
       </div>
     </div>
@@ -2409,19 +2409,19 @@
 
   <!-- RPE selector -->
   <div style="width:100%;margin:16px 0 0;">
-    <div style="font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#666;margin-bottom:10px;text-align:left;">Comment c'était ?</div>
+    <div style="font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:10px;text-align:left;">Comment c'était ?</div>
     <div style="display:flex;gap:6px;" id="rpe-selector">
       <div onclick="selectRpe(6)" data-rpe="6" style="flex:1;padding:10px 4px;background:#1a1a1a;border:1px solid rgba(255,255,255,0.08);border-radius:10px;text-align:center;cursor:pointer;">
-        <div style="font-size:18px;">😌</div><div style="font-size:10px;color:#666;margin-top:3px;">Facile</div>
+        <div style="font-size:18px;">😌</div><div style="font-size:10px;color:rgba(255,255,255,0.55);margin-top:3px;">Facile</div>
       </div>
       <div onclick="selectRpe(7)" data-rpe="7" style="flex:1;padding:10px 4px;background:#1a1a1a;border:1px solid rgba(255,255,255,0.08);border-radius:10px;text-align:center;cursor:pointer;">
-        <div style="font-size:18px;">💪</div><div style="font-size:10px;color:#666;margin-top:3px;">Bien</div>
+        <div style="font-size:18px;">💪</div><div style="font-size:10px;color:rgba(255,255,255,0.55);margin-top:3px;">Bien</div>
       </div>
       <div onclick="selectRpe(8)" data-rpe="8" style="flex:1;padding:10px 4px;background:#1a1a1a;border:1px solid rgba(255,255,255,0.08);border-radius:10px;text-align:center;cursor:pointer;">
-        <div style="font-size:18px;">🔥</div><div style="font-size:10px;color:#666;margin-top:3px;">Dur</div>
+        <div style="font-size:18px;">🔥</div><div style="font-size:10px;color:rgba(255,255,255,0.55);margin-top:3px;">Dur</div>
       </div>
       <div onclick="selectRpe(9)" data-rpe="9" style="flex:1;padding:10px 4px;background:#1a1a1a;border:1px solid rgba(255,255,255,0.08);border-radius:10px;text-align:center;cursor:pointer;">
-        <div style="font-size:18px;">😤</div><div style="font-size:10px;color:#666;margin-top:3px;">Limite</div>
+        <div style="font-size:18px;">😤</div><div style="font-size:10px;color:rgba(255,255,255,0.55);margin-top:3px;">Limite</div>
       </div>
     </div>
   </div>
@@ -2431,7 +2431,7 @@
 
   <!-- Log -->
   <div style="width:100%;background:#111;border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:14px;margin:12px 0;text-align:left;max-height:180px;overflow-y:auto;">
-    <div style="font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#666;margin-bottom:10px;">Log à copier pour Claude</div>
+    <div style="font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:10px;">Log à copier pour Claude</div>
     <pre id="session-log-text" style="font-family:-apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif,sans-serif;font-size:12px;color:#999;white-space:pre-wrap;line-height:1.7;"></pre>
   </div>
 
@@ -3057,7 +3057,7 @@ function updateHomeStats() {
           <div style="font-size:20px;">⚡</div>
           <div>
             <div style="font-size:12px;font-weight:600;color:var(--accent);">Deload recommandé</div>
-            <div style="font-size:11px;color:#666;font-weight:300;margin-top:2px;">${weeksSinceDeload} semaines sans récupération — réduis les charges de 40% cette semaine</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.55);font-weight:300;margin-top:2px;">${weeksSinceDeload} semaines sans récupération — réduis les charges de 40% cette semaine</div>
           </div>
         </div>`;
     } else {
@@ -3627,7 +3627,7 @@ function finishWorkout() {
   const prevSame = log.slice(1).find(e => e.id === currentWorkout);
   const compEl = document.getElementById('session-comparison');
   if (prevSame && compEl) {
-    let compHTML = '<div style="font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#666;margin-bottom:8px;">vs séance précédente</div>';
+    let compHTML = '<div style="font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:8px;">vs séance précédente</div>';
     compHTML += '<div style="display:flex;flex-direction:column;gap:4px;">';
     entry.exercises.forEach(ex => {
       const prevEx = prevSame.exercises.find(e => e.id === ex.id);
@@ -3638,10 +3638,10 @@ function finishWorkout() {
       const diff = curWeight - prevWeight;
       const exDef = w.exercises.find(e => e.id === ex.id);
       const unit = exDef && exDef.weight.includes('côté') ? ' kg/côté' : exDef && exDef.weight.includes('main') ? ' kg/main' : ' kg';
-      const color = diff > 0 ? '#30d158' : diff < 0 ? '#ff453a' : '#555';
+      const color = diff > 0 ? '#30d158' : diff < 0 ? '#ff453a' : 'rgba(255,255,255,0.5)';
       const icon = diff > 0 ? '↑' : diff < 0 ? '↓' : '=';
       compHTML += `<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.04);">
-        <div style="font-size:12px;color:#666;font-weight:300;">${ex.name}</div>
+        <div style="font-size:12px;color:rgba(255,255,255,0.55);font-weight:300;">${ex.name}</div>
         <div style="font-size:12px;color:${color};font-weight:600;">${icon} ${diff !== 0 ? Math.abs(diff) + unit : 'stable'}</div>
       </div>`;
     });
@@ -3831,17 +3831,17 @@ function renderHistory() {
       <div style="display:flex;justify-content:space-between;align-items:center;">
         <div style="text-align:center;flex:1;">
           <div style="font-family:-apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif,sans-serif;font-size:32px;color:var(--accent);letter-spacing:1px;">${streak}</div>
-          <div style="font-size:10px;color:#444;text-transform:uppercase;letter-spacing:2px;margin-top:2px;">🔥 Semaines</div>
+          <div style="font-size:10px;color:rgba(255,255,255,0.45);text-transform:uppercase;letter-spacing:2px;margin-top:2px;">🔥 Semaines</div>
         </div>
         <div style="width:1px;height:40px;background:rgba(255,255,255,0.06);"></div>
         <div style="text-align:center;flex:1;">
           <div style="font-family:-apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif,sans-serif;font-size:32px;color:var(--accent);letter-spacing:1px;">${thisWeek}</div>
-          <div style="font-size:10px;color:#444;text-transform:uppercase;letter-spacing:2px;margin-top:2px;">Cette semaine</div>
+          <div style="font-size:10px;color:rgba(255,255,255,0.45);text-transform:uppercase;letter-spacing:2px;margin-top:2px;">Cette semaine</div>
         </div>
         <div style="width:1px;height:40px;background:rgba(255,255,255,0.06);"></div>
         <div style="text-align:center;flex:1;">
           <div style="font-family:-apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif,sans-serif;font-size:32px;color:var(--accent);letter-spacing:1px;">${totalSessions}</div>
-          <div style="font-size:10px;color:#444;text-transform:uppercase;letter-spacing:2px;margin-top:2px;">Total</div>
+          <div style="font-size:10px;color:rgba(255,255,255,0.45);text-transform:uppercase;letter-spacing:2px;margin-top:2px;">Total</div>
         </div>
       </div>
     </div>
@@ -3906,22 +3906,22 @@ function renderCalendar(sessionDates) {
   wrap.innerHTML = `
     <div style="background:#111;border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:16px;">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
-        <div onclick="prevMonth()" style="width:32px;height:32px;background:#1a1a1a;border:1px solid rgba(255,255,255,0.07);border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;color:#666;">‹</div>
+        <div onclick="prevMonth()" style="width:32px;height:32px;background:#1a1a1a;border:1px solid rgba(255,255,255,0.07);border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;color:rgba(255,255,255,0.55);">‹</div>
         <div style="text-align:center;">
           <div style="font-family:-apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif,sans-serif;font-size:20px;letter-spacing:1px;color:#f0ebe3;">${MONTHS_FR[calMonth]} ${calYear}</div>
-          <div style="font-size:11px;color:#555;font-weight:300;">${monthSessions} séance${monthSessions > 1 ? 's' : ''}</div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.5);font-weight:300;">${monthSessions} séance${monthSessions > 1 ? 's' : ''}</div>
         </div>
-        <div onclick="nextMonth()" style="width:32px;height:32px;background:#1a1a1a;border:1px solid rgba(255,255,255,0.07);border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;color:#666;">›</div>
+        <div onclick="nextMonth()" style="width:32px;height:32px;background:#1a1a1a;border:1px solid rgba(255,255,255,0.07);border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;color:rgba(255,255,255,0.55);">›</div>
       </div>
       <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:6px;">
-        ${DAYS_FR.map(d => `<div style="text-align:center;font-size:11px;font-weight:600;color:#333;letter-spacing:1px;">${d}</div>`).join('')}
+        ${DAYS_FR.map(d => `<div style="text-align:center;font-size:11px;font-weight:600;color:rgba(255,255,255,0.45);letter-spacing:1px;">${d}</div>`).join('')}
       </div>
       <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;">${cells}</div>
       <div style="display:flex;gap:12px;margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.05);">
-        <div style="display:flex;align-items:center;gap:5px;"><div style="width:6px;height:6px;border-radius:50%;background:var(--accent);"></div><span style="font-size:11px;color:#444;">Upper A</span></div>
-        <div style="display:flex;align-items:center;gap:5px;"><div style="width:6px;height:6px;border-radius:50%;background:#ff453a;"></div><span style="font-size:11px;color:#444;">Upper B</span></div>
-        <div style="display:flex;align-items:center;gap:5px;"><div style="width:6px;height:6px;border-radius:50%;background:#ffd60a;"></div><span style="font-size:11px;color:#444;">Upper C</span></div>
-        <div style="display:flex;align-items:center;gap:5px;"><div style="width:6px;height:6px;border-radius:50%;background:#30d158;"></div><span style="font-size:11px;color:#444;">Lower</span></div>
+        <div style="display:flex;align-items:center;gap:5px;"><div style="width:6px;height:6px;border-radius:50%;background:var(--accent);"></div><span style="font-size:11px;color:rgba(255,255,255,0.45);">Upper A</span></div>
+        <div style="display:flex;align-items:center;gap:5px;"><div style="width:6px;height:6px;border-radius:50%;background:#ff453a;"></div><span style="font-size:11px;color:rgba(255,255,255,0.45);">Upper B</span></div>
+        <div style="display:flex;align-items:center;gap:5px;"><div style="width:6px;height:6px;border-radius:50%;background:#ffd60a;"></div><span style="font-size:11px;color:rgba(255,255,255,0.45);">Upper C</span></div>
+        <div style="display:flex;align-items:center;gap:5px;"><div style="width:6px;height:6px;border-radius:50%;background:#30d158;"></div><span style="font-size:11px;color:rgba(255,255,255,0.45);">Lower</span></div>
       </div>
     </div>
   `;
@@ -4013,15 +4013,15 @@ function renderProgress() {
     const pct = (weekVals[i] / maxVol) * 100;
     const isLast = i === weekKeys.length - 1;
     return `<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;justify-content:flex-end;">
-      <div style="font-size:9px;color:${isLast ? '#0a84ff' : '#444'};">${Math.round(weekVals[i]/1000)}k</div>
+      <div style="font-size:10px;color:${isLast ? '#0a84ff' : 'rgba(255,255,255,0.45)'};">${Math.round(weekVals[i]/1000)}k</div>
       <div style="width:100%;border-radius:4px 4px 0 0;background:${isLast ? '#0a84ff' : '#2a2a2a'};height:${Math.max(pct*0.7, 4)}px;transition:height 0.5s;"></div>
-      <div style="font-size:9px;color:#333;">${weekLabels[i]}</div>
+      <div style="font-size:10px;color:rgba(255,255,255,0.45);">${weekLabels[i]}</div>
     </div>`;
   }).join('');
 
   let html = `
     <div style="margin-bottom:12px;background:#111;border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:16px;">
-      <div style="font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#555;margin-bottom:14px;">Volume total / semaine</div>
+      <div style="font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:14px;">Volume total / semaine</div>
       <div style="display:flex;gap:4px;align-items:flex-end;height:80px;">${volBars}</div>
     </div>
   `;
@@ -4053,7 +4053,7 @@ function renderProgress() {
     const first = history[0];
     const weightDiff = latest.weight - first.weight;
     const diffStr = weightDiff > 0 ? '+' + weightDiff + 'kg' : weightDiff < 0 ? weightDiff + 'kg' : 'stable';
-    const diffColor = weightDiff > 0 ? '#30d158' : weightDiff < 0 ? '#ff453a' : '#666';
+    const diffColor = weightDiff > 0 ? '#30d158' : weightDiff < 0 ? '#ff453a' : 'rgba(255,255,255,0.55)';
     const volume = latest.weight > 0 ? latest.weight * latest.sets * latest.reps : '—';
 
     html += `
@@ -4061,14 +4061,14 @@ function renderProgress() {
         <div onclick="toggleExCard('${id}')" style="display:flex;justify-content:space-between;align-items:center;padding:14px 16px;cursor:pointer;">
           <div>
             <div style="font-size:13px;font-weight:600;color:#f0ebe3;margin-bottom:2px;">${name}</div>
-            <div style="font-size:11px;color:#555;font-weight:300;">${history.length} séance${history.length>1?'s':''}</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.5);font-weight:300;">${history.length} séance${history.length>1?'s':''}</div>
           </div>
           <div style="display:flex;align-items:center;gap:12px;">
             <div style="text-align:right;">
               <div style="font-family:-apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif,sans-serif;font-size:20px;color:var(--accent);letter-spacing:1px;">${latest.weight > 0 ? latest.weight + ' kg' : 'BW'}</div>
               <div style="font-size:11px;color:${diffColor};font-weight:600;">${diffStr}</div>
             </div>
-            <div id="arrow-${id}" style="color:#444;font-size:18px;transition:transform 0.25s;">›</div>
+            <div id="arrow-${id}" style="color:rgba(255,255,255,0.45);font-size:18px;transition:transform 0.25s;">›</div>
           </div>
         </div>
 
@@ -4076,15 +4076,15 @@ function renderProgress() {
           <div style="display:flex;gap:8px;margin-bottom:14px;">
             <div style="flex:1;background:#1a1a1a;border-radius:8px;padding:8px 4px;text-align:center;">
               <div style="font-family:-apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif,sans-serif;font-size:20px;color:var(--accent);letter-spacing:1px;">${latest.sets}</div>
-              <div style="font-size:10px;color:#555;text-transform:uppercase;letter-spacing:1px;">séries</div>
+              <div style="font-size:10px;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:1px;">séries</div>
             </div>
             <div style="flex:1;background:#1a1a1a;border-radius:8px;padding:8px 4px;text-align:center;">
               <div style="font-family:-apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif,sans-serif;font-size:20px;color:var(--accent);letter-spacing:1px;">${latest.reps}</div>
-              <div style="font-size:10px;color:#555;text-transform:uppercase;letter-spacing:1px;">reps</div>
+              <div style="font-size:10px;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:1px;">reps</div>
             </div>
             <div style="flex:1;background:#1a1a1a;border-radius:8px;padding:8px 4px;text-align:center;">
               <div style="font-family:-apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif,sans-serif;font-size:18px;color:var(--accent);letter-spacing:1px;">${volume}</div>
-              <div style="font-size:10px;color:#555;text-transform:uppercase;letter-spacing:1px;">vol. kg</div>
+              <div style="font-size:10px;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:1px;">vol. kg</div>
             </div>
           </div>
           <canvas id="chart-${id}" height="90" style="width:100%;display:block;"></canvas>
@@ -4224,7 +4224,7 @@ function drawChart(id, history) {
       const n = pts.length;
       const show = n <= 5 || i === 0 || i === n - 1 || i % Math.ceil(n / 4) === 0;
       return show
-        ? '<span style="font-size:10px;color:#444;font-weight:300;">' + p.date.slice(0,5) + '</span>'
+        ? '<span style="font-size:10px;color:rgba(255,255,255,0.45);font-weight:300;">' + p.date.slice(0,5) + '</span>'
         : '<span></span>';
     }).join('');
   }
@@ -4346,13 +4346,13 @@ function showPhaseDetail(key) {
     <div style="margin-bottom:20px;">
       <div style="font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:${phase.color};margin-bottom:6px;">Récap</div>
       <div style="font-family:-apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif,sans-serif;font-size:28px;letter-spacing:1px;color:#f0ebe3;line-height:1.1;">${phase.title}</div>
-      <div style="font-size:13px;color:#555;font-weight:300;margin-top:4px;">${phase.subtitle}</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.5);font-weight:300;margin-top:4px;">${phase.subtitle}</div>
     </div>
   `;
 
   phase.sections.forEach(s => {
     html += `<div style="margin-bottom:16px;">`;
-    html += `<div style="font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#555;margin-bottom:8px;">${s.title}</div>`;
+    html += `<div style="font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:8px;">${s.title}</div>`;
     if (s.content) {
       html += `<div style="font-size:13px;color:#888;font-weight:300;line-height:1.6;">${s.content}</div>`;
     }
@@ -4362,7 +4362,7 @@ function showPhaseDetail(key) {
         html += `<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 12px;${i < s.rows.length-1 ? 'border-bottom:1px solid rgba(255,255,255,0.04)' : ''}">
           <div style="font-size:13px;color:#888;font-weight:300;">${r[0]}</div>
           <div style="display:flex;gap:10px;align-items:center;">
-            <div style="font-size:11px;color:#555;">${r[1]}</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.5);">${r[1]}</div>
             <div style="font-family:-apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif,sans-serif;font-size:16px;color:var(--accent);letter-spacing:1px;">${r[2]}</div>
           </div>
         </div>`;
@@ -4421,7 +4421,7 @@ function renderWeightScreen() {
   const first = weights[0];
   const latest = weights[weights.length - 1];
   const diff = (latest.w - first.w).toFixed(1);
-  const diffColor = diff > 0 ? '#30d158' : diff < 0 ? '#ff453a' : '#666';
+  const diffColor = diff > 0 ? '#30d158' : diff < 0 ? '#ff453a' : 'rgba(255,255,255,0.55)';
   statsEl.innerHTML = `
     <div style="font-family:-apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif,sans-serif;font-size:22px;color:var(--accent);letter-spacing:1px;">${latest.w} kg</div>
     <div style="font-size:11px;color:${diffColor};font-weight:600;">${diff > 0 ? '+' : ''}${diff} kg</div>
@@ -4431,7 +4431,7 @@ function renderWeightScreen() {
   requestAnimationFrame(() => drawWeightChart(weights));
 
   // History list
-  listEl.innerHTML = '<div style="font-size:11px;color:#555;text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;">Historique</div>' +
+  listEl.innerHTML = '<div style="font-size:11px;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;">Historique</div>' +
     [...weights].reverse().map(e => `
       <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.04);">
         <div style="font-size:13px;color:#888;font-weight:300;">${e.date}</div>
@@ -4525,7 +4525,7 @@ function drawWeightChart(weights) {
     labelsEl.innerHTML = pts.map((p, i) => {
       const n = pts.length;
       const show = n <= 5 || i === 0 || i === n-1 || i % Math.ceil(n/4) === 0;
-      return show ? `<span style="font-size:10px;color:#444;font-weight:300;">${p.date.slice(0,5)}</span>` : '<span></span>';
+      return show ? `<span style="font-size:10px;color:rgba(255,255,255,0.45);font-weight:300;">${p.date.slice(0,5)}</span>` : '<span></span>';
     }).join('');
   }
 }
@@ -4806,7 +4806,7 @@ function renderNutrition() {
   const mealIcons = { 'petit-déjeuner':'🌅', 'déjeuner':'☀️', 'dîner':'🌙', 'collation':'🍎' };
   const listEl = document.getElementById('nutri-meals-list');
   if (meals.length === 0) {
-    listEl.innerHTML = '<div style="text-align:center;padding:20px 0;color:#333;font-size:13px;">Aucun repas enregistré</div>';
+    listEl.innerHTML = '<div style="text-align:center;padding:20px 0;color:rgba(255,255,255,0.45);font-size:13px;">Aucun repas enregistré</div>';
     return;
   }
   listEl.innerHTML = meals.map((m, i) => `
@@ -4816,26 +4816,26 @@ function renderNutrition() {
           <div style="font-size:18px;">${mealIcons[m.type]||'🍽️'}</div>
           <div>
             <div style="font-size:13px;font-weight:600;color:#fff;text-transform:capitalize;">${m.type}</div>
-            ${m.desc ? `<div style="font-size:11px;color:#555;font-weight:300;">${esc(m.desc)}</div>` : ''}
+            ${m.desc ? `<div style="font-size:11px;color:rgba(255,255,255,0.5);font-weight:300;">${esc(m.desc)}</div>` : ''}
           </div>
         </div>
         <div style="display:flex;align-items:center;gap:10px;">
-          <div style="font-size:16px;font-weight:700;color:var(--accent);">${m.kcal} <span style="font-size:10px;color:#444;font-weight:400;">kcal</span></div>
-          <div onclick="deleteMeal('${key}',${i})" style="font-size:16px;color:#333;cursor:pointer;padding:4px;">✕</div>
+          <div style="font-size:16px;font-weight:700;color:var(--accent);">${m.kcal} <span style="font-size:10px;color:rgba(255,255,255,0.45);font-weight:400;">kcal</span></div>
+          <div onclick="deleteMeal('${key}',${i})" style="font-size:16px;color:rgba(255,255,255,0.45);cursor:pointer;padding:4px;">✕</div>
         </div>
       </div>
       <div style="display:flex;gap:6px;">
         <div style="flex:1;background:rgba(48,209,88,0.06);border-radius:8px;padding:6px;text-align:center;">
           <div style="font-size:13px;font-weight:600;color:#30d158;">${m.prot}g</div>
-          <div style="font-size:9px;color:#444;text-transform:uppercase;letter-spacing:0.5px;">prot</div>
+          <div style="font-size:10px;color:rgba(255,255,255,0.45);text-transform:uppercase;letter-spacing:0.5px;">prot</div>
         </div>
         <div style="flex:1;background:rgba(255,159,10,0.06);border-radius:8px;padding:6px;text-align:center;">
           <div style="font-size:13px;font-weight:600;color:#ff9f0a;">${m.carb}g</div>
-          <div style="font-size:9px;color:#444;text-transform:uppercase;letter-spacing:0.5px;">gluc</div>
+          <div style="font-size:10px;color:rgba(255,255,255,0.45);text-transform:uppercase;letter-spacing:0.5px;">gluc</div>
         </div>
         <div style="flex:1;background:rgba(191,90,242,0.06);border-radius:8px;padding:6px;text-align:center;">
           <div style="font-size:13px;font-weight:600;color:#bf5af2;">${m.fat}g</div>
-          <div style="font-size:9px;color:#444;text-transform:uppercase;letter-spacing:0.5px;">lip</div>
+          <div style="font-size:10px;color:rgba(255,255,255,0.45);text-transform:uppercase;letter-spacing:0.5px;">lip</div>
         </div>
       </div>
     </div>
@@ -4920,7 +4920,7 @@ function searchIngredients(query) {
     <div onclick="selectIngredient(${ING_DB.indexOf(item)})" style="padding:10px 14px;background:#1c1c1e;border:1px solid rgba(255,255,255,0.08);border-radius:10px;margin-bottom:5px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;" ontouchstart="this.style.background='#252525'" ontouchend="this.style.background='#1c1c1e'">
       <div>
         <div style="font-size:13px;color:#fff;font-weight:500;">${item.name}</div>
-        <div style="font-size:11px;color:#555;margin-top:2px;">${macroHint}</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.5);margin-top:2px;">${macroHint}</div>
       </div>
       <div style="font-size:11px;color:var(--accent);font-weight:600;background:rgba(10,132,255,0.1);padding:4px 8px;border-radius:6px;">par ${unitLabel}</div>
     </div>`;
@@ -5023,9 +5023,9 @@ function renderAddedIngredients() {
     <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:rgba(255,255,255,0.04);border-radius:8px;margin-bottom:5px;">
       <div>
         <div style="font-size:12px;color:#fff;font-weight:500;">${esc(ing.label)}</div>
-        <div style="font-size:10px;color:#555;margin-top:1px;">${ing.kcal} kcal · ${ing.prot}g P · ${ing.carb}g G · ${ing.fat}g L</div>
+        <div style="font-size:10px;color:rgba(255,255,255,0.5);margin-top:1px;">${ing.kcal} kcal · ${ing.prot}g P · ${ing.carb}g G · ${ing.fat}g L</div>
       </div>
-      <div onclick="removeIngredient(${i})" style="font-size:16px;color:#444;cursor:pointer;padding:4px 6px;">✕</div>
+      <div onclick="removeIngredient(${i})" style="font-size:16px;color:rgba(255,255,255,0.45);cursor:pointer;padding:4px 6px;">✕</div>
     </div>
   `).join('');
 }
@@ -5144,7 +5144,7 @@ function switchMacroTab(tab, el) {
     } else {
       tabEl.style.background = '#1a1a1a';
       tabEl.style.borderColor = 'rgba(255,255,255,0.06)';
-      tabEl.style.color = '#555';
+      tabEl.style.color = 'rgba(255,255,255,0.5)';
     }
   });
   renderMacroTab();
@@ -5160,22 +5160,22 @@ function renderMacroTab() {
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
         <div>
           <div style="font-size:13px;font-weight:600;color:#f0ebe3;">${item.name}</div>
-          <div style="font-size:11px;color:#444;font-weight:300;">${item.portion}</div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.45);font-weight:300;">${item.portion}</div>
         </div>
-        <div style="font-size:15px;font-weight:700;color:var(--accent);">${item.kcal} <span style="font-size:10px;color:#444;font-weight:400;">kcal</span></div>
+        <div style="font-size:15px;font-weight:700;color:var(--accent);">${item.kcal} <span style="font-size:10px;color:rgba(255,255,255,0.45);font-weight:400;">kcal</span></div>
       </div>
       <div style="display:flex;gap:6px;">
         <div style="flex:1;background:rgba(48,209,88,0.06);border-radius:6px;padding:5px;text-align:center;">
           <div style="font-size:12px;font-weight:600;color:#30d158;">${item.prot}g</div>
-          <div style="font-size:9px;color:#444;">P</div>
+          <div style="font-size:10px;color:rgba(255,255,255,0.45);">P</div>
         </div>
         <div style="flex:1;background:rgba(255,159,10,0.06);border-radius:6px;padding:5px;text-align:center;">
           <div style="font-size:12px;font-weight:600;color:#ff9f0a;">${item.carb}g</div>
-          <div style="font-size:9px;color:#444;">G</div>
+          <div style="font-size:10px;color:rgba(255,255,255,0.45);">G</div>
         </div>
         <div style="flex:1;background:rgba(191,90,242,0.06);border-radius:6px;padding:5px;text-align:center;">
           <div style="font-size:12px;font-weight:600;color:#bf5af2;">${item.fat}g</div>
-          <div style="font-size:9px;color:#444;">L</div>
+          <div style="font-size:10px;color:rgba(255,255,255,0.45);">L</div>
         </div>
       </div>
     </div>
@@ -5253,7 +5253,7 @@ function renderRecipes() {
           <div>
             <div style="font-size:13px;font-weight:600;color:#f0ebe3;">${r.name}</div>
             <div style="display:flex;gap:4px;margin-top:3px;flex-wrap:wrap;">
-              ${r.tags.map(t => `<span style="font-size:9px;font-weight:600;color:var(--accent);background:rgba(10,132,255,0.1);border-radius:4px;padding:2px 6px;letter-spacing:0.3px;">${t}</span>`).join('')}
+              ${r.tags.map(t => `<span style="font-size:10px;font-weight:600;color:var(--accent);background:rgba(10,132,255,0.1);border-radius:4px;padding:2px 6px;letter-spacing:0.3px;">${t}</span>`).join('')}
             </div>
           </div>
         </div>
@@ -5262,30 +5262,30 @@ function renderRecipes() {
             <div style="font-size:13px;font-weight:700;color:var(--accent);">${r.kcal} kcal</div>
             <div style="font-size:10px;color:#30d158;">${r.prot}g P</div>
           </div>
-          <div id="recipe-arrow-${i}" style="color:#444;font-size:18px;transition:transform 0.25s;">›</div>
+          <div id="recipe-arrow-${i}" style="color:rgba(255,255,255,0.45);font-size:18px;transition:transform 0.25s;">›</div>
         </div>
       </div>
       <div id="recipe-detail-${i}" style="display:none;margin-top:12px;">
-        <div style="font-size:11px;color:#555;font-style:italic;margin-bottom:10px;">${r.desc}</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.5);font-style:italic;margin-bottom:10px;">${r.desc}</div>
         <div style="display:flex;gap:6px;margin-bottom:10px;">
           <div style="flex:1;background:rgba(48,209,88,0.06);border-radius:8px;padding:7px;text-align:center;">
             <div style="font-size:13px;font-weight:600;color:#30d158;">${r.prot}g</div>
-            <div style="font-size:9px;color:#444;">Prot</div>
+            <div style="font-size:10px;color:rgba(255,255,255,0.45);">Prot</div>
           </div>
           <div style="flex:1;background:rgba(255,159,10,0.06);border-radius:8px;padding:7px;text-align:center;">
             <div style="font-size:13px;font-weight:600;color:#ff9f0a;">${r.carb}g</div>
-            <div style="font-size:9px;color:#444;">Gluc</div>
+            <div style="font-size:10px;color:rgba(255,255,255,0.45);">Gluc</div>
           </div>
           <div style="flex:1;background:rgba(191,90,242,0.06);border-radius:8px;padding:7px;text-align:center;">
             <div style="font-size:13px;font-weight:600;color:#bf5af2;">${r.fat}g</div>
-            <div style="font-size:9px;color:#444;">Lip</div>
+            <div style="font-size:10px;color:rgba(255,255,255,0.45);">Lip</div>
           </div>
         </div>
-        <div style="font-size:10px;color:#555;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Ingrédients</div>
+        <div style="font-size:10px;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Ingrédients</div>
         <div style="margin-bottom:10px;">
           ${r.ingredients.map(ing => `<div style="font-size:12px;color:#888;padding:3px 0;border-bottom:1px solid rgba(255,255,255,0.03);">· ${ing}</div>`).join('')}
         </div>
-        <div style="font-size:10px;color:#555;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Préparation</div>
+        <div style="font-size:10px;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Préparation</div>
         ${r.steps.map((s, si) => `<div style="display:flex;gap:8px;margin-bottom:5px;"><div style="font-size:10px;font-weight:700;color:var(--accent);flex-shrink:0;width:16px;margin-top:1px;">${si+1}.</div><div style="font-size:12px;color:#888;line-height:1.5;">${s}</div></div>`).join('')}
         <button onclick="addRecipeToLog(${i})" style="width:100%;margin-top:12px;padding:10px;background:rgba(10,132,255,0.1);border:1px solid rgba(10,132,255,0.25);border-radius:10px;font-size:12px;font-weight:600;color:var(--accent);cursor:pointer;font-family:-apple-system,sans-serif;">+ Ajouter au log du jour</button>
       </div>
