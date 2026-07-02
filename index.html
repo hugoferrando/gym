@@ -1844,13 +1844,21 @@
 
     <!-- PANEL ROUTINE 2 -->
     <div id="abs-routine-panel-2" style="background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:16px;display:none;">
-      <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--border);background:var(--surface2);">
-        <div><div style="font-size:12px;color:var(--text-mid);font-weight:500;">Poids haltère (toute la routine)</div></div>
-        <div style="display:flex;align-items:center;gap:8px;">
-          <button onclick="adjustAbsDb2(-1)" style="width:30px;height:30px;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:16px;color:var(--text-mid);cursor:pointer;">−</button>
-          <div id="abs-db2-weight-val" style="font-size:16px;font-weight:600;color:var(--accent);min-width:58px;text-align:center;">8 kg</div>
-          <button onclick="adjustAbsDb2(1)" style="width:30px;height:30px;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:16px;color:var(--text-mid);cursor:pointer;">+</button>
+      <!-- POIDS -->
+      <div style="padding:8px 16px 6px;background:var(--surface2);border-bottom:2px solid var(--accent);">
+        <div style="font-size:9px;color:var(--accent);text-transform:uppercase;letter-spacing:2px;font-weight:700;margin-bottom:6px;">⚖️ Poids haltère</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <div style="font-size:12px;color:var(--text-dim);">Utilisé sur toute la routine</div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <button onclick="adjustAbsDb2(-1)" style="width:30px;height:30px;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:16px;color:var(--text-mid);cursor:pointer;">−</button>
+            <div id="abs-db2-weight-val" style="font-size:18px;font-weight:700;color:var(--accent);min-width:58px;text-align:center;">8 kg</div>
+            <button onclick="adjustAbsDb2(1)" style="width:30px;height:30px;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:16px;color:var(--text-mid);cursor:pointer;">+</button>
+          </div>
         </div>
+      </div>
+      <!-- REPS -->
+      <div style="padding:8px 16px 4px;border-bottom:1px solid var(--border);">
+        <div style="font-size:9px;color:var(--text-dim);text-transform:uppercase;letter-spacing:2px;font-weight:700;">🔁 Reps par exercice</div>
       </div>
       <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-bottom:1px solid var(--border);">
         <div><div style="font-size:13px;color:var(--text);font-weight:400;">Russian Twist</div><div style="font-size:11px;color:var(--text-dim);margin-top:2px;">Obliques · rotation</div></div>
