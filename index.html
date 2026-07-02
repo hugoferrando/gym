@@ -1603,14 +1603,14 @@
     -webkit-backdrop-filter: blur(30px) saturate(180%);
     border: 1px solid rgba(255,255,255,0.18);
     border-radius: 999px;
-    padding: 7px 15px 7px 8px;
+    padding: 10px 20px 10px 11px;
     box-shadow: 0 8px 24px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.15);
     cursor: pointer;
   }
   #timer-mini.visible { display: flex; }
   #timer-mini:active { transform: scale(0.96); }
   #timer-mini-time {
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 600;
     color: #fff;
     font-variant-numeric: tabular-nums;
@@ -2434,11 +2434,11 @@
 
 <!-- TIMER RÉDUIT (pastille flottante) -->
 <div id="timer-mini" onclick="expandTimer()">
-  <svg width="30" height="30" style="transform:rotate(-90deg);display:block;">
-    <circle cx="15" cy="15" r="12" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="3"/>
-    <circle id="timer-mini-ring" cx="15" cy="15" r="12" fill="none"
-      stroke="var(--accent)" stroke-width="3" stroke-linecap="round"
-      stroke-dasharray="75.4" stroke-dashoffset="0"
+  <svg width="40" height="40" style="transform:rotate(-90deg);display:block;">
+    <circle cx="20" cy="20" r="17" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="3.5"/>
+    <circle id="timer-mini-ring" cx="20" cy="20" r="17" fill="none"
+      stroke="var(--accent)" stroke-width="3.5" stroke-linecap="round"
+      stroke-dasharray="106.81" stroke-dashoffset="0"
       style="transition:stroke-dashoffset 1s linear, stroke 0.3s;"/>
   </svg>
   <div id="timer-mini-time">2:00</div>
@@ -3895,7 +3895,7 @@ function updateTimerDisplay() {
     miniTime.textContent = `${mins}:${secs.toString().padStart(2,'0')}`;
     const miniRing = document.getElementById('timer-mini-ring');
     if (miniRing && timerTotal > 0) {
-      miniRing.style.strokeDashoffset = 75.4 * (1 - timerLeft / timerTotal);
+      miniRing.style.strokeDashoffset = 106.81 * (1 - timerLeft / timerTotal);
       miniRing.style.stroke = timerLeft <= 10 ? 'var(--red)' : 'var(--accent)';
     }
     document.getElementById('timer-mini').classList.toggle('urgent', timerLeft <= 10);
