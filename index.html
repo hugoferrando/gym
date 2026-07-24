@@ -1787,7 +1787,7 @@
         <div>
           <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--accent);margin-bottom:5px;">Upper</div>
           <div style="font-size:20px;font-weight:600;color:var(--text);letter-spacing:-0.3px;">Haut du corps</div>
-          <div style="font-size:13px;color:var(--text-dim);margin-top:2px;">A · B · Bonus — 3 variantes</div>
+          <div style="font-size:13px;color:var(--text-dim);margin-top:2px;">A · B · C — 3 variantes</div>
         </div>
         <div id="upper-arrow" style="width:30px;height:30px;border-radius:50%;background:rgba(10,132,255,0.12);display:flex;align-items:center;justify-content:center;transition:transform 0.25s;font-size:15px;color:var(--accent);">›</div>
       </div>
@@ -1804,13 +1804,13 @@
           <div>
             <div style="font-size:11px;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:2px;">Upper B</div>
             <div style="font-size:15px;font-weight:500;color:var(--text);">Épaules + Dos + Bras</div>
-            <div style="font-size:12px;color:var(--text-dim);margin-top:2px;">8 exercices · ~60 min · 2 supersets</div>
+            <div style="font-size:12px;color:var(--text-dim);margin-top:2px;">8 exercices · ~55 min · 3 supersets</div>
           </div>
           <div style="font-size:17px;color:var(--text-dim);">›</div>
         </div>
         <div onclick="startWorkout('bonus')" style="background:rgba(255,255,255,0.05);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,200,60,0.2);border-left:3px solid #f5a623;box-shadow:inset 0 1px 0 rgba(255,255,255,0.1);border-radius:14px;padding:14px 18px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:all 0.2s;" ontouchstart="this.style.opacity=0.6" ontouchend="this.style.opacity=1">
           <div>
-            <div style="font-size:11px;font-weight:600;color:#f5a623;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:2px;">⭐ Bonus</div>
+            <div style="font-size:11px;font-weight:600;color:#f5a623;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:2px;">⭐ Upper C</div>
             <div style="font-size:15px;font-weight:500;color:var(--text);">Points Faibles</div>
             <div style="font-size:12px;color:var(--text-dim);margin-top:2px;">7 exercices · ~45 min · Optionnel</div>
           </div>
@@ -1825,7 +1825,7 @@
         <div>
           <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--green);margin-bottom:5px;">Lower</div>
           <div style="font-size:20px;font-weight:600;color:var(--text);letter-spacing:-0.3px;">Jambes</div>
-          <div style="font-size:13px;color:var(--text-dim);margin-top:2px;">8 exercices · ~60 min · 3 supersets</div>
+          <div style="font-size:13px;color:var(--text-dim);margin-top:2px;">6 exercices · ~45 min · 2 supersets</div>
         </div>
         <div style="width:30px;height:30px;border-radius:50%;background:rgba(48,209,88,0.12);display:flex;align-items:center;justify-content:center;font-size:15px;color:var(--green);">›</div>
       </div>
@@ -2593,8 +2593,8 @@ const WORKOUTS = {
     name: 'Épaules + Dos + Bras',
     exercises: [
       { id: 'ohp', name: 'Dumbbell OHP', sets: 4, reps: 10, weight: '20 kg', rpe: '7-8', note: 'Fourchette 8-10 reps', restTimer: 120 },
-      { id: 'rowV', name: 'Tirage Vertical', sets: 4, reps: 10, weight: '55 kg', rpe: '7-8', restTimer: 120 },
-      { id: 'bench_b', name: 'Développé Couché Machine', sets: 4, reps: 10, weight: '25 kg/côté', rpe: '7-8', restTimer: 120 },
+      { id: 'rowV', name: 'Tirage Vertical', sets: 4, reps: 10, weight: '55 kg', rpe: '7-8', supersetWith: 'bench_b', restTimer: 0 },
+      { id: 'bench_b', name: 'Développé Couché Machine', sets: 4, reps: 10, weight: '25 kg/côté', rpe: '7-8', supersetStart: true, restTimer: 120 },
       { id: 'lat_b', name: 'Élévations Latérales', sets: 4, reps: 15, weight: '12 kg', rpe: '8-9', note: 'Assis · Isolation deltoïde', restTimer: 75 },
       { id: 'oiseau_b', name: 'Oiseau / Reverse Pec Dec', sets: 3, reps: 15, weight: '10 kg', rpe: '8', note: '⚙️ Calibration — cherche RPE 8 sur 15 reps', supersetWith: 'shrugs_b', restTimer: 0 },
       { id: 'shrugs_b', name: 'Shrugs', sets: 3, reps: 15, weight: '20 kg', rpe: '8', note: '⚙️ Calibration · Épaules vers les oreilles, pause en haut', supersetStart: true, restTimer: 90 },
@@ -2612,12 +2612,10 @@ const WORKOUTS = {
       { id: 'curl_l', name: 'Leg Curl', sets: 3, reps: 12, weight: '35 kg', rpe: '8', supersetStart: true, restTimer: 90 },
       { id: 'bulgarian', name: 'Fentes Bulgares', sets: 3, reps: 10, weight: '10 kg/main', rpe: '7-8', note: '10 reps/jambe', supersetWith: 'calves', restTimer: 0 },
       { id: 'calves', name: 'Mollets', sets: 3, reps: 15, weight: '30 kg', rpe: '8', supersetStart: true, restTimer: 90 },
-      { id: 'lat_l', name: 'Élévations Latérales', sets: 3, reps: 15, weight: '12 kg', rpe: '8-9', note: 'Assis · Maintien du volume épaules', supersetWith: 'oiseau_l', restTimer: 0 },
-      { id: 'oiseau_l', name: 'Oiseau / Reverse Pec Dec', sets: 3, reps: 15, weight: '10 kg', rpe: '8', supersetStart: true, restTimer: 75 },
     ]
   },
   bonus: {
-    tag: 'Bonus',
+    tag: 'Upper C',
     name: 'Points Faibles',
     exercises: [
       { id: 'bon_lat', name: 'Élévations Latérales', sets: 4, reps: 15, weight: '12 kg', rpe: '8-9', note: 'Assis · Charge fixe · Cherche la congestion', restTimer: 75 },
@@ -3168,8 +3166,8 @@ function updateHomeStats() {
     nameEl.textContent = lastSession.name;
     dateEl.textContent = lastSession.date;
     tagEl.textContent = lastSession.tag;
-    const tagColors = { 'Upper A': 'rgba(10,132,255,0.15)', 'Upper B': 'rgba(191,90,242,0.15)', 'Upper C': 'rgba(100,210,255,0.15)', 'Bonus': 'rgba(245,166,35,0.15)', 'Lower': 'rgba(48,209,88,0.15)', 'Circuit': 'rgba(255,159,10,0.15)' };
-    const textColors = { 'Upper A': '#0a84ff', 'Upper B': '#bf5af2', 'Upper C': '#64d2ff', 'Bonus': '#f5a623', 'Lower': '#30d158', 'Circuit': '#ff9f0a' };
+    const tagColors = { 'Upper A': 'rgba(10,132,255,0.15)', 'Upper B': 'rgba(191,90,242,0.15)', 'Upper C': 'rgba(245,166,35,0.15)', 'Lower': 'rgba(48,209,88,0.15)', 'Circuit': 'rgba(255,159,10,0.15)' };
+    const textColors = { 'Upper A': '#0a84ff', 'Upper B': '#bf5af2', 'Upper C': '#f5a623', 'Lower': '#30d158', 'Circuit': '#ff9f0a' };
     tagEl.style.background = tagColors[lastSession.tag] || 'rgba(10,132,255,0.15)';
     tagEl.style.color = textColors[lastSession.tag] || '#0a84ff';
   } else if (nameEl) {
@@ -3180,7 +3178,7 @@ function updateHomeStats() {
 
   // Next session recommendation
   const cycle = ['upperA', 'upperB', 'lower', 'bonus'];
-  const cycleNames = { upperA: { name: 'Upper A · Poitrine + Dos', sub: '8 exercices · ~60 min' }, upperB: { name: 'Upper B · Épaules + Dos + Bras', sub: '8 exercices · ~60 min' }, lower: { name: 'Lower · Jambes', sub: '8 exercices · ~60 min' }, bonus: { name: 'Bonus · Points Faibles', sub: '7 exercices · ~45 min · optionnel' } };
+  const cycleNames = { upperA: { name: 'Upper A · Poitrine + Dos', sub: '8 exercices · ~60 min' }, upperB: { name: 'Upper B · Épaules + Dos + Bras', sub: '8 exercices · ~55 min' }, lower: { name: 'Lower · Jambes', sub: '6 exercices · ~45 min' }, bonus: { name: 'Upper C · Points Faibles', sub: '7 exercices · ~45 min · optionnel' } };
   let nextId = 'upperA';
   if (lastSession) {
     const lastId = lastSession.id;
@@ -4485,16 +4483,16 @@ function drawChart(id, history) {
 const PHASE_DETAILS = {
   phase3: {
     title: 'Phase 3 \u2014 En cours \ud83d\udd25',
-    subtitle: '12 semaines \u00b7 3 Upper + 1 Lower \u00b7 Bonus optionnel \u00b7 ~60 min/s\u00e9ance',
+    subtitle: '12 semaines \u00b7 Upper A / B / C + Lower \u00b7 Upper C optionnel \u00b7 ~60 min/s\u00e9ance',
     color: '#0a84ff',
     sections: [
       {
         title: 'Objectif',
-        content: 'Priorit\u00e9 absolue aux \u00e9paules \u2014 largeur (deltoïde lat\u00e9ral) et \u00e9paisseur (deltoïde post\u00e9rieur). Upper A et Upper B sont deux s\u00e9ances compl\u00e8tes et autonomes : m\u00eame sans le Bonus, tout le haut du corps reste \u00e0 2 s\u00e9ances par semaine.'
+        content: 'Priorit\u00e9 absolue aux \u00e9paules \u2014 largeur (deltoïde lat\u00e9ral) et \u00e9paisseur (deltoïde post\u00e9rieur). Upper A et Upper B sont deux s\u00e9ances compl\u00e8tes et autonomes : m\u00eame sans l\u2019Upper C, tout le haut du corps reste \u00e0 2 s\u00e9ances par semaine.'
       },
       {
         title: 'Changements vs Phase 2',
-        content: 'Deltoïde post\u00e9rieur 3 \u2192 9 s\u00e9ries/sem (oiseau ajout\u00e9) \u00b7 Deltoïde lat\u00e9ral 8 \u2192 13 \u00b7 Trap\u00e8zes 0 \u2192 6 (shrugs) \u00b7 D\u00e9velopp\u00e9 Inclin\u00e9 devient prioritaire \u00b7 Triceps 15 \u2192 9 \u00b7 Upper C supprim\u00e9, remplac\u00e9 par un Bonus points faibles \u00b7 Supersets antagonistes pour tenir 60 min \u00b7 Isolations pass\u00e9es \u00e0 RPE 8-9'
+        content: 'Deltoïde post\u00e9rieur 3 \u2192 9 s\u00e9ries/sem (oiseau ajout\u00e9) \u00b7 Deltoïde lat\u00e9ral 8 \u2192 13 \u00b7 Trap\u00e8zes 0 \u2192 6 (shrugs) \u00b7 D\u00e9velopp\u00e9 Inclin\u00e9 devient prioritaire \u00b7 Triceps 15 \u2192 9 \u00b7 Upper C recentr\u00e9 sur les points faibles et rendu optionnel \u00b7 Supersets antagonistes pour tenir 60 min \u00b7 Lower = jambes uniquement \u00b7 Isolations pass\u00e9es \u00e0 RPE 8-9'
       },
       {
         title: 'Upper A \u2014 Poitrine + Dos',
@@ -4513,8 +4511,8 @@ const PHASE_DETAILS = {
         title: 'Upper B \u2014 \u00c9paules + Dos + Bras',
         rows: [
           ['Dumbbell OHP', '4\u00d78-10', '20 kg'],
-          ['Tirage Vertical', '4\u00d710', '55 kg'],
-          ['D\u00e9velopp\u00e9 Couch\u00e9 Machine', '4\u00d710', '25 kg/c\u00f4t\u00e9'],
+          ['SS \u00b7 Tirage Vertical', '4\u00d710', '55 kg'],
+          ['SS \u00b7 D\u00e9velopp\u00e9 Couch\u00e9 Machine', '4\u00d710', '25 kg/c\u00f4t\u00e9'],
           ['\u00c9l\u00e9vations Lat\u00e9rales', '4\u00d715', '12 kg'],
           ['SS \u00b7 Oiseau / Reverse Pec Dec', '3\u00d715', '10 kg \u2699\ufe0f'],
           ['SS \u00b7 Shrugs', '3\u00d715', '20 kg \u2699\ufe0f'],
@@ -4531,12 +4529,10 @@ const PHASE_DETAILS = {
           ['SS \u00b7 Leg Curl', '3\u00d712', '35 kg'],
           ['SS \u00b7 Fentes Bulgares', '3\u00d710', '10 kg/main'],
           ['SS \u00b7 Mollets', '3\u00d715', '30 kg'],
-          ['SS \u00b7 \u00c9l\u00e9vations Lat\u00e9rales', '3\u00d715', '12 kg'],
-          ['SS \u00b7 Oiseau', '3\u00d715', '10 kg'],
         ]
       },
       {
-        title: 'Bonus \u2014 Points Faibles (optionnel)',
+        title: 'Upper C \u2014 Points Faibles (optionnel)',
         rows: [
           ['\u00c9l\u00e9vations Lat\u00e9rales', '4\u00d715', '12 kg'],
           ['SS \u00b7 D\u00e9velopp\u00e9 Inclin\u00e9 Smith', '3\u00d712', '12.5 kg/c\u00f4t\u00e9'],
@@ -4550,18 +4546,18 @@ const PHASE_DETAILS = {
       {
         title: 'Volume hebdomadaire',
         rows: [
-          ['Deltoïde lat\u00e9ral', 'A+B+Lower 10', '+Bonus 14'],
-          ['Deltoïde post\u00e9rieur', '9', '12'],
-          ['Trap\u00e8zes', '3 + face pull', '6 + face pull'],
-          ['Pec (dont inclin\u00e9)', '14 (4)', '17 (7)'],
+          ['Deltoïde lat\u00e9ral', 'A+B+Lower 7', '+Upper C 11'],
+          ['Deltoïde post\u00e9rieur', '6', '12'],
+          ['Trap\u00e8zes', '3', '6'],
+          ['Pec (dont inclin\u00e9)', '11 (4)', '14 (7)'],
           ['Dos', '12', '12'],
-          ['Biceps / Triceps', '9 / 9', '12 / 12'],
+          ['Biceps / Triceps', '6 / 6', '9 / 9'],
           ['Quadriceps / Ischios', '10 / 7', '\u2014'],
         ]
       },
       {
         title: 'Placement semaine',
-        content: 'Lundi \u2192 Upper A \u00b7 Mardi \u2192 Upper B \u00b7 Jeudi \u2192 Lower \u00b7 Samedi \u2192 Bonus si dispo. Le Bonus est volontairement plac\u00e9 loin des deux s\u00e9ances lourdes d\u2019\u00e9paules.'
+        content: 'Lundi \u2192 Upper A \u00b7 Mardi \u2192 Upper B \u00b7 Jeudi \u2192 Lower \u00b7 Samedi \u2192 Upper C si dispo. L\u2019Upper C est volontairement plac\u00e9 loin des deux s\u00e9ances lourdes d\u2019\u00e9paules.'
       },
       {
         title: 'Supersets (SS)',
@@ -4569,7 +4565,7 @@ const PHASE_DETAILS = {
       },
       {
         title: 'R\u00e8gle de progression',
-        content: 'Compos\u00e9s RPE 7-8, isolations RPE 8-9 (0-2 reps en r\u00e9serve). Haut de la fourchette atteint sur 2-3 s\u00e9ances cons\u00e9cutives \u2192 +2 kg halt\u00e8res / +2.5 kg machines et poulies. La progression se fait sur A, B et Lower \u2014 le Bonus reste \u00e0 charge fixe, tu y cherches la congestion pas le poids.'
+        content: 'Compos\u00e9s RPE 7-8, isolations RPE 8-9 (0-2 reps en r\u00e9serve). Haut de la fourchette atteint sur 2-3 s\u00e9ances cons\u00e9cutives \u2192 +2 kg halt\u00e8res / +2.5 kg machines et poulies. La progression se fait sur A, B et Lower \u2014 l\u2019Upper C reste \u00e0 charge fixe, tu y cherches la congestion pas le poids.'
       },
       {
         title: 'Semaine 1 \u2014 Calibration \u2699\ufe0f',
