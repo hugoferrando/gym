@@ -1808,11 +1808,11 @@
           </div>
           <div style="font-size:17px;color:var(--text-dim);">›</div>
         </div>
-        <div onclick="startWorkout('bonus')" style="background:rgba(255,255,255,0.05);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,200,60,0.2);border-left:3px solid #f5a623;box-shadow:inset 0 1px 0 rgba(255,255,255,0.1);border-radius:14px;padding:14px 18px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:all 0.2s;" ontouchstart="this.style.opacity=0.6" ontouchend="this.style.opacity=1">
+        <div onclick="startWorkout('bonus')" style="background:rgba(255,255,255,0.05);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.08);border-left:3px solid var(--accent);box-shadow:inset 0 1px 0 rgba(255,255,255,0.1);border-radius:14px;padding:14px 18px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:all 0.2s;" ontouchstart="this.style.opacity=0.6" ontouchend="this.style.opacity=1">
           <div>
-            <div style="font-size:11px;font-weight:600;color:#f5a623;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:2px;">⭐ Upper C</div>
+            <div style="font-size:11px;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:2px;">Upper C</div>
             <div style="font-size:15px;font-weight:500;color:var(--text);">Points Faibles</div>
-            <div style="font-size:12px;color:var(--text-dim);margin-top:2px;">7 exercices · ~45 min · Optionnel</div>
+            <div style="font-size:12px;color:var(--text-dim);margin-top:2px;">7 exercices · ~45 min · 3 supersets</div>
           </div>
           <div style="font-size:17px;color:var(--text-dim);">›</div>
         </div>
@@ -3166,8 +3166,8 @@ function updateHomeStats() {
     nameEl.textContent = lastSession.name;
     dateEl.textContent = lastSession.date;
     tagEl.textContent = lastSession.tag;
-    const tagColors = { 'Upper A': 'rgba(10,132,255,0.15)', 'Upper B': 'rgba(191,90,242,0.15)', 'Upper C': 'rgba(245,166,35,0.15)', 'Lower': 'rgba(48,209,88,0.15)', 'Circuit': 'rgba(255,159,10,0.15)' };
-    const textColors = { 'Upper A': '#0a84ff', 'Upper B': '#bf5af2', 'Upper C': '#f5a623', 'Lower': '#30d158', 'Circuit': '#ff9f0a' };
+    const tagColors = { 'Upper A': 'rgba(10,132,255,0.15)', 'Upper B': 'rgba(191,90,242,0.15)', 'Upper C': 'rgba(100,210,255,0.15)', 'Lower': 'rgba(48,209,88,0.15)', 'Circuit': 'rgba(255,159,10,0.15)' };
+    const textColors = { 'Upper A': '#0a84ff', 'Upper B': '#bf5af2', 'Upper C': '#64d2ff', 'Lower': '#30d158', 'Circuit': '#ff9f0a' };
     tagEl.style.background = tagColors[lastSession.tag] || 'rgba(10,132,255,0.15)';
     tagEl.style.color = textColors[lastSession.tag] || '#0a84ff';
   } else if (nameEl) {
@@ -3178,7 +3178,7 @@ function updateHomeStats() {
 
   // Next session recommendation
   const cycle = ['upperA', 'upperB', 'lower', 'bonus'];
-  const cycleNames = { upperA: { name: 'Upper A · Poitrine + Dos', sub: '8 exercices · ~60 min' }, upperB: { name: 'Upper B · Épaules + Dos + Bras', sub: '8 exercices · ~55 min' }, lower: { name: 'Lower · Jambes', sub: '6 exercices · ~45 min' }, bonus: { name: 'Upper C · Points Faibles', sub: '7 exercices · ~45 min · optionnel' } };
+  const cycleNames = { upperA: { name: 'Upper A · Poitrine + Dos', sub: '8 exercices · ~60 min' }, upperB: { name: 'Upper B · Épaules + Dos + Bras', sub: '8 exercices · ~55 min' }, lower: { name: 'Lower · Jambes', sub: '6 exercices · ~45 min' }, bonus: { name: 'Upper C · Points Faibles', sub: '7 exercices · ~45 min' } };
   let nextId = 'upperA';
   if (lastSession) {
     const lastId = lastSession.id;
@@ -4483,7 +4483,7 @@ function drawChart(id, history) {
 const PHASE_DETAILS = {
   phase3: {
     title: 'Phase 3 \u2014 En cours \ud83d\udd25',
-    subtitle: '12 semaines \u00b7 Upper A / B / C + Lower \u00b7 Upper C optionnel \u00b7 ~60 min/s\u00e9ance',
+    subtitle: '12 semaines \u00b7 Upper A / B / C + Lower \u00b7 ~60 min/s\u00e9ance',
     color: '#0a84ff',
     sections: [
       {
@@ -4492,7 +4492,7 @@ const PHASE_DETAILS = {
       },
       {
         title: 'Changements vs Phase 2',
-        content: 'Deltoïde post\u00e9rieur 3 \u2192 9 s\u00e9ries/sem (oiseau ajout\u00e9) \u00b7 Deltoïde lat\u00e9ral 8 \u2192 13 \u00b7 Trap\u00e8zes 0 \u2192 6 (shrugs) \u00b7 D\u00e9velopp\u00e9 Inclin\u00e9 devient prioritaire \u00b7 Triceps 15 \u2192 9 \u00b7 Upper C recentr\u00e9 sur les points faibles et rendu optionnel \u00b7 Supersets antagonistes pour tenir 60 min \u00b7 Lower = jambes uniquement \u00b7 Isolations pass\u00e9es \u00e0 RPE 8-9'
+        content: 'Deltoïde post\u00e9rieur 3 \u2192 9 s\u00e9ries/sem (oiseau ajout\u00e9) \u00b7 Deltoïde lat\u00e9ral 8 \u2192 13 \u00b7 Trap\u00e8zes 0 \u2192 6 (shrugs) \u00b7 D\u00e9velopp\u00e9 Inclin\u00e9 devient prioritaire \u00b7 Triceps 15 \u2192 9 \u00b7 Upper C recentr\u00e9 sur les points faibles \u00b7 Supersets antagonistes pour tenir 60 min \u00b7 Lower = jambes uniquement \u00b7 Isolations pass\u00e9es \u00e0 RPE 8-9'
       },
       {
         title: 'Upper A \u2014 Poitrine + Dos',
@@ -4532,7 +4532,7 @@ const PHASE_DETAILS = {
         ]
       },
       {
-        title: 'Upper C \u2014 Points Faibles (optionnel)',
+        title: 'Upper C \u2014 Points Faibles',
         rows: [
           ['\u00c9l\u00e9vations Lat\u00e9rales', '4\u00d715', '12 kg'],
           ['SS \u00b7 D\u00e9velopp\u00e9 Inclin\u00e9 Smith', '3\u00d712', '12.5 kg/c\u00f4t\u00e9'],
@@ -4557,7 +4557,7 @@ const PHASE_DETAILS = {
       },
       {
         title: 'Placement semaine',
-        content: 'Lundi \u2192 Upper A \u00b7 Mardi \u2192 Upper B \u00b7 Jeudi \u2192 Lower \u00b7 Samedi \u2192 Upper C si dispo. L\u2019Upper C est volontairement plac\u00e9 loin des deux s\u00e9ances lourdes d\u2019\u00e9paules.'
+        content: 'Lundi \u2192 Upper A \u00b7 Mardi \u2192 Upper B \u00b7 Jeudi \u2192 Lower \u00b7 Samedi \u2192 Upper C. L\u2019Upper C est volontairement plac\u00e9 loin des deux s\u00e9ances lourdes d\u2019\u00e9paules.'
       },
       {
         title: 'Supersets (SS)',
