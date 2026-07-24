@@ -1636,32 +1636,30 @@
       <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;">
         <div>
           <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-dim);margin-bottom:5px;">Programme actif</div>
-          <div style="font-size:20px;font-weight:600;color:var(--text);letter-spacing:-0.3px;">Phase 2 · Bloc 2</div>
-          <div style="font-size:13px;color:var(--text-dim);margin-top:2px;">Volume · Surcharge progressive</div>
+          <div style="font-size:20px;font-weight:600;color:var(--text);letter-spacing:-0.3px;">Phase 3 · Épaules</div>
+          <div style="font-size:13px;color:var(--text-dim);margin-top:2px;">Supersets · Deltoïdes prioritaires</div>
         </div>
         <div style="text-align:right;">
-          <div style="font-size:34px;font-weight:700;color:var(--accent);letter-spacing:-1px;line-height:1;">5</div>
+          <div id="prog-week-num" style="font-size:34px;font-weight:700;color:var(--accent);letter-spacing:-1px;line-height:1;">—</div>
           <div style="font-size:11px;color:var(--text-dim);font-weight:500;">/ 12 sem.</div>
         </div>
       </div>
       <div style="height:4px;background:rgba(255,255,255,0.08);border-radius:4px;overflow:hidden;margin-bottom:14px;">
-        <div style="height:100%;width:41%;background:linear-gradient(90deg,var(--accent),#5af);border-radius:4px;box-shadow:0 0 10px rgba(10,132,255,0.5);"></div>
+        <div id="prog-week-bar" style="height:100%;width:0%;background:linear-gradient(90deg,var(--accent),#5af);border-radius:4px;box-shadow:0 0 10px rgba(10,132,255,0.5);transition:width 0.6s ease;"></div>
       </div>
       <!-- Phases button -->
-      <div style="display:flex;gap:8px;">
-        <div onclick="showPhaseDetail('phase1')" style="flex:1;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:9px 12px;cursor:pointer;" ontouchstart="this.style.opacity=0.6" ontouchend="this.style.opacity=1">
-          <div style="display:flex;align-items:center;gap:6px;">
-            <div style="width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 6px rgba(48,209,88,0.6);"></div>
-            <div style="font-size:12px;color:var(--text-mid);">Phase 1 ✓</div>
-          </div>
-          <div style="font-size:11px;color:var(--text-dim);">›</div>
+      <div style="display:flex;gap:6px;">
+        <div onclick="showPhaseDetail('phase1')" style="flex:1;display:flex;align-items:center;justify-content:center;gap:5px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:9px 6px;cursor:pointer;" ontouchstart="this.style.opacity=0.6" ontouchend="this.style.opacity=1">
+          <div style="width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 6px rgba(48,209,88,0.6);"></div>
+          <div style="font-size:12px;color:var(--text-mid);">Ph.1 &#10003;</div>
         </div>
-        <div onclick="showPhaseDetail('phase2')" style="flex:1;display:flex;align-items:center;justify-content:space-between;background:rgba(10,132,255,0.08);border:1px solid rgba(10,132,255,0.25);border-radius:12px;padding:9px 12px;cursor:pointer;" ontouchstart="this.style.opacity=0.6" ontouchend="this.style.opacity=1">
-          <div style="display:flex;align-items:center;gap:6px;">
-            <div style="width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 6px rgba(10,132,255,0.7);animation:pulse 2s infinite;"></div>
-            <div style="font-size:12px;color:var(--accent);font-weight:600;">Phase 2 🔥</div>
-          </div>
-          <div style="font-size:11px;color:var(--accent);">›</div>
+        <div onclick="showPhaseDetail('phase2')" style="flex:1;display:flex;align-items:center;justify-content:center;gap:5px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:9px 6px;cursor:pointer;" ontouchstart="this.style.opacity=0.6" ontouchend="this.style.opacity=1">
+          <div style="width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 6px rgba(48,209,88,0.6);"></div>
+          <div style="font-size:12px;color:var(--text-mid);">Ph.2 &#10003;</div>
+        </div>
+        <div onclick="showPhaseDetail('phase3')" style="flex:1;display:flex;align-items:center;justify-content:center;gap:5px;background:rgba(10,132,255,0.08);border:1px solid rgba(10,132,255,0.25);border-radius:12px;padding:9px 6px;cursor:pointer;" ontouchstart="this.style.opacity=0.6" ontouchend="this.style.opacity=1">
+          <div style="width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 6px rgba(10,132,255,0.7);animation:pulse 2s infinite;"></div>
+          <div style="font-size:12px;color:var(--accent);font-weight:600;">Ph.3 &#128293;</div>
         </div>
       </div>
     </div>
@@ -1702,32 +1700,32 @@
         <div>
           <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--accent);margin-bottom:5px;">Upper</div>
           <div style="font-size:20px;font-weight:600;color:var(--text);letter-spacing:-0.3px;">Haut du corps</div>
-          <div style="font-size:13px;color:var(--text-dim);margin-top:2px;">A · B · C — 3 variantes</div>
+          <div style="font-size:13px;color:var(--text-dim);margin-top:2px;">A · B · Bonus — 3 variantes</div>
         </div>
         <div id="upper-arrow" style="width:30px;height:30px;border-radius:50%;background:rgba(10,132,255,0.12);display:flex;align-items:center;justify-content:center;transition:transform 0.25s;font-size:15px;color:var(--accent);">›</div>
       </div>
-      <div id="upper-group" style="display:none;flex-direction:column;gap:2px;margin-top:2px;padding-left:0;">
+      <div id="upper-group" style="display:none;flex-direction:column;gap:6px;margin-top:6px;padding-left:0;">
         <div onclick="startWorkout('upperA')" style="background:rgba(255,255,255,0.05);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.08);border-left:3px solid var(--accent);box-shadow:inset 0 1px 0 rgba(255,255,255,0.1);border-radius:14px;padding:14px 18px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:all 0.2s;" ontouchstart="this.style.opacity=0.6" ontouchend="this.style.opacity=1">
           <div>
             <div style="font-size:11px;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:2px;">Upper A</div>
             <div style="font-size:15px;font-weight:500;color:var(--text);">Poitrine + Dos</div>
-            <div style="font-size:12px;color:var(--text-dim);margin-top:2px;">5 exercices · ~60 min</div>
+            <div style="font-size:12px;color:var(--text-dim);margin-top:2px;">8 exercices · ~60 min · 2 supersets</div>
           </div>
           <div style="font-size:17px;color:var(--text-dim);">›</div>
         </div>
         <div onclick="startWorkout('upperB')" style="background:rgba(255,255,255,0.05);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.08);border-left:3px solid var(--accent);box-shadow:inset 0 1px 0 rgba(255,255,255,0.1);border-radius:14px;padding:14px 18px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:all 0.2s;" ontouchstart="this.style.opacity=0.6" ontouchend="this.style.opacity=1">
           <div>
             <div style="font-size:11px;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:2px;">Upper B</div>
-            <div style="font-size:15px;font-weight:500;color:var(--text);">Épaules + Bras</div>
-            <div style="font-size:12px;color:var(--text-dim);margin-top:2px;">5 exercices · ~55 min</div>
+            <div style="font-size:15px;font-weight:500;color:var(--text);">Épaules + Dos + Bras</div>
+            <div style="font-size:12px;color:var(--text-dim);margin-top:2px;">8 exercices · ~60 min · 2 supersets</div>
           </div>
           <div style="font-size:17px;color:var(--text-dim);">›</div>
         </div>
-        <div onclick="startWorkout('upperC')" style="background:rgba(255,255,255,0.05);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.08);border-left:3px solid var(--accent);box-shadow:inset 0 1px 0 rgba(255,255,255,0.1);border-radius:14px;padding:14px 18px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:all 0.2s;" ontouchstart="this.style.opacity=0.6" ontouchend="this.style.opacity=1">
+        <div onclick="startWorkout('bonus')" style="background:rgba(255,255,255,0.05);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,200,60,0.2);border-left:3px solid #f5a623;box-shadow:inset 0 1px 0 rgba(255,255,255,0.1);border-radius:14px;padding:14px 18px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:all 0.2s;" ontouchstart="this.style.opacity=0.6" ontouchend="this.style.opacity=1">
           <div>
-            <div style="font-size:11px;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:2px;">Upper C</div>
-            <div style="font-size:15px;font-weight:500;color:var(--text);">Épaules + Dos + Bras</div>
-            <div style="font-size:12px;color:var(--text-dim);margin-top:2px;">5 exercices · ~55 min · Volume</div>
+            <div style="font-size:11px;font-weight:600;color:#f5a623;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:2px;">⭐ Bonus</div>
+            <div style="font-size:15px;font-weight:500;color:var(--text);">Points Faibles</div>
+            <div style="font-size:12px;color:var(--text-dim);margin-top:2px;">7 exercices · ~45 min · Optionnel</div>
           </div>
           <div style="font-size:17px;color:var(--text-dim);">›</div>
         </div>
@@ -1735,12 +1733,12 @@
     </div>
 
     <!-- LOWER -->
-    <div style="margin-bottom:10px;">
+    <div style="margin-bottom:10px;margin-top:16px;">
       <div onclick="startWorkout('lower')" style="background:rgba(255,255,255,0.07);backdrop-filter:blur(40px) saturate(180%);-webkit-backdrop-filter:blur(40px) saturate(180%);border:1px solid rgba(255,255,255,0.12);box-shadow:0 2px 20px rgba(0,0,0,0.15),inset 0 1px 0 rgba(255,255,255,0.18);border-radius:20px;padding:18px 20px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:all 0.2s;" ontouchstart="this.style.opacity=0.7" ontouchend="this.style.opacity=1">
         <div>
           <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--green);margin-bottom:5px;">Lower</div>
           <div style="font-size:20px;font-weight:600;color:var(--text);letter-spacing:-0.3px;">Jambes</div>
-          <div style="font-size:13px;color:var(--text-dim);margin-top:2px;">6 exercices · ~70 min</div>
+          <div style="font-size:13px;color:var(--text-dim);margin-top:2px;">8 exercices · ~60 min · 3 supersets</div>
         </div>
         <div style="width:30px;height:30px;border-radius:50%;background:rgba(48,209,88,0.12);display:flex;align-items:center;justify-content:center;font-size:15px;color:var(--green);">›</div>
       </div>
@@ -2491,39 +2489,29 @@ const WORKOUTS = {
     tag: 'Upper A',
     name: 'Poitrine + Dos',
     exercises: [
-      { id: 'bench', name: 'Développé Couché Machine', sets: 4, reps: 10, weight: '25 kg/côté', rpe: '7-8', note: 'Si indispo → utilise Chest Press Technogym', restTimer: 120, swapWith: 'chest_press' },
-      { id: 'chest_press', name: 'Chest Press Technogym', sets: 4, reps: 10, weight: '60 kg', rpe: '7-8', note: 'Backup si développé couché indispo', hidden: true, restTimer: 120, swapWith: 'incline_smith' },
-      { id: 'incline_smith', name: 'Développé Incliné Smith', sets: 4, reps: 10, weight: '17.5 kg/côté', rpe: '7-8', note: 'Inclinaison 30-45°', hidden: true, restTimer: 120, swapWith: 'bench' },
-      { id: 'pullup', name: 'Tractions Lestées', sets: 4, reps: 10, weight: '5 kg', rpe: '7-8', note: 'Lest ceinture · Coudes vers hanches · Forme propre', restTimer: 150 },
-      { id: 'rowH', name: 'Tirage Horizontal', sets: 4, reps: 10, weight: '55 kg', rpe: '7-8', restTimer: 120 },
-      { id: 'csr', name: 'Chest Supported Row', sets: 3, reps: 12, weight: '50 kg/côté', rpe: '7-8', note: 'Hammer Strength Iso-Lateral', restTimer: 120 },
-      { id: 'pec', name: 'Papillon', sets: 3, reps: 12, weight: '25 kg', rpe: '7-8', restTimer: 90 },
+      { id: 'incline_smith', name: 'Développé Incliné Smith', sets: 4, reps: 10, weight: '17.5 kg/côté', rpe: '7-8', note: 'Inclinaison 30-45° · Fourchette 8-10 reps', restTimer: 120, swapWith: 'chest_press' },
+      { id: 'chest_press', name: 'Chest Press Technogym', sets: 4, reps: 10, weight: '60 kg', rpe: '7-8', note: 'Backup si Smith indispo', hidden: true, restTimer: 120, swapWith: 'incline_smith' },
+      { id: 'pullup', name: 'Tractions Lestées', sets: 4, reps: 10, weight: '6 kg', rpe: '7-8', note: 'Lest ceinture · Coudes vers hanches · Forme propre', restTimer: 150 },
+      { id: 'rowH', name: 'Tirage Horizontal', sets: 4, reps: 10, weight: '62.5 kg', rpe: '7-8', restTimer: 120 },
+      { id: 'bench', name: 'Développé Couché Machine', sets: 3, reps: 12, weight: '25 kg/côté', rpe: '7-8', supersetWith: 'face_pull', restTimer: 0 },
+      { id: 'face_pull', name: 'Face Pull', sets: 3, reps: 15, weight: '10 kg', rpe: '8', note: 'Poulie haute · Coudes hauts · Contraction arrière épaule', supersetStart: true, restTimer: 90 },
+      { id: 'curl', name: 'Curl Marteau', sets: 3, reps: 12, weight: '12 kg', rpe: '8', supersetWith: 'tri_high', restTimer: 0 },
+      { id: 'tri_high', name: 'Triceps Poulie Haute', sets: 3, reps: 12, weight: '15 kg', rpe: '8', supersetStart: true, restTimer: 90 },
+      { id: 'lat', name: 'Élévations Latérales', sets: 3, reps: 15, weight: '12 kg', rpe: '8-9', note: 'Assis · Isolation deltoïde', restTimer: 75 },
     ]
   },
   upperB: {
     tag: 'Upper B',
-    name: 'Épaules + Bras',
-    exercises: [
-      { id: 'ohp', name: 'Dumbbell OHP', sets: 4, reps: 10, weight: '18 kg', rpe: '7-8', restTimer: 120 },
-      { id: 'lat', name: 'Élévations Latérales', sets: 4, reps: 15, weight: '8 kg', rpe: '7', note: 'Assis · Isolation deltoïde', restTimer: 90 },
-      { id: 'curl', name: 'Curl Marteau', sets: 3, reps: 12, weight: '12 kg', rpe: '7', restTimer: 90 },
-      { id: 'tri_high', name: 'Triceps Poulie Haute', sets: 3, reps: 12, weight: '15 kg', rpe: '7', supersetWith: 'tri_low', restTimer: 0 },
-      { id: 'tri_low', name: 'Triceps Poulie Basse', sets: 3, reps: 12, weight: '15 kg', rpe: '7', supersetStart: true, restTimer: 90 },
-      { id: 'curl_cable', name: 'Curl Poulie Basse', sets: 3, reps: 12, weight: '17.5 kg', rpe: '7', restTimer: 90 },
-      { id: 'dips', name: 'Dips', sets: 3, reps: 10, weight: '+5 kg', rpe: '—', restTimer: 90 },
-    ]
-  },
-  upperC: {
-    tag: 'Upper C',
     name: 'Épaules + Dos + Bras',
     exercises: [
-      { id: 'ohp_c', name: 'Dumbbell OHP', sets: 4, reps: 10, weight: '18 kg', rpe: '7-8', restTimer: 120 },
-      { id: 'lat_c', name: 'Élévations Latérales', sets: 4, reps: 15, weight: '8 kg', rpe: '7', note: 'Assis · Focus contraction', restTimer: 90 },
-      { id: 'rowV_c', name: 'Tirage Vertical', sets: 4, reps: 10, weight: '55 kg', rpe: '7-8', restTimer: 120 },
-      { id: 'curl_c', name: 'Curl Marteau', sets: 3, reps: 12, weight: '14 kg', rpe: '7', restTimer: 90 },
-      { id: 'pec_c', name: 'Papillon', sets: 3, reps: 12, weight: '25 kg', rpe: '7-8', restTimer: 90 },
-      { id: 'tri_high_c', name: 'Triceps Poulie Haute', sets: 3, reps: 12, weight: '12.5 kg', rpe: '7', supersetWith: 'tri_low_c', restTimer: 0 },
-      { id: 'tri_low_c', name: 'Triceps Poulie Basse', sets: 3, reps: 12, weight: '12.5 kg', rpe: '7', supersetStart: true, restTimer: 90 },
+      { id: 'ohp', name: 'Dumbbell OHP', sets: 4, reps: 10, weight: '20 kg', rpe: '7-8', note: 'Fourchette 8-10 reps', restTimer: 120 },
+      { id: 'rowV', name: 'Tirage Vertical', sets: 4, reps: 10, weight: '55 kg', rpe: '7-8', restTimer: 120 },
+      { id: 'bench_b', name: 'Développé Couché Machine', sets: 4, reps: 10, weight: '25 kg/côté', rpe: '7-8', restTimer: 120 },
+      { id: 'lat_b', name: 'Élévations Latérales', sets: 4, reps: 15, weight: '12 kg', rpe: '8-9', note: 'Assis · Isolation deltoïde', restTimer: 75 },
+      { id: 'oiseau_b', name: 'Oiseau / Reverse Pec Dec', sets: 3, reps: 15, weight: '10 kg', rpe: '8', note: '⚙️ Calibration — cherche RPE 8 sur 15 reps', supersetWith: 'shrugs_b', restTimer: 0 },
+      { id: 'shrugs_b', name: 'Shrugs', sets: 3, reps: 15, weight: '20 kg', rpe: '8', note: '⚙️ Calibration · Épaules vers les oreilles, pause en haut', supersetStart: true, restTimer: 90 },
+      { id: 'curl_cable', name: 'Curl Poulie Basse', sets: 3, reps: 12, weight: '17.5 kg', rpe: '8', supersetWith: 'tri_low', restTimer: 0 },
+      { id: 'tri_low', name: 'Triceps Poulie Basse', sets: 3, reps: 12, weight: '15 kg', rpe: '8', supersetStart: true, restTimer: 90 },
     ]
   },
   lower: {
@@ -2532,10 +2520,25 @@ const WORKOUTS = {
     exercises: [
       { id: 'rdl', name: 'Romanian Deadlift', sets: 4, reps: 10, weight: '25 kg/côté', rpe: '7-8', note: '⚠️ Toujours en premier · Dos plat · Fessiers à fond', restTimer: 150 },
       { id: 'squat', name: 'Squat Smith', sets: 4, reps: 10, weight: '50 kg', rpe: '7-8', restTimer: 120 },
-      { id: 'press', name: 'Leg Press', sets: 3, reps: 12, weight: '90 kg', rpe: '7-8', restTimer: 120 },
-      { id: 'bulgarian', name: 'Fentes Bulgares', sets: 3, reps: 10, weight: '10 kg/main', rpe: '7', note: '10 reps/jambe', restTimer: 90 },
-      { id: 'curl_l', name: 'Leg Curl', sets: 3, reps: 12, weight: '35 kg', rpe: '7', restTimer: 90 },
-      { id: 'calves', name: 'Mollets', sets: 4, reps: 15, weight: '30 kg', rpe: '7', restTimer: 60 },
+      { id: 'press', name: 'Leg Press', sets: 3, reps: 12, weight: '90 kg', rpe: '7-8', supersetWith: 'curl_l', restTimer: 0 },
+      { id: 'curl_l', name: 'Leg Curl', sets: 3, reps: 12, weight: '35 kg', rpe: '8', supersetStart: true, restTimer: 90 },
+      { id: 'bulgarian', name: 'Fentes Bulgares', sets: 3, reps: 10, weight: '10 kg/main', rpe: '7-8', note: '10 reps/jambe', supersetWith: 'calves', restTimer: 0 },
+      { id: 'calves', name: 'Mollets', sets: 3, reps: 15, weight: '30 kg', rpe: '8', supersetStart: true, restTimer: 90 },
+      { id: 'lat_l', name: 'Élévations Latérales', sets: 3, reps: 15, weight: '12 kg', rpe: '8-9', note: 'Assis · Maintien du volume épaules', supersetWith: 'oiseau_l', restTimer: 0 },
+      { id: 'oiseau_l', name: 'Oiseau / Reverse Pec Dec', sets: 3, reps: 15, weight: '10 kg', rpe: '8', supersetStart: true, restTimer: 75 },
+    ]
+  },
+  bonus: {
+    tag: 'Bonus',
+    name: 'Points Faibles',
+    exercises: [
+      { id: 'bon_lat', name: 'Élévations Latérales', sets: 4, reps: 15, weight: '12 kg', rpe: '8-9', note: 'Assis · Charge fixe · Cherche la congestion', restTimer: 75 },
+      { id: 'bon_incline', name: 'Développé Incliné Smith', sets: 3, reps: 12, weight: '12.5 kg/côté', rpe: '8', note: 'Léger · Focus haut de pec', supersetWith: 'bon_rev', restTimer: 0 },
+      { id: 'bon_rev', name: 'Oiseau / Reverse Pec Dec', sets: 3, reps: 15, weight: '10 kg', rpe: '8', supersetStart: true, restTimer: 90 },
+      { id: 'bon_shrugs', name: 'Shrugs', sets: 3, reps: 15, weight: '20 kg', rpe: '8', supersetWith: 'bon_face', restTimer: 0 },
+      { id: 'bon_face', name: 'Face Pull', sets: 3, reps: 15, weight: '10 kg', rpe: '8', supersetStart: true, restTimer: 90 },
+      { id: 'bon_curl', name: 'Curl Marteau', sets: 3, reps: 12, weight: '14 kg', rpe: '8', supersetWith: 'bon_tri', restTimer: 0 },
+      { id: 'bon_tri', name: 'Triceps Poulie Haute', sets: 3, reps: 12, weight: '12.5 kg', rpe: '8', supersetStart: true, restTimer: 90 },
     ]
   }
 };
@@ -2654,7 +2657,7 @@ function showScreen(id) {
   if (id === 'progress') renderProgress();
   if (id === 'weight') renderWeightScreen();
   if (id === 'abs') renderAbs();
-  if (id === 'home') updateHomeStats();
+  if (id === 'home') { updateHomeStats(); updateProgramWeek(); }
   const nav = document.getElementById('bottom-nav');
   if (nav) nav.style.display = id === 'home' ? 'block' : 'none';
   window.scrollTo(0, 0);
@@ -2737,6 +2740,7 @@ function switchAbsRoutine(n) {
 }
 const ABS_REST = 45;
 const ABS_ROUNDS = 3;
+function getAbsRounds() { return absActiveRoutine === 2 ? 1 : ABS_ROUNDS; }
 
 let absInterval = null;
 let absCurrentRound = 0;
@@ -2837,10 +2841,10 @@ function runAbsStep() {
     if (tipEl) tipEl.textContent = ex.tip || '';
     // Next label
     const isLastEx = absCurrentEx === (window._absExercises || ABS_EXERCISES).length - 1;
-    const isLastRound = absCurrentRound === ABS_ROUNDS - 1;
+    const isLastRound = absCurrentRound === getAbsRounds() - 1;
     document.getElementById('abs-next-label').textContent = `${ex.name} · ${ex.target}`;
     setAbsBackground(ex.id);
-    for (let r = 0; r < ABS_ROUNDS; r++) {
+    for (let r = 0; r < getAbsRounds(); r++) {
       const bar = document.getElementById(`abs-round-${r+1}`);
       if (bar) bar.style.background = r <= absCurrentRound ? 'var(--accent)' : 'rgba(255,255,255,0.15)';
     }
@@ -2879,7 +2883,7 @@ function runAbsStep() {
     document.getElementById('abs-ex-tip').textContent = ex.tip || '';
     setAbsBackground(ex.id);
     const isLastEx = absCurrentEx === (window._absExercises || ABS_EXERCISES).length - 1;
-    const isLastRound = absCurrentRound === ABS_ROUNDS - 1;
+    const isLastRound = absCurrentRound === getAbsRounds() - 1;
     let nextLabel = !isLastEx
       ? `${(window._absExercises || ABS_EXERCISES)[absCurrentEx + 1].name} · ${(window._absExercises || ABS_EXERCISES)[absCurrentEx + 1].target}`
       : !isLastRound ? `Round ${absCurrentRound + 2} · ${(window._absExercises || ABS_EXERCISES)[0].name}`
@@ -2888,7 +2892,7 @@ function runAbsStep() {
     document.getElementById('abs-status-label').textContent = `Round ${absCurrentRound + 1} · ${absCurrentEx + 1}/${(window._absExercises || ABS_EXERCISES).length}`;
   }
 
-  for (let r = 0; r < ABS_ROUNDS; r++) {
+  for (let r = 0; r < getAbsRounds(); r++) {
     const bar = document.getElementById(`abs-round-${r+1}`);
     if (bar) bar.style.background = r <= absCurrentRound ? 'var(--accent)' : 'rgba(255,255,255,0.15)';
   }
@@ -2943,7 +2947,7 @@ function advanceAbsCircuit() {
     absIsRest = false;
     absCurrentEx = 0;
     absCurrentRound++;
-    if (absCurrentRound >= ABS_ROUNDS) {
+    if (absCurrentRound >= getAbsRounds()) {
       finishAbsCircuit();
       return;
     }
@@ -2952,7 +2956,7 @@ function advanceAbsCircuit() {
   } else {
     absCurrentEx++;
     if (absCurrentEx >= (window._absExercises || ABS_EXERCISES).length) {
-      if (absCurrentRound >= ABS_ROUNDS - 1) {
+      if (absCurrentRound >= getAbsRounds() - 1) {
         finishAbsCircuit();
         return;
       }
@@ -3048,6 +3052,18 @@ function prevAbsStep() {
   runAbsStep();
 }
 
+function updateProgramWeek() {
+  const PHASE3_START = new Date('2026-07-24');
+  const now = new Date();
+  const msPerWeek = 7 * 24 * 60 * 60 * 1000;
+  const weekNum = Math.min(Math.max(Math.ceil((now - PHASE3_START) / msPerWeek), 1), 12);
+  const pct = Math.round((weekNum / 12) * 100);
+  const el = document.getElementById('prog-week-num');
+  const bar = document.getElementById('prog-week-bar');
+  if (el) el.textContent = weekNum;
+  if (bar) bar.style.width = pct + '%';
+}
+
 function updateHomeStats() {
   const log = loadLog();
   document.getElementById('total-sessions').textContent = log.length;
@@ -3064,8 +3080,8 @@ function updateHomeStats() {
     nameEl.textContent = lastSession.name;
     dateEl.textContent = lastSession.date;
     tagEl.textContent = lastSession.tag;
-    const tagColors = { 'Upper A': 'rgba(10,132,255,0.15)', 'Upper B': 'rgba(191,90,242,0.15)', 'Upper C': 'rgba(100,210,255,0.15)', 'Lower': 'rgba(48,209,88,0.15)', 'Circuit': 'rgba(255,159,10,0.15)' };
-    const textColors = { 'Upper A': '#0a84ff', 'Upper B': '#bf5af2', 'Upper C': '#64d2ff', 'Lower': '#30d158', 'Circuit': '#ff9f0a' };
+    const tagColors = { 'Upper A': 'rgba(10,132,255,0.15)', 'Upper B': 'rgba(191,90,242,0.15)', 'Upper C': 'rgba(100,210,255,0.15)', 'Bonus': 'rgba(245,166,35,0.15)', 'Lower': 'rgba(48,209,88,0.15)', 'Circuit': 'rgba(255,159,10,0.15)' };
+    const textColors = { 'Upper A': '#0a84ff', 'Upper B': '#bf5af2', 'Upper C': '#64d2ff', 'Bonus': '#f5a623', 'Lower': '#30d158', 'Circuit': '#ff9f0a' };
     tagEl.style.background = tagColors[lastSession.tag] || 'rgba(10,132,255,0.15)';
     tagEl.style.color = textColors[lastSession.tag] || '#0a84ff';
   } else if (nameEl) {
@@ -3075,8 +3091,8 @@ function updateHomeStats() {
   }
 
   // Next session recommendation
-  const cycle = ['upperA', 'upperB', 'lower', 'upperC'];
-  const cycleNames = { upperA: { name: 'Upper A · Poitrine + Dos', sub: '5 exercices · ~60 min' }, upperB: { name: 'Upper B · Épaules + Bras', sub: '5 exercices · ~55 min' }, lower: { name: 'Lower · Jambes', sub: '6 exercices · ~70 min' } };
+  const cycle = ['upperA', 'upperB', 'lower', 'bonus'];
+  const cycleNames = { upperA: { name: 'Upper A · Poitrine + Dos', sub: '8 exercices · ~60 min' }, upperB: { name: 'Upper B · Épaules + Dos + Bras', sub: '8 exercices · ~60 min' }, lower: { name: 'Lower · Jambes', sub: '8 exercices · ~60 min' }, bonus: { name: 'Bonus · Points Faibles', sub: '7 exercices · ~45 min · optionnel' } };
   let nextId = 'upperA';
   if (lastSession) {
     const lastId = lastSession.id;
@@ -4351,10 +4367,104 @@ function drawChart(id, history) {
 
 // ===== PHASE DETAIL =====
 const PHASE_DETAILS = {
-  phase2: {
-    title: 'Phase 2 — En cours 🔥',
-    subtitle: 'Semaines 5–8 · 3 séances/semaine · Jours mieux espacés',
+  phase3: {
+    title: 'Phase 3 \u2014 En cours \ud83d\udd25',
+    subtitle: '12 semaines \u00b7 3 Upper + 1 Lower \u00b7 Bonus optionnel \u00b7 ~60 min/s\u00e9ance',
     color: '#0a84ff',
+    sections: [
+      {
+        title: 'Objectif',
+        content: 'Priorit\u00e9 absolue aux \u00e9paules \u2014 largeur (deltoïde lat\u00e9ral) et \u00e9paisseur (deltoïde post\u00e9rieur). Upper A et Upper B sont deux s\u00e9ances compl\u00e8tes et autonomes : m\u00eame sans le Bonus, tout le haut du corps reste \u00e0 2 s\u00e9ances par semaine.'
+      },
+      {
+        title: 'Changements vs Phase 2',
+        content: 'Deltoïde post\u00e9rieur 3 \u2192 9 s\u00e9ries/sem (oiseau ajout\u00e9) \u00b7 Deltoïde lat\u00e9ral 8 \u2192 13 \u00b7 Trap\u00e8zes 0 \u2192 6 (shrugs) \u00b7 D\u00e9velopp\u00e9 Inclin\u00e9 devient prioritaire \u00b7 Triceps 15 \u2192 9 \u00b7 Upper C supprim\u00e9, remplac\u00e9 par un Bonus points faibles \u00b7 Supersets antagonistes pour tenir 60 min \u00b7 Isolations pass\u00e9es \u00e0 RPE 8-9'
+      },
+      {
+        title: 'Upper A \u2014 Poitrine + Dos',
+        rows: [
+          ['D\u00e9velopp\u00e9 Inclin\u00e9 Smith', '4\u00d78-10', '17.5 kg/c\u00f4t\u00e9'],
+          ['Tractions Lest\u00e9es', '4\u00d710', '+6 kg'],
+          ['Tirage Horizontal', '4\u00d710', '62.5 kg'],
+          ['SS \u00b7 D\u00e9velopp\u00e9 Couch\u00e9 Machine', '3\u00d712', '25 kg/c\u00f4t\u00e9'],
+          ['SS \u00b7 Face Pull', '3\u00d715', '10 kg'],
+          ['SS \u00b7 Curl Marteau', '3\u00d712', '12 kg'],
+          ['SS \u00b7 Triceps Poulie Haute', '3\u00d712', '15 kg'],
+          ['\u00c9l\u00e9vations Lat\u00e9rales', '3\u00d715', '12 kg'],
+        ]
+      },
+      {
+        title: 'Upper B \u2014 \u00c9paules + Dos + Bras',
+        rows: [
+          ['Dumbbell OHP', '4\u00d78-10', '20 kg'],
+          ['Tirage Vertical', '4\u00d710', '55 kg'],
+          ['D\u00e9velopp\u00e9 Couch\u00e9 Machine', '4\u00d710', '25 kg/c\u00f4t\u00e9'],
+          ['\u00c9l\u00e9vations Lat\u00e9rales', '4\u00d715', '12 kg'],
+          ['SS \u00b7 Oiseau / Reverse Pec Dec', '3\u00d715', '10 kg \u2699\ufe0f'],
+          ['SS \u00b7 Shrugs', '3\u00d715', '20 kg \u2699\ufe0f'],
+          ['SS \u00b7 Curl Poulie Basse', '3\u00d712', '17.5 kg'],
+          ['SS \u00b7 Triceps Poulie Basse', '3\u00d712', '15 kg'],
+        ]
+      },
+      {
+        title: 'Lower \u2014 Jambes',
+        rows: [
+          ['Romanian Deadlift', '4\u00d710', '25 kg/c\u00f4t\u00e9'],
+          ['Squat Smith', '4\u00d710', '50 kg'],
+          ['SS \u00b7 Leg Press', '3\u00d712', '90 kg'],
+          ['SS \u00b7 Leg Curl', '3\u00d712', '35 kg'],
+          ['SS \u00b7 Fentes Bulgares', '3\u00d710', '10 kg/main'],
+          ['SS \u00b7 Mollets', '3\u00d715', '30 kg'],
+          ['SS \u00b7 \u00c9l\u00e9vations Lat\u00e9rales', '3\u00d715', '12 kg'],
+          ['SS \u00b7 Oiseau', '3\u00d715', '10 kg'],
+        ]
+      },
+      {
+        title: 'Bonus \u2014 Points Faibles (optionnel)',
+        rows: [
+          ['\u00c9l\u00e9vations Lat\u00e9rales', '4\u00d715', '12 kg'],
+          ['SS \u00b7 D\u00e9velopp\u00e9 Inclin\u00e9 Smith', '3\u00d712', '12.5 kg/c\u00f4t\u00e9'],
+          ['SS \u00b7 Oiseau / Reverse Pec Dec', '3\u00d715', '10 kg'],
+          ['SS \u00b7 Shrugs', '3\u00d715', '20 kg'],
+          ['SS \u00b7 Face Pull', '3\u00d715', '10 kg'],
+          ['SS \u00b7 Curl Marteau', '3\u00d712', '14 kg'],
+          ['SS \u00b7 Triceps Poulie Haute', '3\u00d712', '12.5 kg'],
+        ]
+      },
+      {
+        title: 'Volume hebdomadaire',
+        rows: [
+          ['Deltoïde lat\u00e9ral', 'A+B+Lower 10', '+Bonus 14'],
+          ['Deltoïde post\u00e9rieur', '9', '12'],
+          ['Trap\u00e8zes', '3 + face pull', '6 + face pull'],
+          ['Pec (dont inclin\u00e9)', '14 (4)', '17 (7)'],
+          ['Dos', '12', '12'],
+          ['Biceps / Triceps', '9 / 9', '12 / 12'],
+          ['Quadriceps / Ischios', '10 / 7', '\u2014'],
+        ]
+      },
+      {
+        title: 'Placement semaine',
+        content: 'Lundi \u2192 Upper A \u00b7 Mardi \u2192 Upper B \u00b7 Jeudi \u2192 Lower \u00b7 Samedi \u2192 Bonus si dispo. Le Bonus est volontairement plac\u00e9 loin des deux s\u00e9ances lourdes d\u2019\u00e9paules.'
+      },
+      {
+        title: 'Supersets (SS)',
+        content: 'Tu ench\u00e2ines les deux exercices sans repos, puis tu r\u00e9cup\u00e8res une seule fois (le temps affich\u00e9 sur le second). Appari\u00e9s en muscles oppos\u00e9s ou \u00e9loign\u00e9s : quasi aucune perte de performance, 12-15 min gagn\u00e9es. R\u00e9serve tes deux postes avant de commencer \u2014 si l\u2019un est pris, fais-les en s\u00e9ries classiques.'
+      },
+      {
+        title: 'R\u00e8gle de progression',
+        content: 'Compos\u00e9s RPE 7-8, isolations RPE 8-9 (0-2 reps en r\u00e9serve). Haut de la fourchette atteint sur 2-3 s\u00e9ances cons\u00e9cutives \u2192 +2 kg halt\u00e8res / +2.5 kg machines et poulies. La progression se fait sur A, B et Lower \u2014 le Bonus reste \u00e0 charge fixe, tu y cherches la congestion pas le poids.'
+      },
+      {
+        title: 'Semaine 1 \u2014 Calibration \u2699\ufe0f',
+        content: 'Oiseau, Reverse Pec Dec et Shrugs n\u2019ont aucun historique : les poids affich\u00e9s sont des estimations. Cherche un poids o\u00f9 les 15 reps sortent \u00e0 RPE 8, note-le. Idem pour le D\u00e9velopp\u00e9 Inclin\u00e9 Smith \u00e0 17.5 kg/c\u00f4t\u00e9. Coupe une s\u00e9rie par exercice sur la premi\u00e8re semaine \u2014 volume complet d\u00e8s la semaine 2.'
+      }
+    ]
+  },
+  phase2: {
+    title: 'Phase 2 — Terminée ✓',
+    subtitle: '16/05 → 24/07/2026 · 4 séances/semaine · Upper A / B / C + Lower',
+    color: '#30d158',
     sections: [
       {
         title: 'Objectif',
@@ -4821,6 +4931,7 @@ function seedHistoricalData() {
 // Init
 seedHistoricalData();
 updateHomeStats();
+updateProgramWeek();
 
 // ===== NUTRITION =====
 const NUTRI_DEFAULTS = { kcal: 2700, prot: 134, carb: 320, fat: 75 };
