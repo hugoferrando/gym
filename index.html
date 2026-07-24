@@ -248,6 +248,77 @@
     height: 10px;
   }
 
+  /* ---- Superset grouping ---- */
+  .ss-wrap {
+    border: 1.5px solid rgba(112,96,232,0.45);
+    border-radius: 16px;
+    background: rgba(112,96,232,0.06);
+    padding: 0 0 6px;
+    overflow: hidden;
+  }
+  .ss-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 14px 8px;
+    background: rgba(112,96,232,0.14);
+  }
+  .ss-head-icon {
+    font-size: 13px;
+    color: #a99bff;
+    line-height: 1;
+  }
+  .ss-head-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: #a99bff;
+  }
+  .ss-head-sub {
+    font-size: 11px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.5);
+    margin-left: auto;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+  .ss-inner { padding: 6px 6px 0; }
+  .ss-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 2px 14px 4px;
+  }
+  .ss-link-line {
+    flex: 1;
+    height: 1px;
+    background: rgba(112,96,232,0.3);
+  }
+  .ss-link-text {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: rgba(169,155,255,0.85);
+    white-space: nowrap;
+  }
+  .ss-letter {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 6px;
+    background: rgba(112,96,232,0.25);
+    border: 1px solid rgba(112,96,232,0.5);
+    font-size: 10px;
+    font-weight: 700;
+    color: #a99bff;
+    letter-spacing: 0;
+    margin-bottom: 3px;
+  }
+
   .ex-header {
     padding: 13px 16px;
     display: flex;
@@ -1453,11 +1524,27 @@
 
   .superset-tag {
     font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 2px;
+    font-weight: 700;
+    letter-spacing: 1px;
     text-transform: uppercase;
-    color: #7060e8;
-    margin-bottom: 2px;
+    color: #a99bff;
+    margin-bottom: 3px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* Blocks inside a superset wrapper: flat, no own border */
+  .ss-wrap .exercise-block,
+  .ss-wrap .ex-block {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    border-radius: 12px;
+  }
+  .ss-wrap .exercise-block.active-ex {
+    background: rgba(112,96,232,0.12) !important;
   }
 
   @keyframes pulse {
@@ -2491,9 +2578,10 @@ const WORKOUTS = {
     exercises: [
       { id: 'incline_smith', name: 'Développé Incliné Smith', sets: 4, reps: 10, weight: '17.5 kg/côté', rpe: '7-8', note: 'Inclinaison 30-45° · Fourchette 8-10 reps', restTimer: 120, swapWith: 'chest_press' },
       { id: 'chest_press', name: 'Chest Press Technogym', sets: 4, reps: 10, weight: '60 kg', rpe: '7-8', note: 'Backup si Smith indispo', hidden: true, restTimer: 120, swapWith: 'incline_smith' },
-      { id: 'pullup', name: 'Tractions Lestées', sets: 4, reps: 10, weight: '6 kg', rpe: '7-8', note: 'Lest ceinture · Coudes vers hanches · Forme propre', restTimer: 150 },
+      { id: 'pullup', name: 'Tractions Lestées', sets: 4, reps: 10, weight: '6 kg', rpe: '7-8', note: 'Lest ceinture · Coudes vers hanches · Forme propre', restTimer: 150, swapWith: 'rowV' },
+      { id: 'rowV', name: 'Tirage Vertical', sets: 4, reps: 10, weight: '55 kg', rpe: '7-8', note: 'Alternative aux tractions · Barre à la clavicule', hidden: true, restTimer: 120, swapWith: 'pullup' },
       { id: 'rowH', name: 'Tirage Horizontal', sets: 4, reps: 10, weight: '62.5 kg', rpe: '7-8', restTimer: 120 },
-      { id: 'bench', name: 'Développé Couché Machine', sets: 3, reps: 12, weight: '25 kg/côté', rpe: '7-8', supersetWith: 'face_pull', restTimer: 0 },
+      { id: 'pec', name: 'Papillon', sets: 3, reps: 12, weight: '25 kg', rpe: '8', note: 'Étirement complet en position basse · Pas de rebond', supersetWith: 'face_pull', restTimer: 0 },
       { id: 'face_pull', name: 'Face Pull', sets: 3, reps: 15, weight: '10 kg', rpe: '8', note: 'Poulie haute · Coudes hauts · Contraction arrière épaule', supersetStart: true, restTimer: 90 },
       { id: 'curl', name: 'Curl Marteau', sets: 3, reps: 12, weight: '12 kg', rpe: '8', supersetWith: 'tri_high', restTimer: 0 },
       { id: 'tri_high', name: 'Triceps Poulie Haute', sets: 3, reps: 12, weight: '15 kg', rpe: '8', supersetStart: true, restTimer: 90 },
@@ -3269,17 +3357,40 @@ function renderExercises(w) {
   }
 
   let globalEi = 0; // global exercise index for set IDs
+  let ssCount = 0;  // superset numbering
 
   groups.forEach((group, gi) => {
     if (gi > 0) {
       const gap = document.createElement('div');
       gap.className = 'ex-group-gap';
+      gap.style.height = group.type === 'superset' ? '18px' : '10px';
       list.appendChild(gap);
     }
 
+    const isSS = group.type === 'superset';
+    let ssNum = 0;
+
     // Wrapper that groups the blocks
     const wrapper = document.createElement('div');
-    wrapper.style.cssText = 'border-radius:12px;overflow:hidden;';
+    if (isSS) {
+      ssNum = ++ssCount;
+      wrapper.className = 'ss-wrap';
+      const totalRest = group.exercises[group.exercises.length - 1].restTimer || 0;
+      const head = document.createElement('div');
+      head.className = 'ss-head';
+      head.innerHTML = `
+        <span class="ss-head-icon">\u21c5</span>
+        <span class="ss-head-title">Superset ${ssNum}</span>
+        <span class="ss-head-sub">sans repos entre A et B \u00b7 ${totalRest}s apr\u00e8s</span>`;
+      wrapper.appendChild(head);
+      const inner = document.createElement('div');
+      inner.className = 'ss-inner';
+      wrapper._inner = inner;
+      wrapper.appendChild(inner);
+    } else {
+      wrapper.style.cssText = 'border-radius:12px;overflow:hidden;';
+    }
+    const target = wrapper._inner || wrapper;
 
     group.exercises.forEach((ex, blockIdx) => {
       const ei = globalEi++;
@@ -3327,9 +3438,9 @@ function renderExercises(w) {
       const weightVal = ex.weight.replace(' kg','').replace('/côté','').replace('Poids de corps','BW');
       const weightUnit = ex.weight.includes('côté') ? 'kg/côté' : ex.weight.includes('corps') ? '' : 'kg';
 
-      const supersetBadge = ex.supersetWith
-        ? '<div class="superset-tag">SUPERSET</div>'
-        : (ex.supersetStart ? '<div class="superset-tag">SUPERSET</div>' : '');
+      const supersetBadge = isSS
+        ? `<div class="superset-tag"><span class="ss-letter">${String.fromCharCode(65 + blockIdx)}</span> Superset ${ssNum}</div>`
+        : '';
 
       const rpeSelector = `
         <div class="ex-rpe-selector" id="ex-rpe-${ex.id}">
@@ -3396,14 +3507,19 @@ function renderExercises(w) {
         ${rpeSelector}
       `;
 
-      wrapper.appendChild(block);
+      target.appendChild(block);
 
-      // Add thin separator between blocks in same group (not after last)
+      // Add separator between blocks in same group (not after last)
       if (!isLast) {
         const sep = document.createElement('div');
-        sep.className = 'ex-separator';
-        sep.style.cssText = 'height:0.5px;background:rgba(255,255,255,0.07);margin:0;';
-        wrapper.appendChild(sep);
+        if (isSS) {
+          sep.className = 'ss-link';
+          sep.innerHTML = '<span class="ss-link-line"></span><span class="ss-link-text">\u2193 ench\u00eene direct</span><span class="ss-link-line"></span>';
+        } else {
+          sep.className = 'ex-separator';
+          sep.style.cssText = 'height:0.5px;background:rgba(255,255,255,0.07);margin:0;';
+        }
+        target.appendChild(sep);
       }
     });
 
@@ -4386,7 +4502,7 @@ const PHASE_DETAILS = {
           ['D\u00e9velopp\u00e9 Inclin\u00e9 Smith', '4\u00d78-10', '17.5 kg/c\u00f4t\u00e9'],
           ['Tractions Lest\u00e9es', '4\u00d710', '+6 kg'],
           ['Tirage Horizontal', '4\u00d710', '62.5 kg'],
-          ['SS \u00b7 D\u00e9velopp\u00e9 Couch\u00e9 Machine', '3\u00d712', '25 kg/c\u00f4t\u00e9'],
+          ['SS \u00b7 Papillon', '3\u00d712', '25 kg'],
           ['SS \u00b7 Face Pull', '3\u00d715', '10 kg'],
           ['SS \u00b7 Curl Marteau', '3\u00d712', '12 kg'],
           ['SS \u00b7 Triceps Poulie Haute', '3\u00d712', '15 kg'],
