@@ -1552,6 +1552,46 @@
     50% { opacity: 0.6; box-shadow: 0 0 12px rgba(10,132,255,1); }
   }
 
+  .gym-selector {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 16px 12px;
+    padding: 10px 12px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px;
+  }
+  .gym-selector-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.5);
+    white-space: nowrap;
+  }
+  .gym-pills {
+    display: flex;
+    gap: 6px;
+    flex: 1;
+  }
+  .gym-pill {
+    flex: 1;
+    text-align: center;
+    padding: 8px 10px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    color: rgba(255,255,255,0.6);
+    transition: all 0.15s;
+  }
+  .gym-pill.active {
+    background: rgba(10,132,255,0.15);
+    border-color: rgba(10,132,255,0.4);
+    color: var(--accent);
+  }
+
   .ex-rpe-selector {
     display: none;
     padding: 10px 16px 12px;
@@ -1796,7 +1836,7 @@
           <div>
             <div style="font-size:11px;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:2px;">Upper A</div>
             <div style="font-size:15px;font-weight:500;color:var(--text);">Poitrine + Dos</div>
-            <div style="font-size:12px;color:var(--text-dim);margin-top:2px;">8 exercices · ~60 min · 2 supersets</div>
+            <div style="font-size:12px;color:var(--text-dim);margin-top:2px;">8 exercices · ~65 min</div>
           </div>
           <div style="font-size:17px;color:var(--text-dim);">›</div>
         </div>
@@ -1804,7 +1844,7 @@
           <div>
             <div style="font-size:11px;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:2px;">Upper B</div>
             <div style="font-size:15px;font-weight:500;color:var(--text);">Épaules + Dos + Bras</div>
-            <div style="font-size:12px;color:var(--text-dim);margin-top:2px;">8 exercices · ~55 min · 3 supersets</div>
+            <div style="font-size:12px;color:var(--text-dim);margin-top:2px;">8 exercices · ~60 min</div>
           </div>
           <div style="font-size:17px;color:var(--text-dim);">›</div>
         </div>
@@ -1812,7 +1852,7 @@
           <div>
             <div style="font-size:11px;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:2px;">Upper C</div>
             <div style="font-size:15px;font-weight:500;color:var(--text);">Points Faibles</div>
-            <div style="font-size:12px;color:var(--text-dim);margin-top:2px;">7 exercices · ~45 min · 3 supersets</div>
+            <div style="font-size:12px;color:var(--text-dim);margin-top:2px;">7 exercices · ~45 min</div>
           </div>
           <div style="font-size:17px;color:var(--text-dim);">›</div>
         </div>
@@ -1825,7 +1865,7 @@
         <div>
           <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--green);margin-bottom:5px;">Lower</div>
           <div style="font-size:20px;font-weight:600;color:var(--text);letter-spacing:-0.3px;">Jambes</div>
-          <div style="font-size:13px;color:var(--text-dim);margin-top:2px;">6 exercices · ~45 min · 2 supersets</div>
+          <div style="font-size:13px;color:var(--text-dim);margin-top:2px;">6 exercices · ~55 min</div>
         </div>
         <div style="width:30px;height:30px;border-radius:50%;background:rgba(48,209,88,0.12);display:flex;align-items:center;justify-content:center;font-size:15px;color:var(--green);">›</div>
       </div>
@@ -2103,6 +2143,13 @@
       <div class="workout-name" id="wk-name">Poitrine + Dos</div>
     </div>
     <button class="done-btn" onclick="finishWorkout()">Fin ✓</button>
+  </div>
+  <div class="gym-selector" id="gym-selector">
+    <div class="gym-selector-label">📍 Salle</div>
+    <div class="gym-pills">
+      <div class="gym-pill" id="gym-pill-celleneuve" onclick="setGym('celleneuve')">Celleneuve</div>
+      <div class="gym-pill" id="gym-pill-odysseum" onclick="setGym('odysseum')">Odysseum</div>
+    </div>
   </div>
   <div class="exercises-list" id="exercises-list"></div>
 </div>
@@ -2577,15 +2624,17 @@ const WORKOUTS = {
     name: 'Poitrine + Dos',
     exercises: [
       { id: 'incline_smith', name: 'Développé Incliné Smith', sets: 4, reps: 10, weight: '17.5 kg/côté', rpe: '7-8', note: 'Inclinaison 30-45° · Fourchette 8-10 reps', restTimer: 120, swapWith: 'chest_press' },
-      { id: 'chest_press', name: 'Chest Press Technogym', sets: 4, reps: 10, weight: '60 kg', rpe: '7-8', note: 'Backup si Smith indispo', hidden: true, restTimer: 120, swapWith: 'incline_smith' },
+      { id: 'chest_press', name: 'Chest Press Technogym', sets: 4, reps: 10, weight: '60 kg', rpe: '7-8', note: 'Backup si Smith indispo', hidden: true, restTimer: 120, swapWith: 'hammer_bench' },
+      { id: 'hammer_bench', name: 'Hammer Strength Iso-Lateral Bench', sets: 4, reps: 10, weight: '20 kg/côté', rpe: '7-8', note: 'Plateaux · Bras indépendants · Presse à plat', hidden: true, restTimer: 120, swapWith: 'incline_smith' },
       { id: 'pullup', name: 'Tractions Lestées', sets: 4, reps: 10, weight: '6 kg', rpe: '7-8', note: 'Lest ceinture · Coudes vers hanches · Forme propre', restTimer: 150, swapWith: 'rowV' },
       { id: 'rowV', name: 'Tirage Vertical', sets: 4, reps: 10, weight: '55 kg', rpe: '7-8', note: 'Alternative aux tractions · Barre à la clavicule', hidden: true, restTimer: 120, swapWith: 'pullup' },
       { id: 'rowH', name: 'Tirage Horizontal', sets: 4, reps: 10, weight: '62.5 kg', rpe: '7-8', restTimer: 120 },
-      { id: 'pec', name: 'Papillon', sets: 3, reps: 12, weight: '25 kg', rpe: '8', note: 'Étirement complet en position basse · Pas de rebond', supersetWith: 'face_pull', restTimer: 0 },
-      { id: 'face_pull', name: 'Face Pull', sets: 3, reps: 15, weight: '10 kg', rpe: '8', note: 'Poulie haute · Coudes hauts · Contraction arrière épaule', supersetStart: true, restTimer: 90 },
-      { id: 'curl', name: 'Curl Marteau', sets: 3, reps: 12, weight: '12 kg', rpe: '8', supersetWith: 'tri_high', restTimer: 0 },
-      { id: 'tri_high', name: 'Triceps Poulie Haute', sets: 3, reps: 12, weight: '15 kg', rpe: '8', supersetStart: true, restTimer: 90 },
-      { id: 'lat', name: 'Élévations Latérales', sets: 3, reps: 15, weight: '12 kg', rpe: '8-9', note: 'Assis · Isolation deltoïde', restTimer: 75 },
+      { id: 'pec', name: 'Papillon', sets: 3, reps: 12, weight: '25 kg', rpe: '8', note: 'Étirement complet en position basse · Pas de rebond', restTimer: 60 },
+      { id: 'face_pull', name: 'Face Pull', sets: 3, reps: 15, weight: '10 kg', rpe: '8', note: 'Poulie haute · Coudes hauts · Contraction arrière épaule', restTimer: 60 },
+      { id: 'curl', name: 'Curl Marteau', sets: 3, reps: 12, weight: '12 kg', rpe: '8', restTimer: 60 },
+      { id: 'tri_high', name: 'Triceps Poulie Haute', sets: 3, reps: 12, weight: '15 kg', rpe: '8', restTimer: 60 },
+      { id: 'lat', name: 'Élévations Latérales', sets: 3, reps: 15, weight: '12 kg', rpe: '8-9', note: 'Assis · Isolation deltoïde', restTimer: 75, swapWith: 'lat_mach' },
+      { id: 'lat_mach', name: 'Élévations Latérales Machine', sets: 3, reps: 15, weight: '20 kg', rpe: '8-9', note: '⚙️ Calibration · Dos calé · Amplitude complète', hidden: true, restTimer: 75, swapWith: 'lat' },
     ]
   },
   upperB: {
@@ -2593,13 +2642,15 @@ const WORKOUTS = {
     name: 'Épaules + Dos + Bras',
     exercises: [
       { id: 'ohp', name: 'Dumbbell OHP', sets: 4, reps: 10, weight: '20 kg', rpe: '7-8', note: 'Fourchette 8-10 reps', restTimer: 120 },
-      { id: 'rowV', name: 'Tirage Vertical', sets: 4, reps: 10, weight: '55 kg', rpe: '7-8', supersetWith: 'bench_b', restTimer: 0 },
-      { id: 'bench_b', name: 'Développé Couché Machine', sets: 4, reps: 10, weight: '25 kg/côté', rpe: '7-8', supersetStart: true, restTimer: 120 },
-      { id: 'lat_b', name: 'Élévations Latérales', sets: 4, reps: 15, weight: '12 kg', rpe: '8-9', note: 'Assis · Isolation deltoïde', restTimer: 75 },
-      { id: 'oiseau_b', name: 'Oiseau / Reverse Pec Dec', sets: 3, reps: 15, weight: '10 kg', rpe: '8', note: '⚙️ Calibration — cherche RPE 8 sur 15 reps', supersetWith: 'shrugs_b', restTimer: 0 },
-      { id: 'shrugs_b', name: 'Shrugs', sets: 3, reps: 15, weight: '20 kg', rpe: '8', note: '⚙️ Calibration · Épaules vers les oreilles, pause en haut', supersetStart: true, restTimer: 90 },
-      { id: 'curl_cable', name: 'Curl Poulie Basse', sets: 3, reps: 12, weight: '17.5 kg', rpe: '8', supersetWith: 'tri_low', restTimer: 0 },
-      { id: 'tri_low', name: 'Triceps Poulie Basse', sets: 3, reps: 12, weight: '15 kg', rpe: '8', supersetStart: true, restTimer: 90 },
+      { id: 'rowV', name: 'Tirage Vertical', sets: 4, reps: 10, weight: '55 kg', rpe: '7-8', restTimer: 0 },
+      { id: 'bench_b', name: 'Développé Couché Machine', sets: 4, reps: 10, weight: '25 kg/côté', rpe: '7-8', restTimer: 120 },
+      { id: 'lat_b', name: 'Élévations Latérales', sets: 4, reps: 15, weight: '12 kg', rpe: '8-9', note: 'Assis · Isolation deltoïde', restTimer: 75, swapWith: 'lat_b_mach' },
+      { id: 'lat_b_mach', name: 'Élévations Latérales Machine', sets: 4, reps: 15, weight: '20 kg', rpe: '8-9', note: '⚙️ Calibration · Dos calé · Amplitude complète', hidden: true, restTimer: 75, swapWith: 'lat_b' },
+      { id: 'oiseau_b', name: 'Oiseau / Reverse Pec Dec', sets: 3, reps: 15, weight: '10 kg', rpe: '8', note: '⚙️ Calibration — cherche RPE 8 sur 15 reps', restTimer: 60 },
+      { id: 'shrugs_b', name: 'Shrugs Haltères', sets: 3, reps: 15, weight: '20 kg', rpe: '8', note: '⚙️ Calibration · Haltères · Pause 1s en haut · Étirement complet en bas', restTimer: 60, swapWith: 'shrugs_b_mach' },
+      { id: 'shrugs_b_mach', name: 'Shrugs Machine', sets: 3, reps: 15, weight: '40 kg', rpe: '8', note: '⚙️ Calibration · Pause 1s en haut · Amplitude complète', hidden: true, restTimer: 60, swapWith: 'shrugs_b' },
+      { id: 'curl_cable', name: 'Curl Poulie Basse', sets: 3, reps: 12, weight: '17.5 kg', rpe: '8', restTimer: 60 },
+      { id: 'tri_low', name: 'Triceps Poulie Basse', sets: 3, reps: 12, weight: '15 kg', rpe: '8', restTimer: 60 },
     ]
   },
   lower: {
@@ -2608,21 +2659,24 @@ const WORKOUTS = {
     exercises: [
       { id: 'rdl', name: 'Romanian Deadlift', sets: 4, reps: 10, weight: '25 kg/côté', rpe: '7-8', note: '⚠️ Toujours en premier · Dos plat · Fessiers à fond', restTimer: 150 },
       { id: 'squat', name: 'Squat Smith', sets: 4, reps: 10, weight: '50 kg', rpe: '7-8', restTimer: 120 },
-      { id: 'press', name: 'Leg Press', sets: 3, reps: 12, weight: '90 kg', rpe: '7-8', supersetWith: 'curl_l', restTimer: 0 },
-      { id: 'curl_l', name: 'Leg Curl', sets: 3, reps: 12, weight: '35 kg', rpe: '8', supersetStart: true, restTimer: 90 },
-      { id: 'bulgarian', name: 'Fentes Bulgares', sets: 3, reps: 10, weight: '10 kg/main', rpe: '7-8', note: '10 reps/jambe', supersetWith: 'calves', restTimer: 0 },
-      { id: 'calves', name: 'Mollets', sets: 3, reps: 15, weight: '30 kg', rpe: '8', supersetStart: true, restTimer: 90 },
+      { id: 'press', name: 'Leg Press', sets: 3, reps: 12, weight: '90 kg', rpe: '7-8', restTimer: 120 },
+      { id: 'curl_l', name: 'Leg Curl', sets: 3, reps: 12, weight: '35 kg', rpe: '8', restTimer: 90 },
+      { id: 'bulgarian', name: 'Fentes Bulgares', sets: 3, reps: 10, weight: '10 kg/main', rpe: '7-8', note: '10 reps/jambe', restTimer: 90 },
+      { id: 'calves', name: 'Mollets', sets: 3, reps: 15, weight: '30 kg', rpe: '8', restTimer: 90 },
     ]
   },
   bonus: {
     tag: 'Upper C',
     name: 'Points Faibles',
     exercises: [
-      { id: 'bon_lat', name: 'Élévations Latérales', sets: 4, reps: 15, weight: '12 kg', rpe: '8-9', note: 'Assis · Charge fixe · Cherche la congestion', restTimer: 75 },
-      { id: 'bon_incline', name: 'Développé Incliné Smith', sets: 3, reps: 12, weight: '12.5 kg/côté', rpe: '8', note: 'Léger · Focus haut de pec', supersetWith: 'bon_rev', restTimer: 0 },
-      { id: 'bon_rev', name: 'Oiseau / Reverse Pec Dec', sets: 3, reps: 15, weight: '10 kg', rpe: '8', supersetStart: true, restTimer: 90 },
-      { id: 'bon_shrugs', name: 'Shrugs', sets: 3, reps: 15, weight: '20 kg', rpe: '8', supersetWith: 'bon_face', restTimer: 0 },
-      { id: 'bon_face', name: 'Face Pull', sets: 3, reps: 15, weight: '10 kg', rpe: '8', supersetStart: true, restTimer: 90 },
+      { id: 'bon_lat', name: 'Élévations Latérales', sets: 4, reps: 15, weight: '12 kg', rpe: '8-9', note: 'Assis · Charge fixe · Cherche la congestion', restTimer: 75, swapWith: 'bon_lat_mach' },
+      { id: 'bon_lat_mach', name: 'Élévations Latérales Machine', sets: 4, reps: 15, weight: '20 kg', rpe: '8-9', note: '⚙️ Calibration · Dos calé · Amplitude complète', hidden: true, restTimer: 75, swapWith: 'bon_lat' },
+      { id: 'bon_incline_db', name: 'Développé Incliné Haltères', sets: 3, reps: 12, weight: '14 kg', rpe: '8', note: '⚙️ Calibration · Banc 30° · Poids par haltère · Focus haut de pec', restTimer: 90, swapWith: 'bon_incline' },
+      { id: 'bon_incline', name: 'Développé Incliné Smith', sets: 3, reps: 12, weight: '12.5 kg/côté', rpe: '8', note: 'Alternative si haltères indispo', hidden: true, restTimer: 90, swapWith: 'bon_incline_db' },
+      { id: 'bon_rev', name: 'Oiseau / Reverse Pec Dec', sets: 3, reps: 15, weight: '10 kg', rpe: '8', restTimer: 75 },
+      { id: 'bon_shrugs', name: 'Shrugs Haltères', sets: 3, reps: 15, weight: '20 kg', rpe: '8', note: '⚙️ Calibration · Haltères · Pause 1s en haut · Étirement complet en bas', restTimer: 75, swapWith: 'bon_shrugs_mach' },
+      { id: 'bon_shrugs_mach', name: 'Shrugs Machine', sets: 3, reps: 15, weight: '40 kg', rpe: '8', note: '⚙️ Calibration · Pause 1s en haut · Amplitude complète', hidden: true, restTimer: 75, swapWith: 'bon_shrugs' },
+      { id: 'bon_face', name: 'Face Pull', sets: 3, reps: 15, weight: '10 kg', rpe: '8', restTimer: 75 },
       { id: 'bon_curl', name: 'Curl Marteau', sets: 3, reps: 12, weight: '14 kg', rpe: '8', supersetWith: 'bon_tri', restTimer: 0 },
       { id: 'bon_tri', name: 'Triceps Poulie Haute', sets: 3, reps: 12, weight: '12.5 kg', rpe: '8', supersetStart: true, restTimer: 90 },
     ]
@@ -2630,6 +2684,20 @@ const WORKOUTS = {
 };
 
 let currentWorkout = null;
+let currentGym = (function(){ try { return localStorage.getItem('hugo_gym') || 'celleneuve'; } catch(e){ return 'celleneuve'; } })();
+
+function setGym(g) {
+  currentGym = g;
+  try { localStorage.setItem('hugo_gym', g); } catch(e) {}
+  updateGymPills();
+  if (currentWorkout) renderExercises(WORKOUTS[currentWorkout]);
+}
+function updateGymPills() {
+  ['celleneuve','odysseum'].forEach(g => {
+    const el = document.getElementById('gym-pill-' + g);
+    if (el) el.classList.toggle('active', g === currentGym);
+  });
+}
 let sessionData = {};
 let timerInterval = null;
 let timerTotal = 120;
@@ -2658,7 +2726,7 @@ function loadLog() {
 }
 
 // ---- Export / Import de toutes les données ----
-const BACKUP_KEYS = ['hugo_log', 'hugo_saved_logs', 'hugo_weights', 'hugo_nutri', 'hugo_nutri_targets'];
+const BACKUP_KEYS = ['hugo_log', 'hugo_saved_logs', 'hugo_weights', 'hugo_nutri', 'hugo_nutri_targets', 'hugo_gym'];
 
 function exportAllData() {
   const data = { app: 'hugo-salle', version: 1, exportedAt: new Date().toISOString() };
@@ -3178,7 +3246,7 @@ function updateHomeStats() {
 
   // Next session recommendation
   const cycle = ['upperA', 'upperB', 'lower', 'bonus'];
-  const cycleNames = { upperA: { name: 'Upper A · Poitrine + Dos', sub: '8 exercices · ~60 min' }, upperB: { name: 'Upper B · Épaules + Dos + Bras', sub: '8 exercices · ~55 min' }, lower: { name: 'Lower · Jambes', sub: '6 exercices · ~45 min' }, bonus: { name: 'Upper C · Points Faibles', sub: '7 exercices · ~45 min' } };
+  const cycleNames = { upperA: { name: 'Upper A · Poitrine + Dos', sub: '8 exercices · ~65 min' }, upperB: { name: 'Upper B · Épaules + Dos + Bras', sub: '8 exercices · ~60 min' }, lower: { name: 'Lower · Jambes', sub: '6 exercices · ~55 min' }, bonus: { name: 'Upper C · Points Faibles', sub: '7 exercices · ~45 min' } };
   let nextId = 'upperA';
   if (lastSession) {
     const lastId = lastSession.id;
@@ -3314,6 +3382,7 @@ function startWorkout(key) {
   const w = WORKOUTS[key];
   document.getElementById('wk-tag').textContent = w.tag;
   document.getElementById('wk-name').textContent = w.name;
+  updateGymPills();
   renderExercises(w);
   showScreen('workout');
 }
@@ -3325,7 +3394,7 @@ function renderExercises(w) {
   // Pre-build session data for all exercises (prérempli depuis la dernière séance si dispo)
   w.exercises.forEach((ex) => {
     sessionData[ex.id] = { sets: [], name: ex.name, restTimer: ex.restTimer !== undefined ? ex.restTimer : 120 };
-    const lastEx = getExerciseHistory(ex.id, 1)[0] || null;
+    const lastEx = getExerciseHistory(ex.id, 1, currentGym)[0] || null;
     const lastDone = lastEx ? lastEx.sets.filter(s => s.done) : [];
     for (let i = 0; i < ex.sets; i++) {
       const prev = lastDone[i] || lastDone[lastDone.length - 1] || null;
@@ -3532,10 +3601,14 @@ function parseWeight(w) {
 
 // ---- Historique par exercice & progression ----
 // Retourne les n dernières occurrences loguées de l'exercice (avec au moins 1 série faite)
-function getExerciseHistory(exId, n = 3) {
+function getExerciseHistory(exId, n = 3, gym = null) {
   const log = loadLog();
   const out = [];
   for (const entry of log) {
+    if (gym) {
+      const entryGym = entry.gym || 'celleneuve'; // séances non taguées = Celleneuve
+      if (entryGym !== gym) continue;
+    }
     const ex = entry.exercises && entry.exercises.find(e => e.id === exId);
     if (ex && ex.sets && ex.sets.some(s => s.done)) {
       out.push(ex);
@@ -3548,7 +3621,7 @@ function getExerciseHistory(exId, n = 3) {
 // Suggestion de progression : 2 dernières séances avec toutes les séries
 // validées aux reps cibles, à RPE ≤ 7 (ou RPE non renseigné)
 function getProgressionHint(ex) {
-  const hist = getExerciseHistory(ex.id, 2);
+  const hist = getExerciseHistory(ex.id, 2, currentGym);
   if (hist.length < 2) return null;
   const ok = hist.every(h => {
     const done = h.sets.filter(s => s.done);
@@ -3763,6 +3836,7 @@ function finishWorkout() {
     tag: w.tag,
     name: w.name,
     date: dateStr,
+    gym: currentGym,
     timestamp: Date.now(),
     exercises: w.exercises.map(ex => ({
       id: ex.id,
@@ -3776,7 +3850,8 @@ function finishWorkout() {
 
   const doneSets = Object.values(sessionData).reduce((acc, ex) => acc + ex.sets.filter(s => s.done).length, 0);
 
-  let summary = `📋 LOG SÉANCE — ${w.tag} (${w.name})\n📅 ${dateStr}\n\n`;
+  const gymLabel = currentGym === 'odysseum' ? 'Odysseum' : 'Celleneuve';
+  let summary = `📋 LOG SÉANCE — ${w.tag} (${w.name})\n📅 ${dateStr} · 📍 ${gymLabel}\n\n`;
   w.exercises.forEach(ex => {
     const data = sessionData[ex.id];
     if (!data) return;
@@ -4483,7 +4558,7 @@ function drawChart(id, history) {
 const PHASE_DETAILS = {
   phase3: {
     title: 'Phase 3 \u2014 En cours \ud83d\udd25',
-    subtitle: '12 semaines \u00b7 Upper A / B / C + Lower \u00b7 ~60 min/s\u00e9ance',
+    subtitle: '12 semaines \u00b7 Upper A / B / C + Lower \u00b7 55-65 min/s\u00e9ance',
     color: '#0a84ff',
     sections: [
       {
@@ -4492,7 +4567,7 @@ const PHASE_DETAILS = {
       },
       {
         title: 'Changements vs Phase 2',
-        content: 'Deltoïde post\u00e9rieur 3 \u2192 9 s\u00e9ries/sem (oiseau ajout\u00e9) \u00b7 Deltoïde lat\u00e9ral 8 \u2192 13 \u00b7 Trap\u00e8zes 0 \u2192 6 (shrugs) \u00b7 D\u00e9velopp\u00e9 Inclin\u00e9 devient prioritaire \u00b7 Triceps 15 \u2192 9 \u00b7 Upper C recentr\u00e9 sur les points faibles \u00b7 Supersets antagonistes pour tenir 60 min \u00b7 Lower = jambes uniquement \u00b7 Isolations pass\u00e9es \u00e0 RPE 8-9'
+        content: 'Deltoïde post\u00e9rieur 3 \u2192 9 s\u00e9ries/sem (oiseau ajout\u00e9) \u00b7 Deltoïde lat\u00e9ral 8 \u2192 13 \u00b7 Trap\u00e8zes 0 \u2192 6 (shrugs) \u00b7 D\u00e9velopp\u00e9 Inclin\u00e9 devient prioritaire \u00b7 Triceps 15 \u2192 9 \u00b7 Upper C recentr\u00e9 sur les points faibles \u00b7 S\u00e9ries classiques (supersets abandonn\u00e9s : machines trop \u00e9loign\u00e9es) \u00b7 Lower = jambes uniquement \u00b7 Isolations pass\u00e9es \u00e0 RPE 8-9'
       },
       {
         title: 'Upper A \u2014 Poitrine + Dos',
@@ -4500,10 +4575,10 @@ const PHASE_DETAILS = {
           ['D\u00e9velopp\u00e9 Inclin\u00e9 Smith', '4\u00d78-10', '17.5 kg/c\u00f4t\u00e9'],
           ['Tractions Lest\u00e9es', '4\u00d710', '+6 kg'],
           ['Tirage Horizontal', '4\u00d710', '62.5 kg'],
-          ['SS \u00b7 Papillon', '3\u00d712', '25 kg'],
-          ['SS \u00b7 Face Pull', '3\u00d715', '10 kg'],
-          ['SS \u00b7 Curl Marteau', '3\u00d712', '12 kg'],
-          ['SS \u00b7 Triceps Poulie Haute', '3\u00d712', '15 kg'],
+          ['Papillon', '3\u00d712', '25 kg'],
+          ['Face Pull', '3\u00d715', '10 kg'],
+          ['Curl Marteau', '3\u00d712', '12 kg'],
+          ['Triceps Poulie Haute', '3\u00d712', '15 kg'],
           ['\u00c9l\u00e9vations Lat\u00e9rales', '3\u00d715', '12 kg'],
         ]
       },
@@ -4511,13 +4586,13 @@ const PHASE_DETAILS = {
         title: 'Upper B \u2014 \u00c9paules + Dos + Bras',
         rows: [
           ['Dumbbell OHP', '4\u00d78-10', '20 kg'],
-          ['SS \u00b7 Tirage Vertical', '4\u00d710', '55 kg'],
-          ['SS \u00b7 D\u00e9velopp\u00e9 Couch\u00e9 Machine', '4\u00d710', '25 kg/c\u00f4t\u00e9'],
+          ['Tirage Vertical', '4\u00d710', '55 kg'],
+          ['D\u00e9velopp\u00e9 Couch\u00e9 Machine', '4\u00d710', '25 kg/c\u00f4t\u00e9'],
           ['\u00c9l\u00e9vations Lat\u00e9rales', '4\u00d715', '12 kg'],
-          ['SS \u00b7 Oiseau / Reverse Pec Dec', '3\u00d715', '10 kg \u2699\ufe0f'],
-          ['SS \u00b7 Shrugs', '3\u00d715', '20 kg \u2699\ufe0f'],
-          ['SS \u00b7 Curl Poulie Basse', '3\u00d712', '17.5 kg'],
-          ['SS \u00b7 Triceps Poulie Basse', '3\u00d712', '15 kg'],
+          ['Oiseau / Reverse Pec Dec', '3\u00d715', '10 kg \u2699\ufe0f'],
+          ['Shrugs Halt\u00e8res', '3\u00d715', '20 kg \u2699\ufe0f'],
+          ['Curl Poulie Basse', '3\u00d712', '17.5 kg'],
+          ['Triceps Poulie Basse', '3\u00d712', '15 kg'],
         ]
       },
       {
@@ -4525,20 +4600,20 @@ const PHASE_DETAILS = {
         rows: [
           ['Romanian Deadlift', '4\u00d710', '25 kg/c\u00f4t\u00e9'],
           ['Squat Smith', '4\u00d710', '50 kg'],
-          ['SS \u00b7 Leg Press', '3\u00d712', '90 kg'],
-          ['SS \u00b7 Leg Curl', '3\u00d712', '35 kg'],
-          ['SS \u00b7 Fentes Bulgares', '3\u00d710', '10 kg/main'],
-          ['SS \u00b7 Mollets', '3\u00d715', '30 kg'],
+          ['Leg Press', '3\u00d712', '90 kg'],
+          ['Leg Curl', '3\u00d712', '35 kg'],
+          ['Fentes Bulgares', '3\u00d710', '10 kg/main'],
+          ['Mollets', '3\u00d715', '30 kg'],
         ]
       },
       {
         title: 'Upper C \u2014 Points Faibles',
         rows: [
           ['\u00c9l\u00e9vations Lat\u00e9rales', '4\u00d715', '12 kg'],
-          ['SS \u00b7 D\u00e9velopp\u00e9 Inclin\u00e9 Smith', '3\u00d712', '12.5 kg/c\u00f4t\u00e9'],
-          ['SS \u00b7 Oiseau / Reverse Pec Dec', '3\u00d715', '10 kg'],
-          ['SS \u00b7 Shrugs', '3\u00d715', '20 kg'],
-          ['SS \u00b7 Face Pull', '3\u00d715', '10 kg'],
+          ['D\u00e9velopp\u00e9 Inclin\u00e9 Halt\u00e8res', '3\u00d712', '14 kg \u2699\ufe0f'],
+          ['Oiseau / Reverse Pec Dec', '3\u00d715', '10 kg'],
+          ['Shrugs Halt\u00e8res', '3\u00d715', '20 kg'],
+          ['Face Pull', '3\u00d715', '10 kg'],
           ['SS \u00b7 Curl Marteau', '3\u00d712', '14 kg'],
           ['SS \u00b7 Triceps Poulie Haute', '3\u00d712', '12.5 kg'],
         ]
@@ -4561,7 +4636,7 @@ const PHASE_DETAILS = {
       },
       {
         title: 'Supersets (SS)',
-        content: 'Tu ench\u00e2ines les deux exercices sans repos, puis tu r\u00e9cup\u00e8res une seule fois (le temps affich\u00e9 sur le second). Appari\u00e9s en muscles oppos\u00e9s ou \u00e9loign\u00e9s : quasi aucune perte de performance, 12-15 min gagn\u00e9es. R\u00e9serve tes deux postes avant de commencer \u2014 si l\u2019un est pris, fais-les en s\u00e9ries classiques.'
+        content: 'Un seul superset dans tout le programme : Curl Marteau + Triceps Poulie Haute en Upper C. M\u00eame poulie, aucun d\u00e9placement. Tu ench\u00eenes les deux sans repos, puis 90s. Partout ailleurs, s\u00e9ries classiques avec le temps de repos affich\u00e9.'
       },
       {
         title: 'R\u00e8gle de progression',
@@ -4569,7 +4644,7 @@ const PHASE_DETAILS = {
       },
       {
         title: 'Semaine 1 \u2014 Calibration \u2699\ufe0f',
-        content: 'Oiseau, Reverse Pec Dec et Shrugs n\u2019ont aucun historique : les poids affich\u00e9s sont des estimations. Cherche un poids o\u00f9 les 15 reps sortent \u00e0 RPE 8, note-le. Idem pour le D\u00e9velopp\u00e9 Inclin\u00e9 Smith \u00e0 17.5 kg/c\u00f4t\u00e9. Coupe une s\u00e9rie par exercice sur la premi\u00e8re semaine \u2014 volume complet d\u00e8s la semaine 2.'
+        content: 'Oiseau, Reverse Pec Dec, Shrugs et D\u00e9velopp\u00e9 Inclin\u00e9 Halt\u00e8res n\u2019ont aucun historique : les poids affich\u00e9s sont des estimations. Cherche un poids o\u00f9 les 15 reps sortent \u00e0 RPE 8, note-le. Idem pour le D\u00e9velopp\u00e9 Inclin\u00e9 Smith \u00e0 17.5 kg/c\u00f4t\u00e9. Coupe une s\u00e9rie par exercice sur la premi\u00e8re semaine \u2014 volume complet d\u00e8s la semaine 2.'
       }
     ]
   },
@@ -4874,14 +4949,29 @@ function drawWeightChart(weights) {
 // ===== HISTORICAL DATA =====
 function seedHistoricalData() {
   const existing = loadLog();
-  if (existing.some(e => e.seeded === 'v6')) return; // Already seeded v6
+  if (existing.some(e => e.seeded === 'v7')) return; // Already seeded v7
   // Clear old seed data and re-seed with corrections
   const nonSeeded = existing.filter(e => !e.seeded);
 
   const historicalLog = [
+    // ODYSSEUM — RÉFÉRENCE (29/07/2026)
+    {
+      seeded: 'v7', id: 'upperA', tag: 'Upper A', name: 'Poitrine + Dos',
+      gym: 'odysseum', date: '29/07/2026', timestamp: Date.now() - 3600000,
+      exercises: [
+        { id: 'hammer_bench', name: 'Hammer Strength Iso-Lateral Bench', sets: [{reps:10,weight:'20',done:true},{reps:10,weight:'20',done:true},{reps:10,weight:'20',done:true},{reps:10,weight:'20',done:true}] },
+        { id: 'rowV', name: 'Tirage Vertical', sets: [{reps:12,weight:'55',done:true},{reps:12,weight:'60',done:true},{reps:12,weight:'60',done:true},{reps:12,weight:'55',done:true}] },
+        { id: 'rowH', name: 'Tirage Horizontal', sets: [{reps:10,weight:'60',done:true},{reps:10,weight:'60',done:true},{reps:10,weight:'60',done:true},{reps:10,weight:'60',done:true}] },
+        { id: 'pec', name: 'Papillon', sets: [{reps:12,weight:'45',done:true},{reps:12,weight:'50',done:true},{reps:12,weight:'50',done:true}] },
+        { id: 'face_pull', name: 'Face Pull', sets: [{reps:15,weight:'35',done:true},{reps:15,weight:'35',done:true},{reps:15,weight:'40',done:true}] },
+        { id: 'curl', name: 'Curl Marteau', sets: [{reps:12,weight:'14',done:true},{reps:12,weight:'14',done:true},{reps:12,weight:'12',done:true}] },
+        { id: 'tri_high', name: 'Triceps Poulie Haute', sets: [{reps:12,weight:'15',done:true},{reps:12,weight:'15',done:true},{reps:10,weight:'12.5',done:true}] },
+        { id: 'lat_mach', name: 'Élévations Latérales Machine', sets: [{reps:12,weight:'40',done:true},{reps:12,weight:'35',done:true},{reps:12,weight:'35',done:true}] },
+      ]
+    },
     // PHASE 2 — SEMAINE 5 (début)
     {
-      seeded: 'v6', id: 'lower', tag: 'Lower', name: 'Jambes',
+      seeded: 'v7', id: 'lower', tag: 'Lower', name: 'Jambes',
       date: '10/05/2026', timestamp: Date.now() - 3 * 86400000,
       exercises: [
         { id: 'rdl', name: 'Romanian Deadlift', sets: [{reps:10,weight:'60',done:true},{reps:10,weight:'60',done:true},{reps:10,weight:'60',done:true},{reps:10,weight:'60',done:true}] },
@@ -4894,7 +4984,7 @@ function seedHistoricalData() {
     },
     // PHASE 1 — SEMAINE 4
     {
-      seeded: 'v6', id: 'upperA', tag: 'Upper A', name: 'Poitrine + Dos',
+      seeded: 'v7', id: 'upperA', tag: 'Upper A', name: 'Poitrine + Dos',
       date: '05/05/2026', timestamp: Date.now() - 1.5 * 86400000,
       exercises: [
         { id: 'bench', name: 'Développé Couché Machine', sets: [{reps:10,weight:'25',done:true},{reps:10,weight:'25',done:true},{reps:10,weight:'25',done:true},{reps:10,weight:'25',done:true}] },
@@ -4905,7 +4995,7 @@ function seedHistoricalData() {
       ]
     },
     {
-      seeded: 'v6', id: 'upperB', tag: 'Upper B', name: 'Épaules + Bras',
+      seeded: 'v7', id: 'upperB', tag: 'Upper B', name: 'Épaules + Bras',
       date: '04/05/2026', timestamp: Date.now() - 2 * 86400000,
       exercises: [
         { id: 'ohp', name: 'Dumbbell OHP', sets: [{reps:10,weight:'14',done:true},{reps:10,weight:'14',done:true},{reps:10,weight:'14',done:true},{reps:10,weight:'14',done:true}] },
@@ -4917,7 +5007,7 @@ function seedHistoricalData() {
       ]
     },
     {
-      seeded: 'v6', id: 'upperA', tag: 'Upper A', name: 'Poitrine + Dos',
+      seeded: 'v7', id: 'upperA', tag: 'Upper A', name: 'Poitrine + Dos',
       date: '03/05/2026', timestamp: Date.now() - 3 * 86400000,
       exercises: [
         { id: 'bench', name: 'Développé Couché Machine', sets: [{reps:10,weight:'25',done:true},{reps:10,weight:'25',done:true},{reps:10,weight:'25',done:true},{reps:10,weight:'25',done:true}] },
@@ -4929,7 +5019,7 @@ function seedHistoricalData() {
     },
     // SEMAINE 3
     {
-      seeded: 'v6', id: 'lower', tag: 'Lower', name: 'Jambes',
+      seeded: 'v7', id: 'lower', tag: 'Lower', name: 'Jambes',
       date: '26/04/2026', timestamp: Date.now() - 9 * 86400000,
       exercises: [
         { id: 'dead', name: 'Deadlift', sets: [{reps:8,weight:'60',done:true},{reps:8,weight:'60',done:true},{reps:8,weight:'60',done:true},{reps:8,weight:'60',done:true}] },
@@ -4941,7 +5031,7 @@ function seedHistoricalData() {
       ]
     },
     {
-      seeded: 'v6', id: 'upperB', tag: 'Upper B', name: 'Épaules + Bras',
+      seeded: 'v7', id: 'upperB', tag: 'Upper B', name: 'Épaules + Bras',
       date: '25/04/2026', timestamp: Date.now() - 10 * 86400000,
       exercises: [
         { id: 'ohp', name: 'Dumbbell OHP', sets: [{reps:10,weight:'14',done:true},{reps:10,weight:'14',done:true},{reps:10,weight:'14',done:true},{reps:10,weight:'14',done:true}] },
@@ -4953,7 +5043,7 @@ function seedHistoricalData() {
       ]
     },
     {
-      seeded: 'v6', id: 'upperA', tag: 'Upper A', name: 'Poitrine + Dos',
+      seeded: 'v7', id: 'upperA', tag: 'Upper A', name: 'Poitrine + Dos',
       date: '24/04/2026', timestamp: Date.now() - 11 * 86400000,
       exercises: [
         { id: 'chest_press', name: 'Chest Press Technogym', sets: [{reps:10,weight:'60',done:true},{reps:10,weight:'60',done:true},{reps:10,weight:'60',done:true},{reps:10,weight:'60',done:true}] },
@@ -4965,7 +5055,7 @@ function seedHistoricalData() {
     },
     // SEMAINE 2
     {
-      seeded: 'v6', id: 'lower', tag: 'Lower', name: 'Jambes',
+      seeded: 'v7', id: 'lower', tag: 'Lower', name: 'Jambes',
       date: '19/04/2026', timestamp: Date.now() - 16 * 86400000,
       exercises: [
         { id: 'press', name: 'Leg Press', sets: [{reps:12,weight:'75',done:true},{reps:12,weight:'75',done:true},{reps:12,weight:'75',done:true}] },
@@ -4977,7 +5067,7 @@ function seedHistoricalData() {
       ]
     },
     {
-      seeded: 'v6', id: 'upperB', tag: 'Upper B', name: 'Épaules + Bras',
+      seeded: 'v7', id: 'upperB', tag: 'Upper B', name: 'Épaules + Bras',
       date: '18/04/2026', timestamp: Date.now() - 17 * 86400000,
       exercises: [
         { id: 'ohp', name: 'Dumbbell OHP', sets: [{reps:10,weight:'14',done:true},{reps:10,weight:'14',done:true},{reps:10,weight:'14',done:true},{reps:10,weight:'14',done:true}] },
@@ -4989,7 +5079,7 @@ function seedHistoricalData() {
       ]
     },
     {
-      seeded: 'v6', id: 'upperA', tag: 'Upper A', name: 'Poitrine + Dos',
+      seeded: 'v7', id: 'upperA', tag: 'Upper A', name: 'Poitrine + Dos',
       date: '17/04/2026', timestamp: Date.now() - 18 * 86400000,
       exercises: [
         { id: 'chest_press', name: 'Chest Press Technogym', sets: [{reps:10,weight:'60',done:true},{reps:10,weight:'60',done:true},{reps:10,weight:'60',done:true},{reps:10,weight:'60',done:true}] },
@@ -5001,7 +5091,7 @@ function seedHistoricalData() {
     },
     // SEMAINE 1
     {
-      seeded: 'v6', id: 'lower', tag: 'Lower', name: 'Jambes',
+      seeded: 'v7', id: 'lower', tag: 'Lower', name: 'Jambes',
       date: '12/04/2026', timestamp: Date.now() - 23 * 86400000,
       exercises: [
         { id: 'squat', name: 'Squat Smith', sets: [{reps:10,weight:'30',done:true},{reps:10,weight:'40',done:true},{reps:10,weight:'40',done:true},{reps:10,weight:'40',done:true}] },
@@ -5012,7 +5102,7 @@ function seedHistoricalData() {
       ]
     },
     {
-      seeded: 'v6', id: 'upperB', tag: 'Upper B', name: 'Épaules + Bras',
+      seeded: 'v7', id: 'upperB', tag: 'Upper B', name: 'Épaules + Bras',
       date: '11/04/2026', timestamp: Date.now() - 24 * 86400000,
       exercises: [
         { id: 'ohp', name: 'Dumbbell OHP', sets: [{reps:10,weight:'14',done:true},{reps:10,weight:'14',done:true},{reps:10,weight:'14',done:true},{reps:10,weight:'14',done:true}] },
@@ -5024,7 +5114,7 @@ function seedHistoricalData() {
       ]
     },
     {
-      seeded: 'v6', id: 'upperA', tag: 'Upper A', name: 'Poitrine + Dos',
+      seeded: 'v7', id: 'upperA', tag: 'Upper A', name: 'Poitrine + Dos',
       date: '10/04/2026', timestamp: Date.now() - 25 * 86400000,
       exercises: [
         { id: 'chest_press', name: 'Chest Press Technogym', sets: [{reps:10,weight:'60',done:true},{reps:10,weight:'60',done:true},{reps:10,weight:'60',done:true},{reps:10,weight:'60',done:true}] },
