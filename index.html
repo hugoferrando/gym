@@ -2624,8 +2624,8 @@ const WORKOUTS = {
     name: 'Poitrine + Dos',
     exercises: [
       { id: 'incline_smith', name: 'Développé Incliné Smith', sets: 4, reps: 10, weight: '17.5 kg/côté', rpe: '7-8', note: 'Inclinaison 30-45° · Fourchette 8-10 reps', restTimer: 120, swapWith: 'chest_press' },
-      { id: 'chest_press', name: 'Chest Press Technogym', sets: 4, reps: 10, weight: '60 kg', rpe: '7-8', note: 'Backup si Smith indispo', hidden: true, restTimer: 120, swapWith: 'hammer_bench' },
-      { id: 'hammer_bench', name: 'Hammer Strength Iso-Lateral Bench', sets: 4, reps: 10, weight: '20 kg/côté', rpe: '7-8', note: 'Plateaux · Bras indépendants · Presse à plat', hidden: true, restTimer: 120, swapWith: 'incline_smith' },
+      { id: 'chest_press', name: 'Chest Press Technogym', sets: 4, reps: 10, weight: '60 kg', rpe: '7-8', note: 'Backup si Smith indispo', hidden: true, restTimer: 120, swapWith: 'hammer_incline' },
+      { id: 'hammer_incline', name: 'Hammer Strength Iso-Lateral Incline', sets: 4, reps: 10, weight: '20 kg/côté', rpe: '7-8', note: '⚙️ Calibration · Plateaux · Bras indépendants · Haut de pec', hidden: true, restTimer: 120, swapWith: 'incline_smith' },
       { id: 'pullup', name: 'Tractions Lestées', sets: 4, reps: 10, weight: '6 kg', rpe: '7-8', note: 'Lest ceinture · Coudes vers hanches · Forme propre', restTimer: 150, swapWith: 'rowV' },
       { id: 'rowV', name: 'Tirage Vertical', sets: 4, reps: 10, weight: '55 kg', rpe: '7-8', note: 'Alternative aux tractions · Barre à la clavicule', hidden: true, restTimer: 120, swapWith: 'pullup' },
       { id: 'rowH', name: 'Tirage Horizontal', sets: 4, reps: 10, weight: '62.5 kg', rpe: '7-8', restTimer: 120 },
@@ -2642,15 +2642,16 @@ const WORKOUTS = {
     name: 'Épaules + Dos + Bras',
     exercises: [
       { id: 'ohp', name: 'Dumbbell OHP', sets: 4, reps: 10, weight: '20 kg', rpe: '7-8', note: 'Fourchette 8-10 reps', restTimer: 120 },
-      { id: 'rowV', name: 'Tirage Vertical', sets: 4, reps: 10, weight: '55 kg', rpe: '7-8', restTimer: 0 },
-      { id: 'bench_b', name: 'Développé Couché Machine', sets: 4, reps: 10, weight: '25 kg/côté', rpe: '7-8', restTimer: 120 },
+      { id: 'rowV', name: 'Tirage Vertical', sets: 4, reps: 10, weight: '55 kg', rpe: '7-8', restTimer: 120 },
+      { id: 'bench_b', name: 'Développé Couché Machine', sets: 4, reps: 10, weight: '25 kg/côté', rpe: '7-8', restTimer: 120, swapWith: 'hammer_bench' },
+      { id: 'hammer_bench', name: 'Hammer Strength Iso-Lateral Bench', sets: 4, reps: 10, weight: '20 kg/côté', rpe: '7-8', note: 'Plateaux · Bras indépendants · Presse à plat', hidden: true, restTimer: 120, swapWith: 'bench_b' },
       { id: 'lat_b', name: 'Élévations Latérales', sets: 4, reps: 15, weight: '12 kg', rpe: '8-9', note: 'Assis · Isolation deltoïde', restTimer: 75, swapWith: 'lat_b_mach' },
       { id: 'lat_b_mach', name: 'Élévations Latérales Machine', sets: 4, reps: 15, weight: '20 kg', rpe: '8-9', note: '⚙️ Calibration · Dos calé · Amplitude complète', hidden: true, restTimer: 75, swapWith: 'lat_b' },
       { id: 'oiseau_b', name: 'Oiseau / Reverse Pec Dec', sets: 3, reps: 15, weight: '10 kg', rpe: '8', note: '⚙️ Calibration — cherche RPE 8 sur 15 reps', restTimer: 60 },
       { id: 'shrugs_b', name: 'Shrugs Haltères', sets: 3, reps: 15, weight: '20 kg', rpe: '8', note: '⚙️ Calibration · Haltères · Pause 1s en haut · Étirement complet en bas', restTimer: 60, swapWith: 'shrugs_b_mach' },
       { id: 'shrugs_b_mach', name: 'Shrugs Machine', sets: 3, reps: 15, weight: '40 kg', rpe: '8', note: '⚙️ Calibration · Pause 1s en haut · Amplitude complète', hidden: true, restTimer: 60, swapWith: 'shrugs_b' },
-      { id: 'curl_cable', name: 'Curl Poulie Basse', sets: 3, reps: 12, weight: '17.5 kg', rpe: '8', restTimer: 60 },
-      { id: 'tri_low', name: 'Triceps Poulie Basse', sets: 3, reps: 12, weight: '15 kg', rpe: '8', restTimer: 60 },
+      { id: 'curl_cable', name: 'Curl Poulie Basse', sets: 3, reps: 12, weight: '17.5 kg', rpe: '8', supersetWith: 'tri_low', restTimer: 0 },
+      { id: 'tri_low', name: 'Triceps Poulie Basse', sets: 3, reps: 12, weight: '15 kg', rpe: '8', supersetStart: true, restTimer: 90 },
     ]
   },
   lower: {
@@ -3406,6 +3407,21 @@ function renderExercises(w) {
     }
   });
 
+  // Restaure la séance en cours si elle correspond (séries validées + RPE)
+  const saved = loadProgress();
+  if (saved && saved.workoutKey === currentWorkout && saved.sessionData) {
+    Object.keys(saved.sessionData).forEach(exId => {
+      if (!sessionData[exId]) return;
+      const savedEx = saved.sessionData[exId];
+      if (savedEx.rpe) sessionData[exId].rpe = savedEx.rpe;
+      (savedEx.sets || []).forEach((ss, idx) => {
+        if (ss && ss.done && sessionData[exId].sets[idx]) {
+          sessionData[exId].sets[idx] = { reps: ss.reps, weight: ss.weight, done: true };
+        }
+      });
+    });
+  }
+
   // Build groups: consecutive supersetWith+supersetStart pairs are grouped, rest are solo
   const groups = [];
   const visibleExercises = w.exercises.filter(ex => !ex.hidden);
@@ -3592,11 +3608,71 @@ function renderExercises(w) {
 
     list.appendChild(wrapper);
   });
+  applyRestoredVisualState();
 }
 
 function parseWeight(w) {
   const match = w.match(/[\d.]+/);
   return match ? match[0] : '0';
+}
+
+// ---- Sauvegarde auto de la séance en cours ----
+function saveProgress() {
+  if (!currentWorkout) return;
+  try {
+    localStorage.setItem('hugo_inprogress', JSON.stringify({
+      workoutKey: currentWorkout,
+      gym: currentGym,
+      sessionData: sessionData,
+      ts: Date.now()
+    }));
+  } catch (e) {}
+}
+function loadProgress() {
+  try { return JSON.parse(localStorage.getItem('hugo_inprogress') || 'null'); } catch (e) { return null; }
+}
+function clearProgress() {
+  try { localStorage.removeItem('hugo_inprogress'); } catch (e) {}
+}
+// Réapplique l'état visuel (coché / grisé / RPE) des séries restaurées
+function applyRestoredVisualState() {
+  const list = document.getElementById('exercises-list');
+  if (!list) return;
+  const blocks = list.querySelectorAll('[id^="ex-block-"]');
+  // Map ei -> exId via check elements
+  document.querySelectorAll('.set-check').forEach(chk => {
+    const m = chk.id.match(/^check-(\d+)-(\d+)$/);
+    if (!m) return;
+    const ei = m[1], si = parseInt(m[2], 10);
+    const onclick = chk.getAttribute('onclick') || '';
+    const exM = onclick.match(/toggleSet\(\d+,\d+,'([^']+)'\)/);
+    if (!exM) return;
+    const exId = exM[1];
+    const sd = sessionData[exId];
+    if (sd && sd.sets[si] && sd.sets[si].done) {
+      chk.classList.add('checked');
+      const wInp = document.getElementById(`inp-w-${ei}-${si}`);
+      const rInp = document.getElementById(`inp-r-${ei}-${si}`);
+      if (wInp) wInp.classList.add('done-input');
+      if (rInp) rInp.classList.add('done-input');
+    }
+  });
+  // Dim fully-done blocks + show RPE
+  Object.keys(sessionData).forEach(exId => {
+    const sd = sessionData[exId];
+    if (sd.sets.length && sd.sets.every(s => s.done)) {
+      const rpeSelector = document.getElementById(`ex-rpe-${exId}`);
+      if (rpeSelector) rpeSelector.classList.add('visible');
+    }
+    if (sd.rpe) {
+      const sel = document.getElementById(`ex-rpe-${exId}`);
+      if (sel) sel.querySelectorAll('.ex-rpe-btn').forEach(o => {
+        const oc = o.getAttribute('onclick') || '';
+        const m = oc.match(/selectExRpe\('[^']+',\s*(\d+)/);
+        if (m && m[1] === String(sd.rpe)) o.classList.add('selected');
+      });
+    }
+  });
 }
 
 // ---- Historique par exercice & progression ----
@@ -3751,6 +3827,7 @@ function showSwapToast(name) {
 function updateSet(exId, setIdx, field, val) {
   if (sessionData[exId] && sessionData[exId].sets[setIdx]) {
     sessionData[exId].sets[setIdx][field] = val;
+    saveProgress();
   }
 }
 
@@ -3793,6 +3870,7 @@ function toggleSet(ei, si, exId) {
       rpeSelector.classList.toggle('visible', allDone);
     }
   }
+  saveProgress();
 }
 
 function selectExRpe(exId, rpe, btn) {
@@ -3804,6 +3882,7 @@ function selectExRpe(exId, rpe, btn) {
     selector.querySelectorAll('.ex-rpe-btn').forEach(b => b.classList.remove('selected'));
   }
   btn.classList.add('selected');
+  saveProgress();
 }
 
 let selectedRpe = null;
@@ -3847,6 +3926,7 @@ function finishWorkout() {
   };
   log.unshift(entry);
   saveLog(log);
+  clearProgress();
 
   const doneSets = Object.values(sessionData).reduce((acc, ex) => acc + ex.sets.filter(s => s.done).length, 0);
 
@@ -3998,6 +4078,7 @@ function startTimer(secs) {
 
 // Recalcule le temps restant quand on revient sur l'appli
 document.addEventListener('visibilitychange', () => {
+  if (document.hidden) { saveProgress(); return; }
   if (!document.hidden && timerEndTime && timerInterval) {
     const remaining = Math.max(0, Math.round((timerEndTime - Date.now()) / 1000));
     timerLeft = remaining;
@@ -5134,6 +5215,17 @@ function seedHistoricalData() {
 seedHistoricalData();
 updateHomeStats();
 updateProgramWeek();
+
+// Reprise auto d'une séance en cours (< 8h)
+(function resumeInProgress() {
+  const p = loadProgress();
+  if (!p || !p.workoutKey || !WORKOUTS[p.workoutKey]) return;
+  const doneCount = Object.values(p.sessionData || {}).reduce((a, ex) => a + (ex.sets || []).filter(s => s.done).length, 0);
+  if (doneCount === 0) { clearProgress(); return; }
+  if (Date.now() - (p.ts || 0) > 8 * 3600 * 1000) return; // trop vieux, on laisse au tap manuel
+  if (p.gym) currentGym = p.gym;
+  startWorkout(p.workoutKey);
+})();
 
 // ===== NUTRITION =====
 const NUTRI_DEFAULTS = { kcal: 2700, prot: 134, carb: 320, fat: 75 };
