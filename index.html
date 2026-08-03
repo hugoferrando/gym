@@ -1764,7 +1764,7 @@
         <div>
           <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-dim);margin-bottom:5px;">Programme actif</div>
           <div style="font-size:20px;font-weight:600;color:var(--text);letter-spacing:-0.3px;">Phase 3 · Épaules</div>
-          <div style="font-size:13px;color:var(--text-dim);margin-top:2px;">Supersets · Deltoïdes prioritaires</div>
+          <div style="font-size:13px;color:var(--text-dim);margin-top:2px;">Supersets · Deltoïdes prioritaires <span style="opacity:0.5;">· v10</span></div>
         </div>
         <div style="text-align:right;">
           <div id="prog-week-num" style="font-size:34px;font-weight:700;color:var(--accent);letter-spacing:-1px;line-height:1;">—</div>
@@ -2633,8 +2633,8 @@ const WORKOUTS = {
       { id: 'face_pull', name: 'Face Pull', sets: 3, reps: 15, weight: '10 kg', rpe: '8', note: 'Poulie haute · Coudes hauts · Contraction arrière épaule', restTimer: 60 },
       { id: 'curl', name: 'Curl Marteau', sets: 3, reps: 12, weight: '12 kg', rpe: '8', restTimer: 60 },
       { id: 'tri_high', name: 'Triceps Poulie Haute', sets: 3, reps: 12, weight: '15 kg', rpe: '8', restTimer: 60 },
-      { id: 'lat', name: 'Élévations Latérales', sets: 3, reps: 15, weight: '12 kg', rpe: '8-9', note: 'Assis · Isolation deltoïde', restTimer: 75, swapWith: 'lat_mach' },
-      { id: 'lat_mach', name: 'Élévations Latérales Machine', sets: 3, reps: 15, weight: '20 kg', rpe: '8-9', note: '⚙️ Calibration · Dos calé · Amplitude complète', hidden: true, restTimer: 75, swapWith: 'lat' },
+      { id: 'lat_mach', name: 'Élévations Latérales Machine', sets: 3, reps: 15, weight: '20 kg', rpe: '8-9', note: 'Dos calé · Amplitude complète', restTimer: 75, swapWith: 'lat' },
+      { id: 'lat', name: 'Élévations Latérales', sets: 3, reps: 15, weight: '12 kg', rpe: '8-9', note: 'Haltères · Assis · Isolation deltoïde', hidden: true, restTimer: 75, swapWith: 'lat_mach' },
     ]
   },
   upperB: {
@@ -2645,8 +2645,8 @@ const WORKOUTS = {
       { id: 'rowV', name: 'Tirage Vertical', sets: 4, reps: 10, weight: '55 kg', rpe: '7-8', restTimer: 120 },
       { id: 'bench_b', name: 'Développé Couché Machine', sets: 4, reps: 10, weight: '25 kg/côté', rpe: '7-8', restTimer: 120, swapWith: 'hammer_bench' },
       { id: 'hammer_bench', name: 'Hammer Strength Iso-Lateral Bench', sets: 4, reps: 10, weight: '20 kg/côté', rpe: '7-8', note: 'Plateaux · Bras indépendants · Presse à plat', hidden: true, restTimer: 120, swapWith: 'bench_b' },
-      { id: 'lat_b', name: 'Élévations Latérales', sets: 4, reps: 15, weight: '12 kg', rpe: '8-9', note: 'Assis · Isolation deltoïde', restTimer: 75, swapWith: 'lat_b_mach' },
-      { id: 'lat_b_mach', name: 'Élévations Latérales Machine', sets: 4, reps: 15, weight: '20 kg', rpe: '8-9', note: '⚙️ Calibration · Dos calé · Amplitude complète', hidden: true, restTimer: 75, swapWith: 'lat_b' },
+      { id: 'lat_b_mach', name: 'Élévations Latérales Machine', sets: 4, reps: 15, weight: '20 kg', rpe: '8-9', note: 'Dos calé · Amplitude complète', restTimer: 75, swapWith: 'lat_b' },
+      { id: 'lat_b', name: 'Élévations Latérales', sets: 4, reps: 15, weight: '12 kg', rpe: '8-9', note: 'Haltères · Assis · Isolation deltoïde', hidden: true, restTimer: 75, swapWith: 'lat_b_mach' },
       { id: 'oiseau_b', name: 'Oiseau / Reverse Pec Dec', sets: 3, reps: 15, weight: '10 kg', rpe: '8', note: '⚙️ Calibration — cherche RPE 8 sur 15 reps', restTimer: 60 },
       { id: 'shrugs_b', name: 'Shrugs Haltères', sets: 3, reps: 15, weight: '20 kg', rpe: '8', note: '⚙️ Calibration · Haltères · Pause 1s en haut · Étirement complet en bas', restTimer: 60, swapWith: 'shrugs_b_mach' },
       { id: 'shrugs_b_mach', name: 'Shrugs Machine', sets: 3, reps: 15, weight: '40 kg', rpe: '8', note: '⚙️ Calibration · Pause 1s en haut · Amplitude complète', hidden: true, restTimer: 60, swapWith: 'shrugs_b' },
@@ -2670,8 +2670,8 @@ const WORKOUTS = {
     tag: 'Upper C',
     name: 'Points Faibles',
     exercises: [
-      { id: 'bon_lat', name: 'Élévations Latérales', sets: 4, reps: 15, weight: '12 kg', rpe: '8-9', note: 'Assis · Charge fixe · Cherche la congestion', restTimer: 75, swapWith: 'bon_lat_mach' },
-      { id: 'bon_lat_mach', name: 'Élévations Latérales Machine', sets: 4, reps: 15, weight: '20 kg', rpe: '8-9', note: '⚙️ Calibration · Dos calé · Amplitude complète', hidden: true, restTimer: 75, swapWith: 'bon_lat' },
+      { id: 'bon_lat_mach', name: 'Élévations Latérales Machine', sets: 4, reps: 15, weight: '20 kg', rpe: '8-9', note: 'Dos calé · Cherche la congestion', restTimer: 75, swapWith: 'bon_lat' },
+      { id: 'bon_lat', name: 'Élévations Latérales', sets: 4, reps: 15, weight: '12 kg', rpe: '8-9', note: 'Haltères · Assis · Charge fixe', hidden: true, restTimer: 75, swapWith: 'bon_lat_mach' },
       { id: 'bon_incline_db', name: 'Développé Incliné Haltères', sets: 3, reps: 12, weight: '14 kg', rpe: '8', note: '⚙️ Calibration · Banc 30° · Poids par haltère · Focus haut de pec', restTimer: 90, swapWith: 'bon_incline' },
       { id: 'bon_incline', name: 'Développé Incliné Smith', sets: 3, reps: 12, weight: '12.5 kg/côté', rpe: '8', note: 'Alternative si haltères indispo', hidden: true, restTimer: 90, swapWith: 'bon_incline_mach' },
       { id: 'bon_incline_mach', name: 'Développé Incliné Machine', sets: 3, reps: 12, weight: '20 kg', rpe: '8', note: '⚙️ Calibration · Machine guidée · Focus haut de pec · Cherche la congestion', hidden: true, restTimer: 90, swapWith: 'bon_incline_db' },
@@ -2679,8 +2679,10 @@ const WORKOUTS = {
       { id: 'bon_shrugs', name: 'Shrugs Haltères', sets: 3, reps: 15, weight: '20 kg', rpe: '8', note: '⚙️ Calibration · Haltères · Pause 1s en haut · Étirement complet en bas', restTimer: 75, swapWith: 'bon_shrugs_mach' },
       { id: 'bon_shrugs_mach', name: 'Shrugs Machine', sets: 3, reps: 15, weight: '40 kg', rpe: '8', note: '⚙️ Calibration · Pause 1s en haut · Amplitude complète', hidden: true, restTimer: 75, swapWith: 'bon_shrugs' },
       { id: 'bon_face', name: 'Face Pull', sets: 3, reps: 15, weight: '10 kg', rpe: '8', restTimer: 75 },
-      { id: 'bon_curl', name: 'Curl Marteau', sets: 3, reps: 12, weight: '14 kg', rpe: '8', supersetWith: 'bon_tri', restTimer: 0 },
-      { id: 'bon_tri', name: 'Triceps Poulie Haute', sets: 3, reps: 12, weight: '12.5 kg', rpe: '8', supersetStart: true, restTimer: 90 },
+      { id: 'bon_curl_cable', name: 'Curl Marteau Poulie', sets: 3, reps: 12, weight: '15 kg', rpe: '8', note: '⚙️ Calibration · Corde à la poulie basse · Prise neutre', supersetWith: 'bon_tri', restTimer: 0, swapWith: 'bon_curl_db' },
+      { id: 'bon_curl_db', name: 'Curl Marteau Haltères', sets: 3, reps: 12, weight: '14 kg', rpe: '8', note: 'Debout · Prise neutre · Brachial + long supinateur', hidden: true, restTimer: 90, swapWith: 'bon_curl_cable' },
+      { id: 'bon_tri', name: 'Triceps Poulie Haute', sets: 3, reps: 12, weight: '12.5 kg', rpe: '8', supersetStart: true, restTimer: 90, swapWith: 'bon_tri_db' },
+      { id: 'bon_tri_db', name: 'French Press Haltères', sets: 3, reps: 12, weight: '12 kg', rpe: '8', note: '⚙️ Calibration · Banc incliné · Extension nuque · Chef long · Descente contrôlée', hidden: true, restTimer: 90, swapWith: 'bon_tri' },
     ]
   }
 };
@@ -3462,10 +3464,22 @@ function renderExercises(w) {
       const totalRest = group.exercises[group.exercises.length - 1].restTimer || 0;
       const head = document.createElement('div');
       head.className = 'ss-head';
+      const armSet = ['bon_curl_cable', 'bon_curl_db', 'bon_tri', 'bon_tri_db'];
+      const isArmBlock = group.exercises.some(e => armSet.includes(e.id));
+      const isDumbbell = group.exercises.some(e => e.id === 'bon_curl_db' || e.id === 'bon_tri_db');
+      const armToggle = isArmBlock ? `
+        <span onclick="setArmMode('${isDumbbell ? 'cable' : 'dumbbell'}')" style="
+          margin-left:auto;display:inline-flex;align-items:center;gap:5px;
+          padding:5px 10px;border-radius:10px;cursor:pointer;
+          background:rgba(255,165,0,0.12);border:1px solid rgba(255,165,0,0.3);
+          font-size:11px;font-weight:700;color:rgba(255,165,0,0.95);white-space:nowrap;">
+          ⇄ ${isDumbbell ? 'Poulie' : 'Haltères'}
+        </span>` : '';
       head.innerHTML = `
         <span class="ss-head-icon">\u21c5</span>
         <span class="ss-head-title">Superset ${ssNum}</span>
-        <span class="ss-head-sub">sans repos entre A et B \u00b7 ${totalRest}s apr\u00e8s</span>`;
+        ${isArmBlock ? '' : `<span class="ss-head-sub">sans repos entre A et B \u00b7 ${totalRest}s apr\u00e8s</span>`}
+        ${armToggle}`;
       wrapper.appendChild(head);
       const inner = document.createElement('div');
       inner.className = 'ss-inner';
@@ -3547,7 +3561,8 @@ function renderExercises(w) {
         if (next) allAlts.push(next);
         cur = next;
       }
-      const hasAlts = allAlts.length > 0;
+      const armBlockIds = ['bon_curl_cable', 'bon_curl_db', 'bon_tri', 'bon_tri_db'];
+      const hasAlts = allAlts.length > 0 && !armBlockIds.includes(ex.id);
       const swapBtn = hasAlts ? `
         <div onclick="showSwapMenu('${ex.id}')" style="
           display:flex;align-items:center;gap:5px;
@@ -3777,8 +3792,13 @@ function showSwapMenu(currentId) {
       ${isActive ? '<div style="font-size:18px;">✓</div>' : ''}
     `;
     btn.onclick = () => {
-      options.forEach(o => { o.hidden = (o.id !== opt.id); });
-      renderExercises(w);
+      const armIds = ['bon_curl_cable', 'bon_curl_db', 'bon_tri', 'bon_tri_db'];
+      if (w === WORKOUTS.bonus && armIds.includes(opt.id)) {
+        setArmMode((opt.id === 'bon_curl_db' || opt.id === 'bon_tri_db') ? 'dumbbell' : 'cable');
+      } else {
+        options.forEach(o => { o.hidden = (o.id !== opt.id); });
+        renderExercises(w);
+      }
       overlay.remove();
       showSwapToast(opt.name);
     };
@@ -3789,17 +3809,25 @@ function showSwapMenu(currentId) {
   document.body.appendChild(overlay);
 }
 
-function swapExercise(exAId, exBId) {
-  const w = WORKOUTS[currentWorkout];
-  const exA = w.exercises.find(e => e.id === exAId);
-  const exB = w.exercises.find(e => e.id === exBId);
-  if (!exA || !exB) return;
-  const aWasHidden = exA.hidden;
-  exA.hidden = !aWasHidden;
-  exB.hidden = aWasHidden;
-  const visibleName = exA.hidden ? exB.name : exA.name;
+function setArmMode(mode) {
+  const w = WORKOUTS.bonus;
+  const curlC = w.exercises.find(e => e.id === 'bon_curl_cable');
+  const curlD = w.exercises.find(e => e.id === 'bon_curl_db');
+  const triC  = w.exercises.find(e => e.id === 'bon_tri');
+  const triD  = w.exercises.find(e => e.id === 'bon_tri_db');
+  if (!curlC || !curlD || !triC || !triD) return;
+  if (mode === 'dumbbell') {
+    curlC.hidden = true; triC.hidden = true;
+    curlD.hidden = false; triD.hidden = false;
+    curlD.supersetWith = 'bon_tri_db'; curlD.restTimer = 0; // superset haltères
+    triD.supersetStart = true; triD.restTimer = 90;
+  } else {
+    curlD.hidden = true; triD.hidden = true;
+    curlC.hidden = false; triC.hidden = false;
+    curlC.supersetWith = 'bon_tri'; curlC.restTimer = 0; // superset poulie
+    triC.supersetStart = true; triC.restTimer = 90;
+  }
   renderExercises(w);
-  showSwapToast(visibleName);
 }
 
 function showSwapToast(name) {
@@ -4696,7 +4724,7 @@ const PHASE_DETAILS = {
           ['Oiseau / Reverse Pec Dec', '3\u00d715', '10 kg'],
           ['Shrugs Halt\u00e8res', '3\u00d715', '20 kg'],
           ['Face Pull', '3\u00d715', '10 kg'],
-          ['SS \u00b7 Curl Marteau', '3\u00d712', '14 kg'],
+          ['SS \u00b7 Curl Marteau Poulie', '3\u00d712', '15 kg \u2699\ufe0f'],
           ['SS \u00b7 Triceps Poulie Haute', '3\u00d712', '12.5 kg'],
         ]
       },
