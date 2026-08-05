@@ -2641,7 +2641,8 @@ const WORKOUTS = {
     tag: 'Upper B',
     name: 'Épaules + Dos + Bras',
     exercises: [
-      { id: 'ohp', name: 'Dumbbell OHP', sets: 4, reps: 10, weight: '20 kg', rpe: '7-8', note: 'Fourchette 8-10 reps', restTimer: 120 },
+      { id: 'ohp', name: 'Dumbbell OHP', sets: 4, reps: 10, weight: '20 kg', rpe: '7-8', note: 'Haltères · Fourchette 8-10 reps', restTimer: 120, swapWith: 'ohp_mach' },
+      { id: 'ohp_mach', name: 'Développé Épaules Machine', sets: 4, reps: 10, weight: '30 kg', rpe: '7-8', note: '⚙️ Calibration · Dossier vertical · Amplitude complète', hidden: true, restTimer: 120, swapWith: 'ohp' },
       { id: 'rowV', name: 'Tirage Vertical', sets: 4, reps: 10, weight: '55 kg', rpe: '7-8', restTimer: 120 },
       { id: 'bench_b', name: 'Développé Couché Machine', sets: 4, reps: 10, weight: '25 kg/côté', rpe: '7-8', restTimer: 120, swapWith: 'hammer_bench' },
       { id: 'hammer_bench', name: 'Hammer Strength Iso-Lateral Bench', sets: 4, reps: 10, weight: '20 kg/côté', rpe: '7-8', note: 'Plateaux · Bras indépendants · Presse à plat', hidden: true, restTimer: 120, swapWith: 'bench_b' },
