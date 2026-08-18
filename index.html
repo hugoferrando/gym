@@ -3562,7 +3562,8 @@ function renderExercises(w) {
         </div>
       `;
 
-      for (let s = 0; s < ex.sets; s++) {
+      const nSets = sessionData[ex.id].sets.length;
+      for (let s = 0; s < nSets; s++) {
         const preset = sessionData[ex.id].sets[s];
         setsHTML += `
           <div class="set-row" id="set-${ei}-${s}">
