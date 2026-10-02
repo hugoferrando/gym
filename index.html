@@ -1764,7 +1764,7 @@
         <div>
           <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-dim);margin-bottom:5px;">Programme actif</div>
           <div style="font-size:20px;font-weight:600;color:var(--text);letter-spacing:-0.3px;">Phase 4 · Bloc Lourd</div>
-          <div style="font-size:13px;color:var(--text-dim);margin-top:2px;">Force-Hypertrophie · 6-8 reps <span style="opacity:0.5;">· v13</span></div>
+          <div style="font-size:13px;color:var(--text-dim);margin-top:2px;">Force-Hypertrophie · 6-8 reps <span style="opacity:0.5;">· v14</span></div>
         </div>
         <div style="text-align:right;">
           <div id="prog-week-num" style="font-size:34px;font-weight:700;color:var(--accent);letter-spacing:-1px;line-height:1;">—</div>
@@ -1840,7 +1840,7 @@
           <div>
             <div style="font-size:11px;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:2px;">Upper A</div>
             <div style="font-size:15px;font-weight:500;color:var(--text);">Poitrine + Dos</div>
-            <div style="font-size:12px;color:var(--text-dim);margin-top:2px;">6 exercices · ~60 min · Lourd</div>
+            <div style="font-size:12px;color:var(--text-dim);margin-top:2px;">8 exercices · ~65 min · Lourd</div>
           </div>
           <div style="font-size:17px;color:var(--text-dim);">›</div>
         </div>
@@ -2665,6 +2665,8 @@ const WORKOUTS = {
       { id: 'lat_cable', name: 'Élévations Latérales Poulie', sets: 3, reps: 15, weight: '5 kg', rpe: '8-9', note: '⚙️ Calibration · Unilatéral · 15 reps par bras · Poulie basse', restTimer: 60, swapWith: 'lat_mach' },
       { id: 'lat_mach', name: 'Élévations Latérales Machine', sets: 3, reps: 15, weight: '35 kg', rpe: '8-9', note: 'Dos calé · Amplitude complète', hidden: true, restTimer: 60, swapWith: 'lat' },
       { id: 'lat', name: 'Élévations Latérales', sets: 3, reps: 15, weight: '10 kg', rpe: '8-9', note: 'Haltères · Assis', hidden: true, restTimer: 60, swapWith: 'lat_cable' },
+      { id: 'curl', name: 'Curl Marteau', sets: 3, reps: 12, weight: '14 kg', rpe: '8', note: 'Haltères · Prise neutre', supersetWith: 'tri_high', restTimer: 0 },
+      { id: 'tri_high', name: 'Triceps Poulie Haute', sets: 3, reps: 12, weight: '35 kg', rpe: '8', note: 'Barre ou corde · Coudes fixes', supersetStart: true, restTimer: 90 },
     ]
   },
   upperB: {
@@ -3309,7 +3311,7 @@ function updateHomeStats() {
 
   // Next session recommendation
   const cycle = ['upperA', 'upperB', 'lower', 'bonus'];
-  const cycleNames = { upperA: { name: 'Upper A · Poitrine + Dos', sub: '6 exercices · ~60 min · Lourd' }, upperB: { name: 'Upper B · Épaules + Dos + Bras', sub: '7 exercices · ~65 min · Lourd' }, lower: { name: 'Lower · Jambes', sub: '6 exercices · ~60 min · Lourd' }, bonus: { name: 'Upper C · Points Faibles', sub: '7 exercices · ~50 min · Volume' } };
+  const cycleNames = { upperA: { name: 'Upper A · Poitrine + Dos', sub: '8 exercices · ~65 min · Lourd' }, upperB: { name: 'Upper B · Épaules + Dos + Bras', sub: '7 exercices · ~65 min · Lourd' }, lower: { name: 'Lower · Jambes', sub: '6 exercices · ~60 min · Lourd' }, bonus: { name: 'Upper C · Points Faibles', sub: '7 exercices · ~50 min · Volume' } };
   let nextId = 'upperA';
   if (lastSession) {
     const lastId = lastSession.id;
@@ -4735,6 +4737,8 @@ const PHASE_DETAILS = {
         ['\u00c9cart\u00e9 Poulie', '3\u00d712', 'nouveau'],
         ['Face Pull', '3\u00d715', ''],
         ['\u00c9l\u00e9vations Lat\u00e9rales Poulie', '3\u00d715', 'nouveau'],
+        ['SS \u00b7 Curl Marteau', '3\u00d712', ''],
+        ['SS \u00b7 Triceps Poulie Haute', '3\u00d712', ''],
       ]},
       { title: 'Upper B \u2014 \u00c9paules + Dos + Bras', rows: [
         ['Dumbbell OHP', '4\u00d76-8', '3 min'],
@@ -4764,7 +4768,7 @@ const PHASE_DETAILS = {
       { title: 'Volume hebdomadaire', rows: [
         ['Pec', '14 s\u00e9ries', ''], ['Dos', '12 s\u00e9ries', ''],
         ['Delto\u00efde lat\u00e9ral', '11 s\u00e9ries', ''], ['Delto\u00efde post\u00e9rieur', '9 s\u00e9ries', ''],
-        ['Trap\u00e8zes', '6 s\u00e9ries', ''], ['Biceps / Triceps', '6 / 6 + compos\u00e9s', ''],
+        ['Trap\u00e8zes', '6 s\u00e9ries', ''], ['Biceps / Triceps', '9 / 9 + compos\u00e9s', ''],
         ['Quadriceps / Ischios', '10 / 7', ''],
       ]},
       { title: 'R\u00e8gles du bloc', content: 'Compos\u00e9s : 2 s\u00e9ries d\u2019\u00e9chauffement montantes, puis 4 s\u00e9ries de travail au M\u00caME poids, RPE 8. Quand tu fais 8 reps sur les 4 s\u00e9ries deux s\u00e9ances de suite \u2192 +2,5 kg (+5 kg sur RDL et squat). Isolations : haut de la fourchette sur toutes les s\u00e9ries \u2192 +1 cran. Premi\u00e8re semaine = calibration : compte environ +10 % sur tes charges de 10 reps.' },
@@ -6017,7 +6021,7 @@ function addRecipeToLog(i) {
   if (btn) { btn.textContent = '✅ Ajouté !'; setTimeout(() => { btn.textContent = '+ Ajouter au log du jour'; }, 2000); }
 }
 // ---- PWA : service worker (offline) + mise à jour automatique ----
-const APP_VERSION = 'v13';
+const APP_VERSION = 'v14';
 async function checkForAppUpdate() {
   if (!location.protocol.startsWith('http')) return;
   try {
