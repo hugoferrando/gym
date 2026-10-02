@@ -1764,7 +1764,7 @@
         <div>
           <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-dim);margin-bottom:5px;">Programme actif</div>
           <div style="font-size:20px;font-weight:600;color:var(--text);letter-spacing:-0.3px;">Phase 4 · Bloc Lourd</div>
-          <div style="font-size:13px;color:var(--text-dim);margin-top:2px;">Force-Hypertrophie · 6-8 reps <span style="opacity:0.5;">· v14</span></div>
+          <div style="font-size:13px;color:var(--text-dim);margin-top:2px;">Force-Hypertrophie · 6-8 reps <span style="opacity:0.5;">· v17</span></div>
         </div>
         <div style="text-align:right;">
           <div id="prog-week-num" style="font-size:34px;font-weight:700;color:var(--accent);letter-spacing:-1px;line-height:1;">—</div>
@@ -2653,20 +2653,21 @@ const WORKOUTS = {
     tag: 'Upper A',
     name: 'Poitrine + Dos',
     exercises: [
-      { id: 'incline_smith', name: 'Développé Incliné Smith', sets: 4, reps: 8, weight: '30 kg', rpe: '8', note: 'Lourd 6-8 reps · 2 séries d\'échauffement avant · Haut de pec', restTimer: 180, swapWith: 'chest_press' },
+      { id: 'incline_smith', name: 'Développé Incliné Smith', sets: 4, reps: 8, weight: '25 kg/côté', rpe: '8', note: 'Lourd 6-8 reps · Poids par côté de la barre · 2 séries d\'échauffement avant', restTimer: 180, swapWith: 'chest_press' },
       { id: 'chest_press', name: 'Chest Press Technogym', sets: 4, reps: 8, weight: '60 kg', rpe: '8', note: 'Backup si Smith indispo', hidden: true, restTimer: 180, swapWith: 'hammer_incline' },
-      { id: 'hammer_incline', name: 'Hammer Strength Iso-Lateral Incline', sets: 4, reps: 8, weight: '25 kg/côté', rpe: '8', note: 'Lourd 6-8 reps · Bras indépendants · Haut de pec', hidden: true, restTimer: 180, swapWith: 'incline_smith' },
+      { id: 'hammer_incline', name: 'Hammer Strength Iso-Lateral Incline', sets: 4, reps: 8, weight: '25 kg/côté', rpe: '8', note: 'Lourd 6-8 reps · Bras indépendants · Haut de pec', hidden: true, restTimer: 180, swapWith: 'incline_db' },
+      { id: 'incline_db', name: 'Développé Incliné Haltères', sets: 4, reps: 8, weight: '24 kg', rpe: '8', note: 'Lourd 6-8 reps · Banc 30° · Poids par haltère · 2 séries d\'échauffement', hidden: true, restTimer: 180, swapWith: 'incline_smith' },
       { id: 'rowV', name: 'Tirage Vertical', sets: 4, reps: 8, weight: '65 kg', rpe: '8', note: 'Lourd 6-8 reps · 1 série d\'échauffement · Barre à la clavicule', restTimer: 120, swapWith: 'pullup' },
       { id: 'pullup', name: 'Tractions Lestées', sets: 4, reps: 8, weight: '6 kg', rpe: '8', note: 'Lourd 6-8 reps · Lest ceinture · Coudes vers les hanches', hidden: true, restTimer: 180, swapWith: 'rowV' },
       { id: 'rowH', name: 'Tirage Horizontal', sets: 4, reps: 8, weight: '65 kg', rpe: '8', note: 'Lourd 6-8 reps · Omoplates serrées en fin de mouvement', restTimer: 120 },
-      { id: 'cable_fly', name: 'Écarté Poulie', sets: 3, reps: 12, weight: '10 kg', rpe: '8-9', note: '⚙️ Calibration · Poulies à hauteur d\'épaules · Étirement complet', restTimer: 75, swapWith: 'pec' },
-      { id: 'pec', name: 'Papillon', sets: 3, reps: 12, weight: '55 kg', rpe: '8-9', note: 'Étirement complet en position basse', hidden: true, restTimer: 75, swapWith: 'cable_fly' },
-      { id: 'face_pull', name: 'Face Pull', sets: 3, reps: 15, weight: '40 kg', rpe: '8', note: 'Poulie haute · Coudes hauts · Arrière d\'épaule', restTimer: 60 },
-      { id: 'lat_cable', name: 'Élévations Latérales Poulie', sets: 3, reps: 15, weight: '5 kg', rpe: '8-9', note: '⚙️ Calibration · Unilatéral · 15 reps par bras · Poulie basse', restTimer: 60, swapWith: 'lat_mach' },
-      { id: 'lat_mach', name: 'Élévations Latérales Machine', sets: 3, reps: 15, weight: '35 kg', rpe: '8-9', note: 'Dos calé · Amplitude complète', hidden: true, restTimer: 60, swapWith: 'lat' },
-      { id: 'lat', name: 'Élévations Latérales', sets: 3, reps: 15, weight: '10 kg', rpe: '8-9', note: 'Haltères · Assis', hidden: true, restTimer: 60, swapWith: 'lat_cable' },
-      { id: 'curl', name: 'Curl Marteau', sets: 3, reps: 12, weight: '14 kg', rpe: '8', note: 'Haltères · Prise neutre', supersetWith: 'tri_high', restTimer: 0 },
-      { id: 'tri_high', name: 'Triceps Poulie Haute', sets: 3, reps: 12, weight: '35 kg', rpe: '8', note: 'Barre ou corde · Coudes fixes', supersetStart: true, restTimer: 90 },
+      { id: 'cable_fly', name: 'Écarté Poulie', sets: 3, reps: 10, weight: '10 kg', rpe: '8-9', note: '⚙️ Calibration · Poulies à hauteur d\'épaules · Étirement complet', restTimer: 75, swapWith: 'pec' },
+      { id: 'pec', name: 'Papillon', sets: 3, reps: 10, weight: '55 kg', rpe: '8-9', note: 'Étirement complet en position basse', hidden: true, restTimer: 75, swapWith: 'cable_fly' },
+      { id: 'face_pull', name: 'Face Pull', sets: 3, reps: 12, weight: '40 kg', rpe: '8', note: 'Poulie haute · Coudes hauts · Arrière d\'épaule', restTimer: 60 },
+      { id: 'lat_cable', name: 'Élévations Latérales Poulie', sets: 3, reps: 12, weight: '5 kg', rpe: '8-9', note: '⚙️ Calibration · Unilatéral · 12 reps par bras · Poulie basse', restTimer: 60, swapWith: 'lat_mach' },
+      { id: 'lat_mach', name: 'Élévations Latérales Machine', sets: 3, reps: 12, weight: '35 kg', rpe: '8-9', note: 'Dos calé · Amplitude complète', hidden: true, restTimer: 60, swapWith: 'lat' },
+      { id: 'lat', name: 'Élévations Latérales', sets: 3, reps: 12, weight: '10 kg', rpe: '8-9', note: 'Haltères · Assis', hidden: true, restTimer: 60, swapWith: 'lat_cable' },
+      { id: 'curl', name: 'Curl Marteau', sets: 3, reps: 10, weight: '14 kg', rpe: '8', note: 'Haltères · Prise neutre', supersetWith: 'tri_high', restTimer: 0 },
+      { id: 'tri_high', name: 'Triceps Poulie Haute', sets: 3, reps: 10, weight: '35 kg', rpe: '8', note: 'Barre ou corde · Coudes fixes', supersetStart: true, restTimer: 90 },
     ]
   },
   upperB: {
@@ -2679,13 +2680,13 @@ const WORKOUTS = {
       { id: 'bench_b', name: 'Développé Couché Machine', sets: 4, reps: 8, weight: '27.5 kg/côté', rpe: '8', note: 'Lourd 6-8 reps · 1 série d\'échauffement', restTimer: 150, swapWith: 'hammer_bench' },
       { id: 'hammer_bench', name: 'Hammer Strength Iso-Lateral Bench', sets: 4, reps: 8, weight: '27.5 kg/côté', rpe: '8', note: 'Lourd 6-8 reps · Bras indépendants · Presse à plat', hidden: true, restTimer: 150, swapWith: 'chest_press' },
       { id: 'chest_press', name: 'Chest Press Technogym', sets: 4, reps: 8, weight: '65 kg', rpe: '8', note: 'Lourd 6-8 reps · Celleneuve', hidden: true, restTimer: 150, swapWith: 'bench_b' },
-      { id: 'lat_b_mach', name: 'Élévations Latérales Machine', sets: 4, reps: 15, weight: '35 kg', rpe: '8-9', note: 'Dos calé · Amplitude complète', restTimer: 60, swapWith: 'lat_b' },
-      { id: 'lat_b', name: 'Élévations Latérales', sets: 4, reps: 15, weight: '10 kg', rpe: '8-9', note: 'Haltères · Assis', hidden: true, restTimer: 60, swapWith: 'lat_b_mach' },
-      { id: 'shrugs_b', name: 'Shrugs Haltères', sets: 3, reps: 15, weight: '24 kg', rpe: '8', note: 'Pause 1s en haut · Étirement complet en bas', restTimer: 60, swapWith: 'shrugs_b_mach' },
-      { id: 'shrugs_b_mach', name: 'Shrugs Machine', sets: 3, reps: 15, weight: '40 kg', rpe: '8', note: '⚙️ Calibration · Pause 1s en haut', hidden: true, restTimer: 60, swapWith: 'shrugs_b' },
-      { id: 'curl_cable', name: 'Curl Poulie Basse', sets: 3, reps: 12, weight: '45 kg', rpe: '8', note: 'Barre droite · Supination', supersetWith: 'tri_oh', restTimer: 0 },
-      { id: 'tri_oh', name: 'Extension Nuque Poulie', sets: 3, reps: 12, weight: '15 kg', rpe: '8', note: '⚙️ Calibration · Corde · Dos à la poulie · Chef long du triceps', supersetStart: true, restTimer: 90, swapWith: 'tri_low' },
-      { id: 'tri_low', name: 'Triceps Poulie Basse', sets: 3, reps: 12, weight: '35 kg', rpe: '8', hidden: true, supersetStart: true, restTimer: 90, swapWith: 'tri_oh' },
+      { id: 'lat_b_mach', name: 'Élévations Latérales Machine', sets: 4, reps: 12, weight: '35 kg', rpe: '8-9', note: 'Dos calé · Amplitude complète', restTimer: 60, swapWith: 'lat_b' },
+      { id: 'lat_b', name: 'Élévations Latérales', sets: 4, reps: 12, weight: '10 kg', rpe: '8-9', note: 'Haltères · Assis', hidden: true, restTimer: 60, swapWith: 'lat_b_mach' },
+      { id: 'shrugs_b', name: 'Shrugs Haltères', sets: 3, reps: 10, weight: '24 kg', rpe: '8', note: 'Pause 1s en haut · Étirement complet en bas', restTimer: 60, swapWith: 'shrugs_b_mach' },
+      { id: 'shrugs_b_mach', name: 'Shrugs Machine', sets: 3, reps: 10, weight: '40 kg', rpe: '8', note: '⚙️ Calibration · Pause 1s en haut', hidden: true, restTimer: 60, swapWith: 'shrugs_b' },
+      { id: 'curl_cable', name: 'Curl Poulie Basse', sets: 3, reps: 10, weight: '45 kg', rpe: '8', note: 'Barre droite · Supination', supersetWith: 'tri_oh', restTimer: 0 },
+      { id: 'tri_oh', name: 'Extension Nuque Poulie', sets: 3, reps: 10, weight: '15 kg', rpe: '8', note: '⚙️ Calibration · Corde · Dos à la poulie · Chef long du triceps', supersetStart: true, restTimer: 90, swapWith: 'tri_low' },
+      { id: 'tri_low', name: 'Triceps Poulie Basse', sets: 3, reps: 10, weight: '35 kg', rpe: '8', hidden: true, supersetStart: true, restTimer: 90, swapWith: 'tri_oh' },
     ]
   },
   lower: {
@@ -2706,21 +2707,21 @@ const WORKOUTS = {
     tag: 'Upper C',
     name: 'Points Faibles',
     exercises: [
-      { id: 'bon_lat_cable', name: 'Élévations Latérales Poulie', sets: 4, reps: 15, weight: '5 kg', rpe: '8-9', note: '⚙️ Calibration · Unilatéral · 15 reps par bras', restTimer: 60, swapWith: 'bon_lat_mach' },
-      { id: 'bon_lat_mach', name: 'Élévations Latérales Machine', sets: 4, reps: 15, weight: '35 kg', rpe: '8-9', note: 'Dos calé · Cherche la congestion', hidden: true, restTimer: 60, swapWith: 'bon_lat' },
-      { id: 'bon_lat', name: 'Élévations Latérales', sets: 4, reps: 15, weight: '10 kg', rpe: '8-9', note: 'Haltères · Assis', hidden: true, restTimer: 60, swapWith: 'bon_lat_cable' },
+      { id: 'bon_lat_cable', name: 'Élévations Latérales Poulie', sets: 4, reps: 12, weight: '5 kg', rpe: '8-9', note: '⚙️ Calibration · Unilatéral · 12 reps par bras', restTimer: 60, swapWith: 'bon_lat_mach' },
+      { id: 'bon_lat_mach', name: 'Élévations Latérales Machine', sets: 4, reps: 12, weight: '35 kg', rpe: '8-9', note: 'Dos calé · Cherche la congestion', hidden: true, restTimer: 60, swapWith: 'bon_lat' },
+      { id: 'bon_lat', name: 'Élévations Latérales', sets: 4, reps: 12, weight: '10 kg', rpe: '8-9', note: 'Haltères · Assis', hidden: true, restTimer: 60, swapWith: 'bon_lat_cable' },
       { id: 'bon_incline_db', name: 'Développé Incliné Haltères', sets: 3, reps: 12, weight: '20 kg', rpe: '8', note: 'Banc 30° · Poids par haltère · Congestion haut de pec', restTimer: 90, swapWith: 'bon_incline' },
       { id: 'bon_incline', name: 'Développé Incliné Smith', sets: 3, reps: 12, weight: '25 kg', rpe: '8', note: 'Alternative si haltères indispo', hidden: true, restTimer: 90, swapWith: 'bon_incline_mach' },
       { id: 'bon_incline_mach', name: 'Développé Incliné Machine', sets: 3, reps: 12, weight: '30 kg', rpe: '8', note: 'Machine guidée · Congestion haut de pec', hidden: true, restTimer: 90, swapWith: 'bon_incline_db' },
-      { id: 'bon_rev_cable', name: 'Oiseau Poulie Croisée', sets: 3, reps: 15, weight: '5 kg', rpe: '8', note: '⚙️ Calibration · Câbles croisés · Bras presque tendus · Arrière d\'épaule', restTimer: 60, swapWith: 'bon_rev' },
-      { id: 'bon_rev', name: 'Oiseau / Reverse Pec Dec', sets: 3, reps: 15, weight: '30 kg', rpe: '8', hidden: true, restTimer: 60, swapWith: 'bon_rev_cable' },
-      { id: 'bon_shrugs', name: 'Shrugs Haltères', sets: 3, reps: 15, weight: '24 kg', rpe: '8', note: 'Pause 1s en haut', restTimer: 60, swapWith: 'bon_shrugs_mach' },
-      { id: 'bon_shrugs_mach', name: 'Shrugs Machine', sets: 3, reps: 15, weight: '40 kg', rpe: '8', note: '⚙️ Calibration · Pause 1s en haut', hidden: true, restTimer: 60, swapWith: 'bon_shrugs' },
-      { id: 'bon_face', name: 'Face Pull', sets: 3, reps: 15, weight: '40 kg', rpe: '8', restTimer: 60 },
-      { id: 'bon_curl_cable', name: 'Curl Marteau Poulie', sets: 3, reps: 12, weight: '45 kg', rpe: '8', note: 'Corde à la poulie basse · Prise neutre', supersetWith: 'bon_tri', restTimer: 0 },
-      { id: 'bon_curl_db', name: 'Curl Incliné Haltères', sets: 3, reps: 12, weight: '10 kg', rpe: '8', note: '⚙️ Calibration · Banc incliné 45-60° · Supination · Chef long du biceps', hidden: true, restTimer: 0 },
-      { id: 'bon_tri', name: 'Triceps Poulie Haute', sets: 3, reps: 12, weight: '35 kg', rpe: '8', supersetStart: true, restTimer: 90 },
-      { id: 'bon_tri_db', name: 'French Press Haltères', sets: 3, reps: 12, weight: '12 kg', rpe: '8', note: '⚙️ Calibration · Même banc incliné · Chef long · Descente contrôlée', hidden: true, restTimer: 90 },
+      { id: 'bon_rev_cable', name: 'Oiseau Poulie Croisée', sets: 3, reps: 12, weight: '5 kg', rpe: '8', note: '⚙️ Calibration · Câbles croisés · Bras presque tendus · Arrière d\'épaule', restTimer: 60, swapWith: 'bon_rev' },
+      { id: 'bon_rev', name: 'Oiseau / Reverse Pec Dec', sets: 3, reps: 12, weight: '30 kg', rpe: '8', hidden: true, restTimer: 60, swapWith: 'bon_rev_cable' },
+      { id: 'bon_shrugs', name: 'Shrugs Haltères', sets: 3, reps: 10, weight: '24 kg', rpe: '8', note: 'Pause 1s en haut', restTimer: 60, swapWith: 'bon_shrugs_mach' },
+      { id: 'bon_shrugs_mach', name: 'Shrugs Machine', sets: 3, reps: 10, weight: '40 kg', rpe: '8', note: '⚙️ Calibration · Pause 1s en haut', hidden: true, restTimer: 60, swapWith: 'bon_shrugs' },
+      { id: 'bon_face', name: 'Face Pull', sets: 3, reps: 12, weight: '40 kg', rpe: '8', restTimer: 60 },
+      { id: 'bon_curl_cable', name: 'Curl Marteau Poulie', sets: 3, reps: 10, weight: '45 kg', rpe: '8', note: 'Corde à la poulie basse · Prise neutre', supersetWith: 'bon_tri', restTimer: 0 },
+      { id: 'bon_curl_db', name: 'Curl Incliné Haltères', sets: 3, reps: 10, weight: '10 kg', rpe: '8', note: '⚙️ Calibration · Banc incliné 45-60° · Supination · Chef long du biceps', hidden: true, restTimer: 0 },
+      { id: 'bon_tri', name: 'Triceps Poulie Haute', sets: 3, reps: 10, weight: '35 kg', rpe: '8', supersetStart: true, restTimer: 90 },
+      { id: 'bon_tri_db', name: 'French Press Haltères', sets: 3, reps: 10, weight: '12 kg', rpe: '8', note: '⚙️ Calibration · Même banc incliné · Chef long · Descente contrôlée', hidden: true, restTimer: 90 },
     ]
   }
 };
@@ -3463,11 +3464,11 @@ function renderExercises(w) {
     const lastEx = getExerciseHistory(ex.id, 1, currentGym)[0] || null;
     const lastDone = lastEx ? lastEx.sets.filter(s => s.done) : [];
     const effectiveSets = deloadMode ? Math.max(1, ex.sets - 1) : ex.sets;
+    const lastMaxW = lastDone.reduce((m, st) => Math.max(m, parseFloat(st.weight) || 0), 0);
     for (let i = 0; i < effectiveSets; i++) {
-      const prev = lastDone[i] || lastDone[lastDone.length - 1] || null;
       sessionData[ex.id].sets.push({
         reps: ex.reps,
-        weight: prev && parseFloat(prev.weight) > 0 ? prev.weight : parseWeight(ex.weight),
+        weight: lastMaxW > 0 ? String(lastMaxW) : parseWeight(ex.weight),
         done: false
       });
     }
@@ -3566,7 +3567,7 @@ function renderExercises(w) {
       let setsHTML = `
         <div class="sets-table-header">
           <div class="sets-col-label col-num"></div>
-          <div class="sets-col-label col-kg" style="flex:1;text-align:center;">kg</div>
+          <div class="sets-col-label col-kg" style="flex:1;text-align:center;">${ex.weight.includes('côté') ? 'kg / côté' : 'kg'}</div>
           <div class="sets-col-label" style="width:18px;"></div>
           <div class="sets-col-label col-reps" style="flex:1;text-align:center;">reps</div>
           <div class="sets-col-label col-done" style="width:36px;"></div>
@@ -4729,25 +4730,25 @@ const PHASE_DETAILS = {
     subtitle: 'D\u00e8s le 28/09/2026 \u00b7 8 semaines \u00b7 Force + hypertrophie \u00b7 3 Upper + 1 Lower',
     color: '#0a84ff',
     sections: [
-      { title: 'Objectif', content: 'Devenir plus fort sur les gros mouvements tout en continuant \u00e0 construire du muscle. Compos\u00e9s lourds en 6-8 reps, isolations en 12-15. M\u00eame structure qu\u2019avant : chaque muscle du haut reste \u00e0 2-3 s\u00e9ances par semaine.' },
+      { title: 'Objectif', content: 'Devenir plus fort sur les gros mouvements tout en continuant \u00e0 construire du muscle. Compos\u00e9s lourds en 6-8 reps, bras / \u00e9cart\u00e9 / shrugs en 10, \u00e9paules en 12. M\u00eame structure qu\u2019avant : chaque muscle du haut reste \u00e0 2-3 s\u00e9ances par semaine.' },
       { title: 'Upper A \u2014 Poitrine + Dos', rows: [
         ['D\u00e9velopp\u00e9 Inclin\u00e9 Smith', '4\u00d76-8', '3 min'],
         ['Tirage Vertical', '4\u00d76-8', '2 min'],
         ['Tirage Horizontal', '4\u00d76-8', '2 min'],
-        ['\u00c9cart\u00e9 Poulie', '3\u00d712', 'nouveau'],
-        ['Face Pull', '3\u00d715', ''],
-        ['\u00c9l\u00e9vations Lat\u00e9rales Poulie', '3\u00d715', 'nouveau'],
-        ['SS \u00b7 Curl Marteau', '3\u00d712', ''],
-        ['SS \u00b7 Triceps Poulie Haute', '3\u00d712', ''],
+        ['\u00c9cart\u00e9 Poulie', '3\u00d710', 'nouveau'],
+        ['Face Pull', '3\u00d712', ''],
+        ['\u00c9l\u00e9vations Lat\u00e9rales Poulie', '3\u00d712', 'nouveau'],
+        ['SS \u00b7 Curl Marteau', '3\u00d710', ''],
+        ['SS \u00b7 Triceps Poulie Haute', '3\u00d710', ''],
       ]},
       { title: 'Upper B \u2014 \u00c9paules + Dos + Bras', rows: [
         ['Dumbbell OHP', '4\u00d76-8', '3 min'],
         ['Tirage Vertical', '4\u00d76-8', '2 min'],
         ['D\u00e9velopp\u00e9 Couch\u00e9', '4\u00d76-8', '2 min 30'],
-        ['\u00c9l\u00e9vations Lat\u00e9rales Machine', '4\u00d715', ''],
-        ['Shrugs Halt\u00e8res', '3\u00d715', ''],
-        ['SS \u00b7 Curl Poulie Basse', '3\u00d712', ''],
-        ['SS \u00b7 Extension Nuque Poulie', '3\u00d712', 'nouveau'],
+        ['\u00c9l\u00e9vations Lat\u00e9rales Machine', '4\u00d712', ''],
+        ['Shrugs Halt\u00e8res', '3\u00d710', ''],
+        ['SS \u00b7 Curl Poulie Basse', '3\u00d710', ''],
+        ['SS \u00b7 Extension Nuque Poulie', '3\u00d710', 'nouveau'],
       ]},
       { title: 'Lower \u2014 Jambes', rows: [
         ['Romanian Deadlift', '4\u00d76-8', '3 min'],
@@ -4758,12 +4759,12 @@ const PHASE_DETAILS = {
         ['Mollets', '3\u00d715', ''],
       ]},
       { title: 'Upper C \u2014 Points Faibles (volume)', rows: [
-        ['\u00c9l\u00e9vations Lat\u00e9rales Poulie', '4\u00d715', 'nouveau'],
+        ['\u00c9l\u00e9vations Lat\u00e9rales Poulie', '4\u00d712', 'nouveau'],
         ['D\u00e9velopp\u00e9 Inclin\u00e9 Halt\u00e8res', '3\u00d712', ''],
-        ['Oiseau Poulie Crois\u00e9e', '3\u00d715', 'nouveau'],
-        ['Shrugs Halt\u00e8res', '3\u00d715', ''],
-        ['Face Pull', '3\u00d715', ''],
-        ['SS \u00b7 Curl + Triceps', '3\u00d712', 'poulie ou halt\u00e8res'],
+        ['Oiseau Poulie Crois\u00e9e', '3\u00d712', 'nouveau'],
+        ['Shrugs Halt\u00e8res', '3\u00d710', ''],
+        ['Face Pull', '3\u00d712', ''],
+        ['SS \u00b7 Curl + Triceps', '3\u00d710', 'poulie ou halt\u00e8res'],
       ]},
       { title: 'Volume hebdomadaire', rows: [
         ['Pec', '14 s\u00e9ries', ''], ['Dos', '12 s\u00e9ries', ''],
@@ -6021,7 +6022,7 @@ function addRecipeToLog(i) {
   if (btn) { btn.textContent = '✅ Ajouté !'; setTimeout(() => { btn.textContent = '+ Ajouter au log du jour'; }, 2000); }
 }
 // ---- PWA : service worker (offline) + mise à jour automatique ----
-const APP_VERSION = 'v14';
+const APP_VERSION = 'v17';
 async function checkForAppUpdate() {
   if (!location.protocol.startsWith('http')) return;
   try {
