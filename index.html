@@ -1744,6 +1744,18 @@
     letter-spacing: -0.3px;
   }
   #timer-mini.urgent #timer-mini-time { color: var(--red); }
+
+  /* === Correctif iOS : éléments fixes calés sur la zone visible === */
+  #swap-menu-overlay, #phase-modal, #saved-logs-overlay, #add-meal-modal, .complete-overlay {
+    top: var(--vv-top, 0px) !important;
+    bottom: auto !important;
+    height: var(--vv-h, 100%) !important;
+  }
+  .timer-overlay { bottom: var(--vv-bottom, 0px) !important; }
+  #timer-mini { bottom: calc(24px + env(safe-area-inset-bottom) + var(--vv-bottom, 0px)) !important; }
+  #swap-toast { bottom: calc(100px + var(--vv-bottom, 0px)) !important; }
+  #bottom-nav { bottom: calc(20px + env(safe-area-inset-bottom) + var(--vv-bottom, 0px)) !important; }
+  #abs-floating-bar { bottom: calc(20px + var(--vv-bottom, 0px)) !important; }
 </style>
 </head>
 <body>
@@ -1764,7 +1776,7 @@
         <div>
           <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-dim);margin-bottom:5px;">Programme actif</div>
           <div style="font-size:20px;font-weight:600;color:var(--text);letter-spacing:-0.3px;">Phase 4 · Bloc Lourd</div>
-          <div style="font-size:13px;color:var(--text-dim);margin-top:2px;">Force-Hypertrophie · 6-8 reps <span style="opacity:0.5;">· v22</span></div>
+          <div style="font-size:13px;color:var(--text-dim);margin-top:2px;">Force-Hypertrophie · 6-8 reps <span style="opacity:0.5;">· v25</span></div>
         </div>
         <div style="text-align:right;">
           <div id="prog-week-num" style="font-size:34px;font-weight:700;color:var(--accent);letter-spacing:-1px;line-height:1;">—</div>
@@ -2660,7 +2672,8 @@ const WORKOUTS = {
       { id: 'pullup', name: 'Tractions Lestées', sets: 3, reps: 8, weight: '6 kg', rpe: '8', note: 'LOURD 6-8 · Lest ceinture · Coudes vers les hanches', hidden: true, restTimer: 180, swapWith: 'rowV' },
       { id: 'bench_b', name: 'Développé Couché Machine', sets: 3, reps: 10, weight: '25 kg/côté', rpe: '8', note: 'MODÉRÉ 8-10 · Milieu de pec', restTimer: 120, swapWith: 'hammer_bench' },
       { id: 'hammer_bench', name: 'Hammer Strength Iso-Lateral Bench', sets: 3, reps: 10, weight: '30 kg/côté', rpe: '8', note: 'MODÉRÉ 8-10 · Bras indépendants · À plat', hidden: true, restTimer: 120, swapWith: 'chest_press' },
-      { id: 'chest_press', name: 'Chest Press Technogym', sets: 3, reps: 10, weight: '60 kg', rpe: '8', note: 'MODÉRÉ 8-10 · À plat', hidden: true, restTimer: 120, swapWith: 'bench_b' },
+      { id: 'chest_press', name: 'Chest Press Technogym', sets: 3, reps: 10, weight: '60 kg', rpe: '8', note: 'MODÉRÉ 8-10 · À plat', hidden: true, restTimer: 120, swapWith: 'bench_db' },
+      { id: 'bench_db', name: 'Développé Couché Haltères', sets: 3, reps: 10, weight: '24 kg', rpe: '8', note: '⚙️ Calibration · MODÉRÉ 8-10 · Banc plat · Poids par haltère · Descends jusqu\'à l\'étirement du pec', hidden: true, restTimer: 120, swapWith: 'bench_b' },
       { id: 'rowH', name: 'Tirage Horizontal', sets: 3, reps: 10, weight: '60 kg', rpe: '8', note: 'MODÉRÉ 8-10 · Omoplates serrées · Pause 1s contre le ventre', restTimer: 120 },
       { id: 'lat_cable', name: 'Élévations Latérales Poulie', sets: 4, reps: 12, weight: '5 kg', rpe: '9', note: 'Unilatéral · 12 reps par bras · Dernière série jusqu\'à l\'échec', restTimer: 90, swapWith: 'lat_mach' },
       { id: 'lat_mach', name: 'Élévations Latérales Machine', sets: 4, reps: 12, weight: '35 kg', rpe: '9', note: 'Dos calé · Dernière série jusqu\'à l\'échec', hidden: true, restTimer: 90, swapWith: 'lat' },
@@ -4268,6 +4281,67 @@ function expandTimer() {
   };
   ov.addEventListener('touchend', endDrag);
   ov.addEventListener('touchcancel', endDrag);
+})();
+
+// ===== Correctif iOS : position réelle de la zone visible =====
+(function trackVisualViewport() {
+  const vv = window.visualViewport;
+  if (!vv) return;
+  const root = document.documentElement;
+  const apply = () => {
+    const top = Math.max(0, vv.offsetTop);
+    const bottom = Math.max(0, window.innerHeight - vv.height - top);
+    root.style.setProperty('--vv-top', top + 'px');
+    root.style.setProperty('--vv-h', vv.height + 'px');
+    root.style.setProperty('--vv-bottom', bottom + 'px');
+  };
+  vv.addEventListener('resize', apply);
+  vv.addEventListener('scroll', apply);
+  window.addEventListener('scroll', apply, { passive: true });
+  window.addEventListener('orientationchange', () => setTimeout(apply, 300));
+  apply();
+})();
+
+// ===== Clavier iOS : le timer ne gêne plus la saisie, et la page ne saute plus =====
+(function initKeyboardGuard() {
+  let hiddenForKb = false;
+  const isField = (el) => el && el.matches && el.matches('input:not([type=checkbox]):not([type=file]), textarea');
+  document.addEventListener('focusin', (e) => {
+    const t = e.target;
+    if (!isField(t)) return;
+    const ov = document.getElementById('timer-overlay');
+    const mini = document.getElementById('timer-mini');
+    if (ov && ov.classList.contains('visible')) { ov.classList.remove('visible'); ov.style.transform = ''; hiddenForKb = true; }
+    if (mini && mini.classList.contains('visible')) { mini.classList.remove('visible'); hiddenForKb = true; }
+    // Après l'ouverture du clavier, on remet le champ au milieu de l'écran s'il a été envoyé hors de vue
+    setTimeout(() => {
+      if (document.activeElement !== t) return;
+      const vv = window.visualViewport;
+      const top = vv ? vv.offsetTop : 0;
+      const h = vv ? vv.height : window.innerHeight;
+      const r = t.getBoundingClientRect();
+      if (r.top < top + 110 || r.bottom > top + h - 20) {
+        window.scrollBy(0, r.top - (top + h * 0.4));
+      }
+    }, 350);
+  });
+  document.addEventListener('focusout', () => {
+    setTimeout(() => {
+      if (isField(document.activeElement)) return; // on passe juste d'un champ à l'autre
+      // Force iOS à recalculer la position des éléments fixes après la fermeture du clavier
+      const y = window.scrollY;
+      window.scrollTo(window.scrollX, y + 1);
+      window.scrollTo(window.scrollX, y);
+      if (hiddenForKb) {
+        hiddenForKb = false;
+        if (timerInterval) {
+          timerMinimized = true;
+          document.getElementById('timer-mini').classList.add('visible');
+          updateTimerDisplay();
+        }
+      }
+    }, 200);
+  });
 })();
 
 function updateTimerDisplay() {
@@ -6053,7 +6127,7 @@ function addRecipeToLog(i) {
   if (btn) { btn.textContent = '✅ Ajouté !'; setTimeout(() => { btn.textContent = '+ Ajouter au log du jour'; }, 2000); }
 }
 // ---- PWA : service worker (offline) + mise à jour automatique ----
-const APP_VERSION = 'v22';
+const APP_VERSION = 'v25';
 async function checkForAppUpdate() {
   if (!location.protocol.startsWith('http')) return;
   try {
