@@ -1776,7 +1776,7 @@
         <div>
           <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-dim);margin-bottom:5px;">Programme actif</div>
           <div style="font-size:20px;font-weight:600;color:var(--text);letter-spacing:-0.3px;">Phase 4 · Bloc Lourd</div>
-          <div style="font-size:13px;color:var(--text-dim);margin-top:2px;">Force-Hypertrophie · 6-8 reps <span style="opacity:0.5;">· v26</span></div>
+          <div style="font-size:13px;color:var(--text-dim);margin-top:2px;">Force-Hypertrophie · 6-8 reps <span style="opacity:0.5;">· v27</span></div>
         </div>
         <div style="text-align:right;">
           <div id="prog-week-num" style="font-size:34px;font-weight:700;color:var(--accent);letter-spacing:-1px;line-height:1;">—</div>
@@ -2696,7 +2696,8 @@ const WORKOUTS = {
       { id: 'row_db', name: 'Rowing Haltère Unilatéral', sets: 3, reps: 8, weight: '30 kg', rpe: '8', note: '⚙️ Calibration · LOURD 6-8 · Genou sur le banc · 8 reps par bras', hidden: true, restTimer: 150, swapWith: 'iso_row' },
       { id: 'iso_row', name: 'Hammer Strength Iso-Lateral Row', sets: 3, reps: 8, weight: '30 kg/côté', rpe: '8', note: '⚙️ Calibration · LOURD 6-8 · Poitrine contre le pad · Bras indépendants · Coudes le long du corps', hidden: true, restTimer: 150, swapWith: 'csr' },
       { id: 'bon_incline_db', name: 'Développé Incliné Haltères', sets: 3, reps: 10, weight: '22 kg', rpe: '8', note: 'MODÉRÉ 8-10 · Banc à 30° · Poids par haltère · 2e séance haut de pec', restTimer: 120, swapWith: 'bon_incline_mach' },
-      { id: 'bon_incline_mach', name: 'Développé Incliné Machine', sets: 3, reps: 10, weight: '30 kg', rpe: '8', note: 'MODÉRÉ 8-10 · Haut de pec', hidden: true, restTimer: 120, swapWith: 'bon_incline_db' },
+      { id: 'bon_incline_mach', name: 'Développé Incliné Machine', sets: 3, reps: 10, weight: '30 kg', rpe: '8', note: 'MODÉRÉ 8-10 · Haut de pec', hidden: true, restTimer: 120, swapWith: 'incline_smith_b' },
+      { id: 'incline_smith_b', name: 'Développé Incliné Smith', sets: 3, reps: 10, weight: '30 kg/côté', rpe: '8', note: '⚙️ Calibration · MODÉRÉ 8-10 · Banc à 30° · Poids par côté · ~10 % de moins qu\'en Upper A', hidden: true, restTimer: 120, swapWith: 'bon_incline_db' },
       { id: 'rowV_n', name: 'Tirage Vertical Prise Neutre', sets: 3, reps: 10, weight: '60 kg', rpe: '8', note: '⚙️ Calibration · MODÉRÉ 8-10 · Poignée neutre · Étirement complet en haut', restTimer: 120, swapWith: 'pulldown_uni' },
       { id: 'pulldown_uni', name: 'Tirage Vertical Unilatéral', sets: 3, reps: 10, weight: '25 kg', rpe: '8', note: '⚙️ Calibration · MODÉRÉ 8-10 · 10 reps par bras', hidden: true, restTimer: 120, swapWith: 'rowV_n' },
       { id: 'lat_b_mach', name: 'Élévations Latérales Machine', sets: 4, reps: 12, weight: '35 kg', rpe: '9', note: 'Dos calé · Dernière série jusqu\'à l\'échec', restTimer: 90, swapWith: 'lat_b' },
@@ -6128,7 +6129,7 @@ function addRecipeToLog(i) {
   if (btn) { btn.textContent = '✅ Ajouté !'; setTimeout(() => { btn.textContent = '+ Ajouter au log du jour'; }, 2000); }
 }
 // ---- PWA : service worker (offline) + mise à jour automatique ----
-const APP_VERSION = 'v26';
+const APP_VERSION = 'v27';
 async function checkForAppUpdate() {
   if (!location.protocol.startsWith('http')) return;
   try {
