@@ -1776,7 +1776,7 @@
         <div>
           <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-dim);margin-bottom:5px;">Programme actif</div>
           <div style="font-size:20px;font-weight:600;color:var(--text);letter-spacing:-0.3px;">Phase 4 · Bloc Lourd</div>
-          <div style="font-size:13px;color:var(--text-dim);margin-top:2px;">Force-Hypertrophie · 6-8 reps <span style="opacity:0.5;">· v27</span></div>
+          <div style="font-size:13px;color:var(--text-dim);margin-top:2px;">Force-Hypertrophie · 6-8 reps <span style="opacity:0.5;">· v28</span></div>
         </div>
         <div style="text-align:right;">
           <div id="prog-week-num" style="font-size:34px;font-weight:700;color:var(--accent);letter-spacing:-1px;line-height:1;">—</div>
@@ -3820,6 +3820,21 @@ function getProgressionHint(ex) {
   return { target: Math.round((lastMax + increment) * 100) / 100, unit };
 }
 
+// Séries validées sur la mauvaise version → transférées sur la version choisie
+function moveDoneSets(fromId, toId) {
+  try {
+    saveProgress();
+    const p = loadProgress();
+    if (!p || p.workoutKey !== currentWorkout || !p.sessionData) return;
+    const from = p.sessionData[fromId], to = p.sessionData[toId];
+    const hasDone = x => x && (x.sets || []).some(st => st.done);
+    if (!hasDone(from) || hasDone(to)) return;
+    p.sessionData[toId] = from;
+    delete p.sessionData[fromId];
+    localStorage.setItem('hugo_inprogress', JSON.stringify(p));
+  } catch (e) {}
+}
+
 function showSwapMenu(currentId) {
   const w = WORKOUTS[currentWorkout];
   const current = w.exercises.find(e => e.id === currentId);
@@ -3886,6 +3901,8 @@ function showSwapMenu(currentId) {
       if (w === WORKOUTS.bonus && armIds.includes(opt.id)) {
         setArmMode((opt.id === 'bon_curl_db' || opt.id === 'bon_tri_db') ? 'dumbbell' : 'cable');
       } else {
+        const outgoing = options.find(o => !o.hidden);
+        if (outgoing && outgoing.id !== opt.id) moveDoneSets(outgoing.id, opt.id);
         options.forEach(o => { o.hidden = (o.id !== opt.id); });
         renderExercises(w);
       }
@@ -5488,6 +5505,21 @@ function seedHistoricalData() {
 
 // Init
 seedHistoricalData();
+(function migrateRow0111() {
+  try {
+    if (localStorage.getItem('hugo_mig_row_0111') === '1') return;
+    const log = loadLog(); let changed = false;
+    log.forEach(e => {
+      if (e.id === 'upperB' && e.date === '01/11/2026' && e.exercises && e.exercises.some(x => x.id === 'iso_row' && (x.sets || []).some(s => s.done))) {
+        const n = e.exercises.length;
+        e.exercises = e.exercises.filter(x => x.id !== 'csr');
+        if (e.exercises.length !== n) changed = true;
+      }
+    });
+    if (changed) saveLog(log);
+    localStorage.setItem('hugo_mig_row_0111', '1');
+  } catch (e) {}
+})();
 (function migrateCurlCable() {
   try {
     if (localStorage.getItem('hugo_mig_curl_a') === '1') return;
@@ -6129,7 +6161,7 @@ function addRecipeToLog(i) {
   if (btn) { btn.textContent = '✅ Ajouté !'; setTimeout(() => { btn.textContent = '+ Ajouter au log du jour'; }, 2000); }
 }
 // ---- PWA : service worker (offline) + mise à jour automatique ----
-const APP_VERSION = 'v27';
+const APP_VERSION = 'v28';
 async function checkForAppUpdate() {
   if (!location.protocol.startsWith('http')) return;
   try {
